@@ -877,7 +877,7 @@
 
     <div class="form-group">
       <label class="form-label">초대 문구</label>
-      <textarea class="form-textarea" id="messageInput" placeholder="하우스텐보스로 함께 가고 싶은 마음을 자유롭게 적어주세요. 진심 어린 사연일수록 좋습니다 :)" maxlength="500"></textarea>
+      <textarea class="form-textarea" id="messageInput" placeholder="하우스텐보스로 함께 가고 싶은 이유를 자유롭게 적어주세요. 진심 어린 사연일수록 좋습니다 :)" maxlength="500"></textarea>
       <div class="char-count"><span id="charCount">0</span> / 500</div>
     </div>
 
@@ -1023,82 +1023,78 @@
   }
 
   function downloadTicket() {
+
     const overlay = document.getElementById('loadingOverlay');
+
     overlay.classList.add('active');
 
     const ticket = document.getElementById('ticketEl');
+
     const scale = (window.devicePixelRatio || 2) * 2;
 
     html2canvas(ticket, {
+
       scale: scale,
+
       useCORS: true,
+
       allowTaint: true,
+
       backgroundColor: '#d45f1e',
+
       logging: false,
+
       onclone: function(doc) {
+
         const t = doc.getElementById('ticketEl');
+
         if (t) {
+
           t.style.borderRadius = '8px';
+
           t.style.overflow = 'hidden';
+
         }
+
       }
+
     }).then(canvas => {
+
       overlay.classList.remove('active');
 
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      showImageOverlay(canvas.toDataURL('image/png', 1.0));
 
-      if (isIOS || isSafari) {
-        // iOS/Safari: 새 탭에 이미지 열기 → 길게 눌러서 저장
-        const dataUrl = canvas.toDataURL('image/png', 1.0);
-        const win = window.open('', '_blank');
-        if (win) {
-          win.document.write(
-            '<html><head><title>초대장 저장</title>' +
-            '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-            '<style>body{margin:0;background:#0f1420;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px;}' +
-            'img{max-width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);}' +
-            'p{color:#8a9ab5;font-family:sans-serif;font-size:13px;text-align:center;padding:0 20px;line-height:1.7;}' +
-            '</style></head><body>' +
-            '<p>이미지를 <strong style="color:#e8c96a">길게 눌러서</strong> 사진 앱에 저장해 주세요</p>' +
-            '<img src="' + dataUrl + '" alt="HTB 초대장"/>' +
-            '</body></html>'
-          );
-          win.document.close();
-        } else {
-          // 팝업 차단된 경우 현재 탭에 이미지 표시
-          showImageOverlay(canvas.toDataURL('image/png', 1.0));
-        }
-      } else {
-        // Android Chrome 등: blob URL 다운로드
-        canvas.toBlob(function(blob) {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.download = 'HTB_초대장_' + (state.name || 'ticket') + '.png';
-          link.href = url;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => URL.revokeObjectURL(url), 1000);
-        }, 'image/png', 1.0);
-      }
     }).catch(() => {
+
       overlay.classList.remove('active');
-      alert('이미지 저장 중 오류가 발생했습니다. 다시 시도해 주세요.');
+
+      alert('이미지 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+
     });
+
   }
 
   function showImageOverlay(dataUrl) {
-    // 팝업 차단 시 현재 페이지에 이미지 오버레이로 보여주기
-    const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(10,14,24,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;';
-    overlay.innerHTML =
-      '<p style="color:#e8c96a;font-family:sans-serif;font-size:13px;text-align:center;">이미지를 길게 눌러서 저장해 주세요</p>' +
-      '<img src="' + dataUrl + '" style="max-width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.6);" alt="HTB 초대장"/>' +
-      '<button onclick="this.parentNode.remove()" style="background:transparent;border:1px solid rgba(201,168,76,0.4);color:#8a9ab5;font-family:sans-serif;font-size:12px;padding:10px 24px;cursor:pointer;border-radius:2px;margin-top:8px;">닫기</button>';
-    document.body.appendChild(overlay);
-  }
 
+    const overlay = document.createElement('div');
+
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(10,14,24,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:24px;';
+
+    overlay.innerHTML =
+
+      '<p style="color:#e8c96a;font-family:sans-serif;font-size:14px;text-align:center;line-height:1.8;">' +
+
+      '📱 이미지를 <strong>꾹 눌러서</strong> 저장해 주세요<br>' +
+
+      '<span style="font-size:12px;color:#8a9ab5;">사진 앱에 저장 → 블로그 댓글에 첨부</span></p>' +
+
+      '<img src="' + dataUrl + '" style="max-width:100%;max-height:60vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.6);display:block;" alt="HTB 초대장"/>' +
+
+      '<button onclick="this.parentNode.remove()" style="background:transparent;border:1px solid rgba(201,168,76,0.4);color:#8a9ab5;font-family:sans-serif;font-size:13px;padding:12px 32px;cursor:pointer;border-radius:2px;">닫기</button>';
+
+    document.body.appendChild(overlay);
+
+  }
   function restart() {
     state.target = ''; state.name = ''; state.message = '';
     document.getElementById('nameInput').value = '';
