@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>하우스텐보스행 초대장</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --navy: #1a1f2e;
+    --navy-deep: #0f1420;
+    --navy-mid: #232a3a;
+    --cream: #fdfbf7;
+    --cream-warm: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-pale: #f0dfa0;
+    --orange: #d45f1e;
+    --orange-deep: #b84e15;
+    --wax-red: #8b2020;
+    --wax-deep: #6b1515;
+    --text-cream: #f0e8d8;
+    --text-muted: #8a9ab5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; min-height: 100vh;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--navy-deep);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── STARS BG ── */
+  .stars-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(26,31,46,0.8) 0%, transparent 60%),
+      var(--navy-deep);
+  }
+  .stars-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 65% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 10% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 30% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 100%);
+  }
+
+  /* ── STEP WRAPPER ── */
+  .step {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem 1rem;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+    display: none;
+  }
+  .step.active {
+    display: flex;
+    opacity: 1; transform: translateY(0);
+    pointer-events: all;
+  }
+  .step.entering {
+    opacity: 0; transform: translateY(24px);
+  }
+
+  /* ── GOLD DIVIDER ── */
+  .gold-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.2rem auto;
+  }
+
+  /* ═══════════════════════════
+     STEP 1 — OPENING
+  ═══════════════════════════ */
+  .step1-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  /* envelope — pocket style like reference */
+  .envelope-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto 2.5rem;
+    cursor: pointer;
+  }
+
+  /* cream card peeking out from top */
+  .envelope-card-peek {
+    width: 88%;
+    margin: 0 auto;
+    background: #f7f3eb;
+    border-radius: 10px 10px 0 0;
+    padding: 18px 24px 22px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    min-height: 80px;
+  }
+
+  .card-peek-to {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: #1a2540;
+    letter-spacing: 0.06em;
+  }
+
+  /* navy envelope body */
+  .envelope-body {
+    width: 100%;
+    max-width: 340px;
+    background: #1a2540;
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 4px 20px rgba(0,0,0,0.3);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 1;
+    margin-top: -2px;
+  }
+
+  /* subtle arc cutout at top of navy body */
+  .envelope-body::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 10px;
+    background: var(--navy-deep);
+    border-radius: 0 0 30px 30px;
+    z-index: 3;
+  }
+
+  .envelope-htb-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    color: rgba(240,232,210,0.7);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .envelope-bottom-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  .envelope-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.4);
+  }
+
+  .envelope-dot-label {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: rgba(201,168,76,0.45);
+    font-family: 'Cormorant Garamond', serif;
+    text-transform: uppercase;
+  }
+
+  /* wax seal on navy body */
+  .wax-seal {
+    width: 52px; height: 52px;
+    flex-shrink: 0;
+  }
+  .wax-seal svg { width: 100%; height: 100%; }
+
+  .step1-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 600;
+    color: var(--text-cream);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 480px;
+    margin: 0 auto 0.5rem;
+  }
+
+  .step1-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ═══════════════════════════
+     STEP 2 — TARGET SELECT
+  ═══════════════════════════ */
+  .step2-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 3.5vw, 26px);
+    font-style: italic;
+    color: var(--text-cream);
+    text-align: center;
+    line-height: 1.6;
+    max-width: 440px;
+    margin-bottom: 0.5rem;
+  }
+
+  .step2-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5rem;
+  }
+
+  .target-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .target-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--text-cream);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    padding: 12px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .target-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), transparent);
+    opacity: 0; transition: opacity 0.25s;
+  }
+
+  .target-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.15);
+  }
+  .target-btn:hover::before { opacity: 1; }
+
+  /* ═══════════════════════════
+     STEP 3 — LETTER INPUT
+  ═══════════════════════════ */
+  .letter-card {
+    width: 100%; max-width: 520px;
+    background: var(--cream);
+    border-radius: 2px;
+    padding: 36px 40px 32px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 2px 8px rgba(201,168,76,0.1);
+    position: relative;
+  }
+
+  .letter-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent, transparent 31px,
+      rgba(170,150,100,0.12) 31px, rgba(170,150,100,0.12) 32px
+    );
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+
+  .letter-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: #b09060;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .letter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #3a2e18;
+    font-style: italic;
+  }
+
+  .letter-divider {
+    width: 40px; height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 10px auto 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #9a8060;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .form-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(170,140,80,0.4);
+    padding: 6px 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    color: #3a2e18;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { border-bottom-color: var(--gold); }
+  .form-input::placeholder { color: #c0aa80; font-size: 13px; }
+
+  .form-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 8px 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13.5px;
+    line-height: 2;
+    color: #3a2e18;
+    outline: none;
+    resize: none;
+    min-height: 200px;
+  }
+  .form-textarea::placeholder { color: #c0aa80; }
+
+  .char-count {
+    text-align: right;
+    font-size: 11px;
+    color: #b09060;
+    margin-top: 4px;
+  }
+
+  /* ═══════════════════════════
+     STEP 4 — TICKET
+  ═══════════════════════════ */
+  .step4-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    letter-spacing: 0.12em;
+    margin-bottom: 2rem;
+  }
+
+  /* ticket */
+  #ticketEl {
+    width: 100%;
+    max-width: 560px;
+    background: #d45f1e;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .ticket-texture {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px),
+      linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 40%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
+  }
+
+  .ticket-top-bar {
+    background: rgba(0,0,0,0.2);
+    height: 5px;
+  }
+
+  .ticket-content {
+    padding: 24px 32px 20px;
+    position: relative; z-index: 1;
+  }
+
+  .ticket-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .jr-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .ticket-meta {
+    text-align: right;
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    line-height: 1.9;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .ticket-route {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+
+  .ticket-station {
+    flex: 1;
+  }
+
+  .ticket-station-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom: 3px;
+  }
+
+  .ticket-station-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  .ticket-station-jp {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 2px;
+  }
+
+  .ticket-arrow {
+    flex-shrink: 0;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ticket-arrow-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.7));
+    position: relative;
+  }
+  .ticket-arrow-line::after {
+    content: '';
+    position: absolute; right: -1px; top: 50%;
+    transform: translateY(-50%);
+    border-left: 6px solid rgba(255,255,255,0.7);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .ticket-arrow-text {
+    font-size: 9px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.15em;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .ticket-divider {
+    border: none;
+    border-top: 1px dashed rgba(255,255,255,0.25);
+    margin: 0 -32px 18px;
+    position: relative;
+  }
+  .ticket-divider::before,
+  .ticket-divider::after {
+    content: '';
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 18px; height: 18px;
+    background: var(--navy-deep);
+    border-radius: 50%;
+  }
+  .ticket-divider::before { left: -9px; }
+  .ticket-divider::after { right: -9px; }
+
+  .ticket-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 20px;
+    margin-bottom: 16px;
+  }
+
+  .ticket-field {}
+
+  .ticket-field-label {
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 3px;
+  }
+
+  .ticket-field-value {
+    font-size: 14px;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  .ticket-message-block {
+    background: rgba(0,0,0,0.15);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    border-left: 2px solid rgba(255,255,255,0.3);
+  }
+
+  .ticket-message-label {
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 5px;
+  }
+
+  .ticket-message-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+
+  .ticket-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .ticket-brand {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.18em;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* wax seal on ticket */
+  .ticket-wax {
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+  }
+  .ticket-wax svg { width: 100%; height: 100%; }
+
+  /* barcode */
+  .ticket-barcode {
+    display: flex;
+    gap: 1.5px;
+    align-items: flex-end;
+    height: 36px;
+  }
+  .bbar {
+    background: rgba(255,255,255,0.5);
+    border-radius: 1px;
+  }
+
+  /* punching holes */
+  .punch-left, .punch-right {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--navy-deep);
+    z-index: 5;
+  }
+  .punch-left { left: -11px; }
+  .punch-right { right: -11px; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    padding: 14px 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .btn-primary:hover {
+    background: rgba(201,168,76,0.1);
+    box-shadow: 0 4px 24px rgba(201,168,76,0.2);
+    transform: translateY(-1px);
+  }
+  .btn-primary:hover::before { opacity: 1; }
+
+  .btn-issue {
+    width: 100%;
+    background: linear-gradient(135deg, #c44a12, #d45f1e);
+    border: none;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    padding: 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-top: 8px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(212,95,30,0.3);
+    position: relative; z-index: 1;
+  }
+  .btn-issue:hover {
+    background: linear-gradient(135deg, #b84e15, #c44a12);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(212,95,30,0.4);
+  }
+
+  .btn-download {
+    background: linear-gradient(135deg, #8b2020, #a82828);
+    border: none;
+    color: #f5dfc0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    padding: 14px 36px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(139,32,32,0.4);
+  }
+  .btn-download:hover {
+    background: linear-gradient(135deg, #a82828, #c43030);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(139,32,32,0.5);
+  }
+
+  .btn-restart {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--text-muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding: 10px 28px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* step4 actions */
+  .step4-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2rem;
+  }
+
+  /* step heading */
+  .step-heading {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .step-number {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  /* loading */
+  .loading-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(15,20,32,0.9);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .loading-overlay.active { opacity: 1; pointer-events: all; }
+  .loading-spinner {
+    width: 32px; height: 32px;
+    border: 2px solid rgba(201,168,76,0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 13px; color: var(--text-muted); letter-spacing: 0.15em; }
+
+  /* ── RESPONSIVE / MOBILE ── */
+  @media (max-width: 600px) {
+    /* step padding */
+    .step { padding: 1.5rem 1rem; }
+
+    /* step1 eyebrow */
+    .step1-eyebrow { font-size: 9px; letter-spacing: 0.2em; margin-bottom: 1.2rem; }
+
+    /* envelope */
+    .envelope-wrap { width: 100%; max-width: 320px; }
+    .envelope-card-peek { width: 88%; }
+    .envelope-body { width: 100%; }
+
+    /* titles */
+    .step1-title { font-size: 20px; }
+    .step1-sub { font-size: 12px; margin-bottom: 1.8rem; }
+    .step2-question { font-size: 18px; }
+
+    /* target buttons */
+    .target-grid { max-width: 300px; gap: 10px; }
+    .target-btn { padding: 10px 20px; font-size: 13px; }
+
+    /* letter card */
+    .letter-card { padding: 24px 18px 20px; width: 100%; }
+    .letter-title { font-size: 15px; }
+
+    /* ticket */
+    #ticketEl { width: 100%; max-width: 100%; }
+    .ticket-content { padding: 16px 16px 14px; }
+    .ticket-divider { margin: 0 -16px 14px; }
+    .ticket-station-name { font-size: 14px; }
+    .ticket-info-grid { grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+    .ticket-message-text { font-size: 12px; }
+    .ticket-arrow-line { width: 30px; }
+    .jr-badge { font-size: 18px; }
+
+    /* buttons */
+    .btn-primary { padding: 12px 28px; font-size: 14px; }
+    .btn-download { padding: 13px 16px; font-size: 12px; letter-spacing: 0.1em; width: 100%; text-align: center; }
+    .btn-restart { width: 100%; text-align: center; padding: 10px; }
+    .btn-issue { font-size: 14px; padding: 14px; letter-spacing: 0.12em; }
+
+    /* step4 actions */
+    .step4-actions { width: 100%; padding: 0 4px; }
+    .step4-label { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars-bg"></div>
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">티켓을 발권하는 중입니다...</div>
+</div>
+
+<!-- ═══════════ STEP 1 ═══════════ -->
+<div class="step active" id="step1">
+  <div class="step1-eyebrow">JR큐슈 × HUIS TEN BOSCH EVENT</div>
+
+  <div class="envelope-wrap" onclick="goTo(2)">
+    <!-- cream card peeking out -->
+    <div class="envelope-card-peek">
+      <div class="card-peek-to">To.</div>
+    </div>
+    <!-- navy envelope body -->
+    <div class="envelope-body">
+      <div class="wax-seal">
+        <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="26" cy="26" r="24" fill="#8b2020"/>
+          <circle cx="26" cy="26" r="24" fill="none" stroke="#6b1515" stroke-width="1.5"/>
+          <circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,200,150,0.2)" stroke-width="1"/>
+          <path d="M26 14 L27.8 21.4 L35.5 21.4 L29.4 26.1 L31.6 33.5 L26 29.2 L20.4 33.5 L22.6 26.1 L16.5 21.4 L24.2 21.4 Z" fill="rgba(255,200,150,0.65)"/>
+        </svg>
+      </div>
+      <div class="envelope-htb-text">HUIS TEN BOSCH</div>
+      <div class="envelope-bottom-dots">
+        <div class="envelope-dot"></div>
+        <div class="envelope-dot-label">INVITATION</div>
+        <div class="envelope-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-line"></div>
+  <h1 class="step1-title">당신에게 보내는<br>하우스텐보스행 초대장</h1>
+  <div class="gold-line"></div>
+  <p class="step1-sub">봉투를 클릭하거나 아래 버튼을 눌러 초대장을 열어보세요</p>
+  <button class="btn-primary" onclick="goTo(2)">초대장 확인하기</button>
+</div>
+
+<!-- ═══════════ STEP 2 ═══════════ -->
+<div class="step" id="step2">
+  <div class="step-heading">
+    <div class="step-number">STEP 02</div>
+    <h2 class="step2-question">"지금 가장 함께 떠나고 싶은<br>사람은 누구인가요?"</h2>
+    <div class="step2-sub">한 분을 선택해 주세요</div>
+  </div>
+  <div class="gold-line"></div>
+  <div class="target-grid">
+    <button class="target-btn" onclick="selectTarget('연인')">연인</button>
+    <button class="target-btn" onclick="selectTarget('친구')">친구</button>
+    <button class="target-btn" onclick="selectTarget('가족')">가족</button>
+    <button class="target-btn" onclick="selectTarget('나 자신')">나 자신</button>
+  </div>
+</div>
+
+<!-- ═══════════ STEP 3 ═══════════ -->
+<div class="step" id="step3">
+  <div class="step-heading" style="margin-bottom:1.5rem;">
+    <div class="step-number">STEP 03</div>
+  </div>
+  <div class="letter-card">
+    <div class="letter-header">
+      <div class="letter-eyebrow">Invitation Letter</div>
+      <div class="letter-title">진심 어린 초대의 말을 전해주세요</div>
+      <div class="letter-divider"></div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">To. 초대할 사람의 이름</label>
+      <input class="form-input" id="nameInput" type="text" placeholder="이름을 입력해 주세요" maxlength="30">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">초대 문구</label>
+      <textarea class="form-textarea" id="messageInput" placeholder="하우스텐보스로 함께 가고 싶은 마음을 자유롭게 적어주세요. 진심 어린 사연일수록 좋습니다 :)" maxlength="500"></textarea>
+      <div class="char-count"><span id="charCount">0</span> / 500</div>
+    </div>
+
+    <button class="btn-issue" onclick="issueTicket()">하우스텐보스행 레일 티켓 발권하기</button>
+  </div>
+</div>
+
+<!-- ═══════════ STEP 4 ═══════════ -->
+<div class="step" id="step4">
+  <div class="step-heading" style="margin-bottom:0.5rem;">
+    <div class="step-number">STEP 04</div>
+    <p class="step4-label">초대장이 발행되었습니다. 이미지를 저장해 블로그 댓글에 응모해 주세요.</p>
+  </div>
+
+  <div id="ticketEl" style="position:relative;">
+    <div class="punch-left"></div>
+    <div class="punch-right"></div>
+    <div class="ticket-texture"></div>
+    <div class="ticket-top-bar"></div>
+    <div class="ticket-content">
+      <div class="ticket-header-row">
+        <div class="jr-badge">JR</div>
+        <div class="ticket-meta">
+          <div>KYUSHU RAILWAY COMPANY</div>
+          <div>JR큐슈 블로그 이벤트</div>
+        </div>
+      </div>
+
+      <div class="ticket-route">
+        <div class="ticket-station">
+          <div class="ticket-station-label">출발 · FROM</div>
+          <div class="ticket-station-name">HAKATA</div>
+          <div class="ticket-station-jp">博多</div>
+        </div>
+        <div class="ticket-arrow">
+          <div class="ticket-arrow-line"></div>
+        </div>
+        <div class="ticket-station" style="text-align:right;">
+          <div class="ticket-station-label">도착 · TO</div>
+          <div class="ticket-station-name">HUIS TEN BOSCH</div>
+          <div class="ticket-station-jp">ハウステンボス</div>
+        </div>
+      </div>
+
+      <hr class="ticket-divider">
+
+      <div class="ticket-info-grid">
+        <div class="ticket-field">
+          <div class="ticket-field-label">Passenger</div>
+          <div class="ticket-field-value" id="t-name">—</div>
+        </div>
+        <div class="ticket-field">
+          <div class="ticket-field-label">For</div>
+          <div class="ticket-field-value" id="t-target">—</div>
+        </div>
+      </div>
+
+      <div class="ticket-message-block">
+        <div class="ticket-message-label">Message</div>
+        <div class="ticket-message-text" id="t-message">—</div>
+      </div>
+
+      <div class="ticket-bottom-row" style="justify-content:center;">
+        <div class="ticket-wax">
+          <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="26" fill="#8b2020"/>
+            <circle cx="28" cy="28" r="26" fill="none" stroke="#6b1515" stroke-width="1.5"/>
+            <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,200,150,0.2)" stroke-width="1"/>
+            <path d="M28 16 L30.2 23.6 L38.3 23.6 L31.7 28.7 L34.2 36.3 L28 31.6 L21.8 36.3 L24.3 28.7 L17.7 23.6 L25.8 23.6 Z" fill="rgba(255,200,150,0.65)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step4-actions">
+    <button class="btn-download" onclick="downloadTicket()">초대장 이미지 저장하고 블로그에 응모하기</button>
+    <button class="btn-restart" onclick="restart()">처음으로 돌아가기</button>
+  </div>
+</div>
+
+<script>
+  const state = { target: '', name: '', message: '' };
+
+  function goTo(n) {
+    const current = document.querySelector('.step.active');
+    const next = document.getElementById('step' + n);
+    if (!next) return;
+    if (current) {
+      current.classList.remove('active');
+      current.style.display = 'none';
+    }
+    next.style.display = 'flex';
+    next.classList.add('entering');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        next.classList.remove('entering');
+        next.classList.add('active');
+      });
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectTarget(t) {
+    state.target = t;
+    if (t === '나 자신') {
+      document.getElementById('nameInput').value = '나 자신';
+    }
+    goTo(3);
+  }
+
+  document.getElementById('messageInput').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length;
+  });
+
+  function issueTicket() {
+    const name = document.getElementById('nameInput').value.trim();
+    const msg = document.getElementById('messageInput').value.trim();
+    if (!name) { alert('초대할 사람의 이름을 입력해 주세요.'); return; }
+    if (msg.length < 1) { alert('초대 문구를 입력해 주세요.'); return; }
+
+    state.name = name;
+    state.message = msg;
+
+    document.getElementById('t-name').textContent = name;
+    document.getElementById('t-target').textContent = state.target || '소중한 분';
+    document.getElementById('t-message').textContent = msg;
+
+    goTo(4);
+  }
+
+  function generateBarcode() {
+    const el = document.getElementById('barcodeEl');
+    el.innerHTML = '';
+    const pattern = [2,1,2,1,3,1,2,1,1,2,3,1,2,1,1,2,1,3,2,1,1,2,2,1];
+    pattern.forEach(w => {
+      const bar = document.createElement('div');
+      bar.className = 'bbar';
+      bar.style.width = (w * 1.5) + 'px';
+      bar.style.height = (18 + Math.random() * 14) + 'px';
+      el.appendChild(bar);
+    });
+  }
+
+  function downloadTicket() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.add('active');
+
+    const ticket = document.getElementById('ticketEl');
+    const scale = (window.devicePixelRatio || 2) * 2;
+
+    html2canvas(ticket, {
+      scale: scale,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#d45f1e',
+      logging: false,
+      onclone: function(doc) {
+        const t = doc.getElementById('ticketEl');
+        if (t) {
+          t.style.borderRadius = '8px';
+          t.style.overflow = 'hidden';
+        }
+      }
+    }).then(canvas => {
+      overlay.classList.remove('active');
+
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+      if (isIOS || isSafari) {
+        // iOS/Safari: 새 탭에 이미지 열기 → 길게 눌러서 저장
+        const dataUrl = canvas.toDataURL('image/png', 1.0);
+        const win = window.open('', '_blank');
+        if (win) {
+          win.document.write(
+            '<html><head><title>초대장 저장</title>' +
+            '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+            '<style>body{margin:0;background:#0f1420;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px;}' +
+            'img{max-width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);}' +
+            'p{color:#8a9ab5;font-family:sans-serif;font-size:13px;text-align:center;padding:0 20px;line-height:1.7;}' +
+            '</style></head><body>' +
+            '<p>이미지를 <strong style="color:#e8c96a">길게 눌러서</strong> 사진 앱에 저장해 주세요</p>' +
+            '<img src="' + dataUrl + '" alt="HTB 초대장"/>' +
+            '</body></html>'
+          );
+          win.document.close();
+        } else {
+          // 팝업 차단된 경우 현재 탭에 이미지 표시
+          showImageOverlay(canvas.toDataURL('image/png', 1.0));
+        }
+      } else {
+        // Android Chrome 등: blob URL 다운로드
+        canvas.toBlob(function(blob) {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.download = 'HTB_초대장_' + (state.name || 'ticket') + '.png';
+          link.href = url;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }, 'image/png', 1.0);
+      }
+    }).catch(() => {
+      overlay.classList.remove('active');
+      alert('이미지 저장 중 오류가 발생했습니다. 다시 시도해 주세요.');
+    });
+  }
+
+  function showImageOverlay(dataUrl) {
+    // 팝업 차단 시 현재 페이지에 이미지 오버레이로 보여주기
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(10,14,24,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;';
+    overlay.innerHTML =
+      '<p style="color:#e8c96a;font-family:sans-serif;font-size:13px;text-align:center;">이미지를 길게 눌러서 저장해 주세요</p>' +
+      '<img src="' + dataUrl + '" style="max-width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.6);" alt="HTB 초대장"/>' +
+      '<button onclick="this.parentNode.remove()" style="background:transparent;border:1px solid rgba(201,168,76,0.4);color:#8a9ab5;font-family:sans-serif;font-size:12px;padding:10px 24px;cursor:pointer;border-radius:2px;margin-top:8px;">닫기</button>';
+    document.body.appendChild(overlay);
+  }
+
+  function restart() {
+    state.target = ''; state.name = ''; state.message = '';
+    document.getElementById('nameInput').value = '';
+    document.getElementById('messageInput').value = '';
+    document.getElementById('charCount').textContent = '0';
+    goTo(1);
+  }
+
+  // init hidden steps
+  ['step2','step3','step4'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+</script>
+</body>
+</html>
