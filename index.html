@@ -27,9 +27,14 @@
     overflow-x: hidden;
   }
 
- .bg-layer {
-  background:
-    linear-gradient(rgba(15,20,32,0.82), rgba(15,20,32,0.88)),
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background-image:
+    linear-gradient(rgba(15,20,32,0.78), rgba(15,20,32,0.9)),
     url('bg.jpg');
 
   background-size: cover;
