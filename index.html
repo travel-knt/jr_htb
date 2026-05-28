@@ -27,14 +27,22 @@
     overflow-x: hidden;
   }
 
-  .bg-layer {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0;
-    background:
-      radial-gradient(ellipse at 20% 30%, rgba(212,95,30,0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(26,31,46,0.8) 0%, transparent 60%),
-      var(--navy-deep);
-  }
+ .bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 
+  background:
+    linear-gradient(rgba(15,20,32,0.72), rgba(15,20,32,0.82)),
+    url('배경사진.jpg'),
+    radial-gradient(ellipse at 20% 30%, rgba(212,95,30,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(26,31,46,0.8) 0%, transparent 60%);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
   .step {
     position: relative; z-index: 1;
     min-height: 100vh;
