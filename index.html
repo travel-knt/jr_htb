@@ -573,10 +573,52 @@
     goTo(4);
   }
 
-  function downloadTicket() {
+ function downloadTicket() {
+    // 구글 시트에 데이터 저장
+    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec'; 
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: state.name,
+        target: state.target,
+        message: state.message
+      })
+    }).catch(function(err) {
+      console.log('시트 저장 오류:', err);
+    });
+
     const overlay = document.getElementById('loadingOverlay');
     overlay.classList.add('active');
     const ticket = document.getElementById('ticketEl');
+
+    html2canvas(ticket, {
+      scale: 3, useCORS: true,
+      backgroundColor: '#d45f1e', logging: false
+    }).then(canvas => {
+      overlay.classList.remove('active');
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        showImageOverlay(canvas.toDataURL('image/png', 1.0));
+      } else {
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.download = '하우스텐보스_초대장.jpg';
+          link.href = url;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }, 'image/jpeg', 0.95);
+      }
+    }).catch(() => {
+      overlay.classList.remove('active');
+      alert('이미지 저장에 실패했습니다. 다시 시도해 주세요.');
+    });
+  }
 
     html2canvas(ticket, {
       scale: 3, useCORS: true,
