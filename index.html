@@ -27,22 +27,19 @@
     overflow-x: hidden;
   }
 
-.bg-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(15,20,32,0.55), rgba(15,20,32,0.55)),
+      url('23.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
 
-  /* 23.jpg로 변경 및 어두운 오버레이 투명도를 10% 수준으로 조절 (rgba 0.1) */
- background-image:
-    linear-gradient(rgba(15,20,32,0.55), rgba(15,20,32,0.55)),
-    url('23.jpg');
-
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-  
   .step {
     position: relative; z-index: 1;
     min-height: 100vh;
@@ -65,7 +62,6 @@
     margin-bottom: 2rem; font-weight: 600;
   }
 
-  /* 봉투 + 탑승권 씬 */
   @keyframes bounceIn {
     0%   { transform: translateY(20px) scale(0.96); opacity: 0; }
     70%  { transform: translateY(-3px) scale(1.01); opacity: 1; }
@@ -98,13 +94,11 @@
     transform-origin: 50% 70%;
   }
 
-  /* 뒤쪽 플랩/겹 레이어는 제거하고, 앞에서 보이는 봉투 형태만 유지 */
   .envelope-back,
   .envelope-flap {
     display: none;
   }
 
-  /* 탑승권: 열린 뚜껑보다 앞, 봉투 앞면보다 뒤 */
   .boarding-card {
     position: absolute;
     left: 50%;
@@ -166,9 +160,7 @@
 
   .envelope-front {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: 0; right: 0; bottom: 0;
     height: 142px;
     background: linear-gradient(145deg, #25375d 0%, #1d2b4b 62%, #17223d 100%);
     border-radius: 7px 7px 9px 9px;
@@ -196,9 +188,7 @@
   }
   .envelope-bottom-flap {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: 0; right: 0; bottom: 0;
     height: 100%;
     background: linear-gradient(180deg, rgba(33,51,83,0.54) 0%, rgba(23,35,60,0.72) 100%);
     clip-path: polygon(0 100%, 50% 34%, 100% 100%);
@@ -207,13 +197,10 @@
   }
   .envelope-front-label {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 18px;
+    left: 0; right: 0; bottom: 18px;
     text-align: center;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 8px;
-    letter-spacing: 0.34em;
+    font-size: 8px; letter-spacing: 0.34em;
     color: rgba(240,232,216,0.36);
     z-index: 7;
   }
@@ -289,10 +276,8 @@
     width: 100%; max-width: 520px;
     background: var(--orange);
     border-radius: 10px; position: relative;
-    overflow: hidden;
+    overflow: hidden; height: auto;
     box-shadow: 0 25px 55px rgba(0,0,0,0.6);
-    /* 내용에 맞게 높이 자동 조절 */
-    height: auto;
   }
   .ticket-texture {
     position: absolute; inset: 0; pointer-events: none; border-radius: 10px;
@@ -324,15 +309,13 @@
 
   .ticket-message-block {
     background: rgba(0,0,0,0.15); border-radius: 6px; padding: 14px 16px;
-    margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
-    width: 100%;
+    margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); width: 100%;
   }
   .ticket-message-label { font-size: 9px; color: rgba(255,255,255,0.7); font-weight: 700; margin-bottom: 6px; }
   .ticket-message-text {
     font-size: 13px; color: #fff; line-height: 1.7;
     word-break: break-all; white-space: pre-wrap;
-    overflow-wrap: break-word;
-    display: block; width: 100%;
+    overflow-wrap: break-word; display: block; width: 100%;
   }
 
   .ticket-bottom-row { display: flex; justify-content: flex-end; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.15); }
@@ -418,8 +401,6 @@
 
   <div class="envelope-scene" onclick="goTo(2)">
     <div class="envelope-wrap">
-      <!-- 1. 열린 봉투 뚜껑 / 가장 뒤 -->
-      <!-- 2. Boarding Pass / 중간 -->
       <div class="boarding-card">
         <div class="boarding-card-top">
           <div class="boarding-card-invite">Invitation</div>
@@ -434,8 +415,6 @@
           <span>HUIS TEN BOSCH</span>
         </div>
       </div>
-
-      <!-- 3. 봉투 앞면 / 가장 앞, 탑승권 하단을 가림 -->
       <div class="envelope-front">
         <div class="envelope-bottom-flap"></div>
         <div class="envelope-front-label">HUIS TEN BOSCH</div>
@@ -566,16 +545,17 @@
     if (!name) { alert('승객 이름을 입력해 주세요.'); return; }
     if (!msg) { alert('내용을 입력해 주세요.'); return; }
 
-    state.name = name; state.message = msg;
+    state.name = name;
+    state.message = msg;
     document.getElementById('t-name').textContent = name;
     document.getElementById('t-target').textContent = state.target;
     document.getElementById('t-message').textContent = msg;
     goTo(4);
   }
 
- function downloadTicket() {
+  function downloadTicket() {
     // 구글 시트에 데이터 저장
-    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec'; 
+    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
 
     fetch(APPS_SCRIPT_URL, {
       method: 'POST',
@@ -593,32 +573,6 @@
     const overlay = document.getElementById('loadingOverlay');
     overlay.classList.add('active');
     const ticket = document.getElementById('ticketEl');
-
-    html2canvas(ticket, {
-      scale: 3, useCORS: true,
-      backgroundColor: '#d45f1e', logging: false
-    }).then(canvas => {
-      overlay.classList.remove('active');
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile) {
-        showImageOverlay(canvas.toDataURL('image/png', 1.0));
-      } else {
-        canvas.toBlob(blob => {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.download = '하우스텐보스_초대장.jpg';
-          link.href = url;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => URL.revokeObjectURL(url), 1000);
-        }, 'image/jpeg', 0.95);
-      }
-    }).catch(() => {
-      overlay.classList.remove('active');
-      alert('이미지 저장에 실패했습니다. 다시 시도해 주세요.');
-    });
-  }
 
     html2canvas(ticket, {
       scale: 3, useCORS: true,
