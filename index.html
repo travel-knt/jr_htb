@@ -4,624 +4,1745 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>하우스텐보스행 초대장</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
   :root {
     --navy: #1a1f2e;
     --navy-deep: #0f1420;
+
     --orange: #d45f1e;
     --orange-deep: #b84e15;
+
     --cream: #fdfbf7;
     --text-cream: #f0e8d8;
     --text-muted: #8a9ab5;
     --gold: #c9a84c;
+    --white: #ffffff;
+
+    /* 봉투 색상 */
+    --envelope-dark: #741817;
+    --envelope-main: #8f2522;
+    --envelope-mid: #9e2d29;
+    --envelope-light: #a93732;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 100%; min-height: 100vh;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    min-height: 100vh;
     font-family: 'Noto Sans KR', sans-serif;
     background: var(--navy-deep);
     color: var(--text-cream);
     overflow-x: hidden;
   }
 
-  .bg-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(15,20,32,0.3) 0%,
-      rgba(15,20,32,0.5) 50%,
-      rgba(15,20,32,0.85) 100%
-    ),
-    url('zz.jpg');
-  background-size: 85%;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-  
-  .step {
-    position: relative; z-index: 1;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 2rem 1rem;
+  button,
+  input,
+  textarea {
+    font: inherit;
   }
 
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
 
-  /* ═══ STEP 1 ═══ */
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(15, 20, 32, 0.30) 0%,
+        rgba(15, 20, 32, 0.50) 50%,
+        rgba(15, 20, 32, 0.85) 100%
+      ),
+      url('zz.jpg');
+
+    background-size: 85%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+
+    min-height: 100vh;
+    padding: 2rem 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orange-line {
+    width: 50px;
+    height: 1px;
+    margin: 1.2rem auto;
+
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--orange),
+      transparent
+    );
+  }
+
+  /* ═══════════════════════════════
+     STEP 1 — 봉투
+  ═══════════════════════════════ */
+
   .step1-eyebrow {
+    margin-bottom: 2rem;
+
     font-family: 'Cormorant Garamond', serif;
-    font-size: 13px; letter-spacing: 0.35em;
-    color: var(--white); text-transform: uppercase;
-    margin-bottom: 2rem; font-weight: 600;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--white);
   }
 
   @keyframes bounceIn {
-    0%   { transform: translateY(20px) scale(0.96); opacity: 0; }
-    70%  { transform: translateY(-3px) scale(1.01); opacity: 1; }
-    100% { transform: translateY(0) scale(1); }
+    0% {
+      transform: translateY(20px) scale(0.96);
+      opacity: 0;
+    }
+
+    70% {
+      transform: translateY(-3px) scale(1.01);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
   }
+
   @keyframes softFloat {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-7px); }
-    100% { transform: translateY(0); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-7px);
+    }
   }
 
   .envelope-scene {
     width: min(88vw, 360px);
-    height: 292px;
-    margin: 0 auto 2.4rem;
+    height: 315px;
+    margin: 0 auto 2.2rem;
+
     position: relative;
     cursor: pointer;
-    animation: bounceIn 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.12) both,
-               softFloat 3.2s ease-in-out 0.9s infinite;
-    filter: drop-shadow(0 22px 34px rgba(0,0,0,0.36));
+    -webkit-tap-highlight-color: transparent;
+
+    animation:
+      bounceIn 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.12) both,
+      softFloat 3.2s ease-in-out 0.9s infinite;
+
+    filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.36));
+  }
+
+  .envelope-scene.open {
+    animation-play-state: paused;
   }
 
   .envelope-wrap {
     position: absolute;
     left: 50%;
-    bottom: 18px;
+    bottom: 16px;
+
     width: 330px;
-    height: 210px;
+    height: 220px;
+
     transform: translateX(-50%);
     transform-origin: 50% 70%;
   }
 
-  .envelope-back,
-  .envelope-flap {
-    display: none;
+  /* 봉투 뒤판 */
+  .envelope-back {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 230px;
+  z-index: 1;
+
+  background: linear-gradient(
+    180deg,
+    #990000 0%,
+    #741817 100%
+  );
+
+  clip-path: polygon(
+    0 100%,
+    0 48%,
+    50% 0,
+    100% 48%,
+    100% 100%
+  );
+
+  border-radius: 0 0 10px 10px;
+}
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -14px 24px rgba(0, 0, 0, 0.16);
   }
 
+  /* 뒤로 펼쳐진 윗덮개 */
+  .envelope-flap {
+    position: absolute;
+    left: 50%;
+    top: 0;
+
+    width: 94%;
+    height: 150px;
+    z-index: 2;
+
+    transform: translateX(-50%);
+    transform-origin: 50% 100%;
+
+    background:
+      linear-gradient(
+        180deg,
+        var(--envelope-mid) 0%,
+        var(--envelope-dark) 100%
+      );
+
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+
+    filter: drop-shadow(0 -2px 1px rgba(0, 0, 0, 0.12));
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 봉투 안 초대장 */
   .boarding-card {
     position: absolute;
     left: 50%;
-    bottom: 88px;
+    bottom: 46px;
+
     width: 286px;
-    min-height: 156px;
+    min-height: 180px;
+    z-index: 4;
+
+    padding: 23px 22px 20px;
+
     transform: translateX(-50%);
     transform-origin: 50% 100%;
+
     background: #fbf8f1;
-    border-radius: 7px;
-    padding: 20px 22px 18px;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
-    border: 1px solid rgba(200,180,140,0.28);
-    z-index: 3;
-  }
-  .boarding-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 7px;
-    background:
-      linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px) 0 0 / 9px 9px,
-      linear-gradient(180deg, rgba(255,255,255,0.75), transparent 34%);
-    pointer-events: none;
-  }
-  .boarding-card-top {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 12px; position: relative; z-index: 1;
-  }
-  .boarding-card-invite {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 22px;
-    color: #2a1f10; line-height: 1;
-  }
-  .boarding-card-jr {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px; font-weight: 700;
-    color: var(--orange); line-height: 1;
-  }
-  .boarding-card-divider {
-    height: 1px; background: #dfd1b8; margin-bottom: 12px;
-    position: relative; z-index: 1;
-  }
-  .boarding-card-pass {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px; font-weight: 700;
-    color: var(--orange); letter-spacing: 0.1em; margin-bottom: 2px;
-    position: relative; z-index: 1;
-  }
-  .boarding-card-sub {
-    font-size: 9px; color: #9c958c; letter-spacing: 0.08em; margin-bottom: 10px;
-    position: relative; z-index: 1;
-  }
-  .boarding-card-route {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 10px; font-weight: 700; color: #555; letter-spacing: 0.04em;
-    position: relative; z-index: 1;
+    border: 1px solid rgba(200, 180, 140, 0.28);
+    border-radius: 6px;
+
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+
+    transition:
+      transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.72s ease;
   }
 
+  .boarding-card::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    border-radius: 6px;
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.025) 1px,
+        transparent 1px
+      ) 0 0 / 9px 9px,
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.78),
+        transparent 34%
+      );
+  }
+
+  .boarding-card-top {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+  }
+
+  .boarding-card-invite {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-style: italic;
+    line-height: 1;
+    color: #2a1f10;
+  }
+
+  .boarding-card-jr {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--orange);
+  }
+
+  .boarding-card-divider {
+    position: relative;
+    z-index: 1;
+
+    height: 1px;
+    margin-bottom: 12px;
+
+    background: #dfd1b8;
+  }
+
+  .boarding-card-pass {
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: 3px;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+  }
+
+  .boarding-card-sub {
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: 12px;
+
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: #9c958c;
+  }
+
+  .boarding-card-route {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #555;
+  }
+
+  /*
+    봉투 앞면은 배경을 투명하게 두고
+    왼쪽·오른쪽·아래쪽 조각만 카드 위에 올린다.
+    그래서 Invitation 종이가 가운데에서 보인다.
+  */
   .envelope-front {
     position: absolute;
-    left: 0; right: 0; bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
     height: 142px;
-    background: linear-gradient(145deg, #25375d 0%, #1d2b4b 62%, #17223d 100%);
-    border-radius: 7px 7px 9px 9px;
-    overflow: hidden;
     z-index: 5;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.08),
-      inset 0 -16px 24px rgba(0,0,0,0.13);
+
+    overflow: hidden;
+    border-radius: 0 0 10px 10px;
+    background: transparent;
   }
+
   .envelope-front::before {
     content: '';
+
     position: absolute;
-    left: 0; bottom: 0;
-    width: 55%; height: 100%;
-    background: linear-gradient(40deg, rgba(255,255,255,0.026), rgba(0,0,0,0.035));
-    clip-path: polygon(0 0, 100% 55%, 0 100%);
+    left: 0;
+    bottom: 0;
+
+    width: 58%;
+    height: 100%;
+    z-index: 1;
+
+    background:
+      linear-gradient(
+        135deg,
+        var(--envelope-light) 0%,
+        var(--envelope-main) 100%
+      );
+
+    clip-path: polygon(0 0, 100% 60%, 0 100%);
+
+    filter: drop-shadow(1px 0 1px rgba(0, 0, 0, 0.14));
   }
+
   .envelope-front::after {
     content: '';
+
     position: absolute;
-    right: 0; bottom: 0;
-    width: 55%; height: 100%;
-    background: linear-gradient(320deg, rgba(255,255,255,0.022), rgba(0,0,0,0.045));
-    clip-path: polygon(100% 0, 0 55%, 100% 100%);
+    right: 0;
+    bottom: 0;
+
+    width: 58%;
+    height: 100%;
+    z-index: 1;
+
+    background:
+      linear-gradient(
+        225deg,
+        var(--envelope-light) 0%,
+        var(--envelope-main) 100%
+      );
+
+    clip-path: polygon(100% 0, 0 60%, 100% 100%);
+
+    filter: drop-shadow(-1px 0 1px rgba(0, 0, 0, 0.14));
   }
+
   .envelope-bottom-flap {
     position: absolute;
-    left: 0; right: 0; bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
     height: 100%;
-    background: linear-gradient(180deg, rgba(33,51,83,0.54) 0%, rgba(23,35,60,0.72) 100%);
-    clip-path: polygon(0 100%, 50% 34%, 100% 100%);
-    z-index: 6;
-    opacity: 0.96;
+    z-index: 2;
+
+    background:
+      linear-gradient(
+        180deg,
+        var(--envelope-light) 0%,
+        var(--envelope-main) 72%,
+        var(--envelope-dark) 100%
+      );
+
+    clip-path: polygon(0 100%, 50% 39%, 100% 100%);
+
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.16));
   }
+
   .envelope-front-label {
     position: absolute;
-    left: 0; right: 0; bottom: 18px;
+    left: 0;
+    right: 0;
+    bottom: 17px;
+    z-index: 3;
+
     text-align: center;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 8px; letter-spacing: 0.34em;
-    color: rgba(240,232,216,0.36);
-    z-index: 7;
+    font-size: 8px;
+    letter-spacing: 0.34em;
+    color: rgba(255, 255, 255, 0.30);
+  }
+
+  /* 클릭하면 초대장 종이가 위로 올라온다 */
+  .envelope-scene.open .boarding-card {
+    transform: translateX(-50%) translateY(-78px);
+    filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.22));
+  }
+
+  .envelope-scene.open .envelope-flap {
+    transform: translateX(-50%) translateY(5px) scaleY(0.97);
   }
 
   .step1-title {
-    font-size: clamp(18px, 4vw, 24px); font-weight: 700;
-    color: var(--text-cream); text-align: center; line-height: 1.5;
     margin-bottom: 1rem;
+
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--text-cream);
   }
+
   .step1-sub {
-    font-size: 13px; color: var(--text-muted); text-align: center;
-    margin-bottom: 2.5rem; margin-top: 0.8rem;
+    margin-top: 0.8rem;
+    margin-bottom: 2.5rem;
+
+    font-size: 13px;
+    text-align: center;
+    color: var(--text-muted);
   }
 
-  /* ═══ STEP 2 ═══ */
+  /* ═══════════════════════════════
+     STEP 2
+  ═══════════════════════════════ */
+
   .step2-question {
-    font-size: clamp(18px, 3.5vw, 22px); font-weight: 700;
-    color: var(--text-cream); text-align: center;
-    margin-bottom: 2.5rem; line-height: 1.5;
+    margin-bottom: 2.5rem;
+
+    font-size: clamp(18px, 3.5vw, 22px);
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--text-cream);
   }
+
   .target-grid {
-    display: flex; flex-wrap: nowrap; gap: 10px;
-    justify-content: center; width: 100%; max-width: 480px;
+    width: 100%;
+    max-width: 480px;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 10px;
   }
+
   .target-btn {
-    background: var(--orange); border: none;
-    color: #fff; padding: 14px 16px; border-radius: 8px;
-    cursor: pointer; font-size: 14px; font-weight: 500;
-    transition: all 0.2s; white-space: nowrap; flex: 1;
-  }
-  .target-btn:hover { background: var(--orange-deep); transform: translateY(-2px); }
+    flex: 1;
+    padding: 14px 16px;
 
-  /* ═══ STEP 3 ═══ */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--orange);
+
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .target-btn:hover {
+    background: var(--orange-deep);
+    transform: translateY(-2px);
+  }
+
+  /* ═══════════════════════════════
+     STEP 3
+  ═══════════════════════════════ */
+
   .letter-card {
-    width: 100%; max-width: 480px; background: #faf8f5;
-    border-radius: 8px; padding: 36px 30px;
-    box-shadow: 0 24px 50px rgba(0,0,0,0.5); color: #222;
-  }
-  .letter-header { text-align: center; margin-bottom: 24px; }
-  .letter-eyebrow {
-    font-family: 'Cormorant Garamond', serif; font-size: 12px;
-    letter-spacing: 0.2em; color: var(--orange); font-weight: 600;
-  }
-  .letter-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px; color: #333; font-weight: 700; margin-top: 6px;
-  }
-  .form-group { margin-bottom: 20px; }
-  .form-label {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px; font-weight: 700; color: #333; margin-bottom: 8px; display: block;
-  }
-  .form-input {
-    width: 100%; background: transparent; border: none;
-    border-bottom: 1px solid #d1c2b8; padding: 8px 0;
-    font-size: 14px; color: #111; outline: none;
-  }
-  .form-input:focus { border-bottom-color: var(--orange); }
-  .form-textarea {
-    width: 100%; background: #f3ede8; border: none; padding: 14px;
-    font-size: 14px; line-height: 1.8; color: #222; outline: none;
-    resize: none; min-height: 300px; border-radius: 4px; overflow-y: auto;
-  }
-  .char-count { text-align: right; font-size: 11px; color: #777; margin-top: 4px; }
+    width: 100%;
+    max-width: 480px;
+    padding: 36px 30px;
 
-  /* ═══ STEP 4 ═══ */
+    color: #222;
+    background: #faf8f5;
+    border-radius: 8px;
+
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .letter-header {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .letter-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+  }
+
+  .letter-title {
+    margin-top: 6px;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 8px;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 8px 0;
+
+    border: none;
+    border-bottom: 1px solid #d1c2b8;
+    outline: none;
+
+    font-size: 14px;
+    color: #111;
+    background: transparent;
+  }
+
+  .form-input:focus {
+    border-bottom-color: var(--orange);
+  }
+
+  .form-textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 4px;
+    outline: none;
+
+    resize: none;
+    overflow-y: auto;
+
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+    background: #f3ede8;
+  }
+
+  .char-count {
+    margin-top: 4px;
+
+    text-align: right;
+    font-size: 11px;
+    color: #777;
+  }
+
+  /* ═══════════════════════════════
+     STEP 4
+  ═══════════════════════════════ */
+
   .step4-label {
-    font-size: 13px; color: var(--text-muted);
-    text-align: center; margin-bottom: 2rem; line-height: 1.6;
+    margin-bottom: 2rem;
+
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+    color: var(--text-muted);
   }
 
   #ticketEl {
-    width: 100%; max-width: 520px;
+    position: relative;
+
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+
+    overflow: hidden;
+    border-radius: 10px;
+
     background: var(--orange);
-    border-radius: 10px; position: relative;
-    overflow: hidden; height: auto;
-    box-shadow: 0 25px 55px rgba(0,0,0,0.6);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6);
   }
+
   .ticket-texture {
-    position: absolute; inset: 0; pointer-events: none; border-radius: 10px;
-    background: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.02) 4px, rgba(0,0,0,0.02) 5px);
+    position: absolute;
+    inset: 0;
+
+    border-radius: 10px;
+    pointer-events: none;
+
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(0, 0, 0, 0.02) 4px,
+        rgba(0, 0, 0, 0.02) 5px
+      );
   }
-  .ticket-content { padding: 28px 32px; position: relative; z-index: 1; }
-  .ticket-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
-  .jr-logo-area { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #fff; line-height: 1; }
-  .htb-express-title { text-align: right; }
-  .htb-express-title .main-txt { font-family: 'Playfair Display', serif; font-size: 16px; color: #fff; letter-spacing: 0.1em; font-weight: 700; }
-  .htb-express-title .sub-txt { font-size: 9px; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; margin-top: 1px; }
 
-  .ticket-route { display: flex; align-items: center; margin-bottom: 22px; }
-  .ticket-station { flex: 1; }
-  .ticket-station-label { font-size: 8px; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 3px; }
-  .ticket-station-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #fff; line-height: 1; }
-  .ticket-station-jp { font-size: 10px; color: rgba(255,255,255,0.8); margin-top: 2px; }
-  .ticket-arrow { padding: 0 15px; }
-  .ticket-arrow-line { width: 50px; height: 1px; background: #fff; position: relative; }
-  .ticket-arrow-line::after { content: ''; position: absolute; right: 0; top: -3px; border-left: 5px solid #fff; border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+  .ticket-content {
+    position: relative;
+    z-index: 1;
 
-  .ticket-divider { border: none; border-top: 1px dashed rgba(255,255,255,0.3); margin: 0 -32px 20px; position: relative; }
-  .ticket-divider::before, .ticket-divider::after { content: ''; position: absolute; top: -9px; width: 18px; height: 18px; background: var(--navy-deep); border-radius: 50%; }
-  .ticket-divider::before { left: -9px; } .ticket-divider::after { right: -9px; }
+    padding: 28px 32px;
+  }
 
-  .ticket-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-  .ticket-field-label { font-size: 9px; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 2px; font-weight: 500; }
-  .ticket-field-value { font-size: 14px; color: #fff; font-weight: 700; word-break: break-all; }
+  .ticket-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+  }
+
+  .jr-logo-area {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .htb-express-title {
+    text-align: right;
+  }
+
+  .htb-express-title .main-txt {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+  }
+
+  .htb-express-title .sub-txt {
+    margin-top: 1px;
+
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .ticket-route {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 22px;
+  }
+
+  .ticket-station {
+    flex: 1;
+  }
+
+  .ticket-station-label {
+    margin-bottom: 3px;
+
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ticket-station-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .ticket-station-jp {
+    margin-top: 2px;
+
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .ticket-arrow {
+    padding: 0 15px;
+  }
+
+  .ticket-arrow-line {
+    position: relative;
+
+    width: 50px;
+    height: 1px;
+
+    background: #fff;
+  }
+
+  .ticket-arrow-line::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    top: -3px;
+
+    border-left: 5px solid #fff;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+  }
+
+  .ticket-divider {
+    position: relative;
+
+    margin: 0 -32px 20px;
+
+    border: none;
+    border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  }
+
+  .ticket-divider::before,
+  .ticket-divider::after {
+    content: '';
+
+    position: absolute;
+    top: -9px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+    background: var(--navy-deep);
+  }
+
+  .ticket-divider::before {
+    left: -9px;
+  }
+
+  .ticket-divider::after {
+    right: -9px;
+  }
+
+  .ticket-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+
+    margin-bottom: 20px;
+  }
+
+  .ticket-field-label {
+    margin-bottom: 2px;
+
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ticket-field-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    word-break: break-all;
+  }
 
   .ticket-message-block {
-    background: rgba(0,0,0,0.15); border-radius: 6px; padding: 14px 16px;
-    margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); width: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+
+    background: rgba(0, 0, 0, 0.15);
   }
-  .ticket-message-label { font-size: 9px; color: rgba(255,255,255,0.7); font-weight: 700; margin-bottom: 6px; }
+
+  .ticket-message-label {
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
   .ticket-message-text {
-    font-size: 13px; color: #fff; line-height: 1.7;
-    word-break: break-all; white-space: pre-wrap;
-    overflow-wrap: break-word; display: block; width: 100%;
+    display: block;
+    width: 100%;
+
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-all;
+
+    font-size: 13px;
+    line-height: 1.7;
+    color: #fff;
   }
 
-  .ticket-bottom-row { display: flex; justify-content: flex-end; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.15); }
-  .ticket-train-plate { font-size: 10px; color: rgba(255,255,255,0.5); }
+  .ticket-bottom-row {
+    display: flex;
+    justify-content: flex-end;
 
-  /* BUTTONS */
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .ticket-train-plate {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ═══════════════════════════════
+     BUTTONS
+  ═══════════════════════════════ */
+
   .btn-primary {
-    background: var(--orange); border: none; color: #fff;
-    font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
-    padding: 15px 40px; cursor: pointer; transition: all 0.2s;
-    border-radius: 4px; box-shadow: 0 4px 15px rgba(212,95,30,0.35);
+    padding: 15px 40px;
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: var(--orange);
+
+    box-shadow: 0 4px 15px rgba(212, 95, 30, 0.35);
+
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
   }
-  .btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+  .btn-primary:hover {
+    background: var(--orange-deep);
+    transform: translateY(-1px);
+  }
+
   .btn-issue {
-    width: 100%; background: var(--orange); border: none;
-    color: #fff; font-size: 14px; font-weight: 700;
-    padding: 15px; cursor: pointer; border-radius: 4px; margin-top: 8px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 15px;
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--orange);
   }
-  .btn-issue:hover { background: var(--orange-deep); }
+
+  .btn-issue:hover {
+    background: var(--orange-deep);
+  }
+
   .btn-download {
-    background: linear-gradient(135deg, #a82828, #8b2020); border: none;
-    color: #fff; font-size: 14px; font-weight: 700;
-    padding: 15px 36px; cursor: pointer; border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(139,32,32,0.4);
-    width: 100%; text-align: center;
+    width: 100%;
+    padding: 15px 36px;
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+
+    background:
+      linear-gradient(
+        135deg,
+        #a82828,
+        #8b2020
+      );
+
+    box-shadow: 0 4px 15px rgba(139, 32, 32, 0.4);
   }
+
   .btn-restart {
-    background: transparent; border: 1px solid rgba(255,255,255,0.2);
-    color: var(--text-muted); font-size: 12px;
-    padding: 12px 24px; cursor: pointer; border-radius: 4px;
-    width: 100%; text-align: center;
+    width: 100%;
+    padding: 12px 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: transparent;
   }
 
   .step4-actions {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 16px; margin-top: 2.5rem; width: 100%; max-width: 520px;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 2.5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
+
+  /* ═══════════════════════════════
+     LOADING
+  ═══════════════════════════════ */
 
   .loading-overlay {
-    position: fixed; inset: 0; z-index: 100; background: var(--navy-deep);
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 12px;
-    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    background: var(--navy-deep);
+
+    transition: opacity 0.2s ease;
   }
-  .loading-overlay.active { opacity: 1; pointer-events: all; }
+
+  .loading-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
   .loading-spinner {
-    width: 28px; height: 28px;
-    border: 2px solid rgba(212,95,30,0.2);
+    width: 28px;
+    height: 28px;
+
+    border: 2px solid rgba(212, 95, 30, 0.2);
     border-top-color: var(--orange);
-    border-radius: 50%; animation: spin 0.8s linear infinite;
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* ═══════════════════════════════
+     MOBILE
+  ═══════════════════════════════ */
 
   @media (max-width: 600px) {
-    .envelope-scene { width: min(92vw, 320px); height: 276px; }
-    .envelope-wrap { width: 300px; height: 196px; bottom: 16px; }
-    .boarding-card { width: 260px; bottom: 82px; }
-    .envelope-front { height: 132px; }
-    .ticket-content { padding: 18px 16px; }
-    .ticket-divider { margin: 0 -16px 16px; }
-    .ticket-divider::before { left: -8px; }
-    .ticket-divider::after { right: -8px; }
-    .ticket-station-name { font-size: 16px; }
-    .ticket-message-text { font-size: 12px; }
-    #ticketEl { max-width: 100%; }
-    .target-grid { gap: 8px; }
-    .target-btn { padding: 12px 8px; font-size: 13px; }
-    .step4-actions { padding: 0 4px; }
+    .envelope-scene {
+      width: min(92vw, 320px);
+      height: 290px;
+    }
+
+    .envelope-wrap {
+      width: 300px;
+      height: 205px;
+      bottom: 14px;
+    }
+
+    .envelope-back {
+      height: 170px;
+    }
+
+    .envelope-flap {
+      height: 136px;
+    }
+
+    .boarding-card {
+      width: 260px;
+      min-height: 168px;
+      bottom: 43px;
+      padding: 20px 19px 18px;
+    }
+
+    .envelope-front {
+      height: 132px;
+    }
+
+    .envelope-scene.open .boarding-card {
+      transform: translateX(-50%) translateY(-68px);
+    }
+
+    .ticket-content {
+      padding: 18px 16px;
+    }
+
+    .ticket-divider {
+      margin: 0 -16px 16px;
+    }
+
+    .ticket-divider::before {
+      left: -8px;
+    }
+
+    .ticket-divider::after {
+      right: -8px;
+    }
+
+    .ticket-station-name {
+      font-size: 16px;
+    }
+
+    .ticket-message-text {
+      font-size: 12px;
+    }
+
+    #ticketEl {
+      max-width: 100%;
+    }
+
+    .target-grid {
+      gap: 8px;
+    }
+
+    .target-btn {
+      padding: 12px 8px;
+      font-size: 13px;
+    }
+
+    .step4-actions {
+      padding: 0 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .envelope-scene {
+      animation: none;
+    }
+
+    .boarding-card,
+    .envelope-flap {
+      transition-duration: 0.01ms;
+    }
   }
 </style>
 </head>
+
 <body>
+  <div class="bg-layer"></div>
 
-<div class="bg-layer"></div>
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="loading-spinner"></div>
-  <div style="font-size:13px;color:var(--text-muted);">탑승권 발행 중...</div>
-</div>
-
-<!-- ═══════════ STEP 1 ═══════════ -->
-<div class="step" id="step1">
-  <div class="step1-eyebrow">JR KYUSHU OFFICIAL EVENT</div>
-
-  <div class="envelope-scene" onclick="goTo(2)">
-    <div class="envelope-wrap">
-      <div class="boarding-card">
-        <div class="boarding-card-top">
-          <div class="boarding-card-invite">Invitation</div>
-          <div class="boarding-card-jr">JR</div>
-        </div>
-        <div class="boarding-card-divider"></div>
-        <div class="boarding-card-pass">BOARDING PASS</div>
-        <div class="boarding-card-sub">JR 특급 하우스텐보스호</div>
-        <div class="boarding-card-route">
-          <span>HAKATA</span>
-          <span style="color:var(--orange); font-size:12px;">➔</span>
-          <span>HUIS TEN BOSCH</span>
-        </div>
-      </div>
-      <div class="envelope-front">
-        <div class="envelope-bottom-flap"></div>
-        <div class="envelope-front-label">HUIS TEN BOSCH</div>
-      </div>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div style="font-size: 13px; color: var(--text-muted);">
+      탑승권 발행 중...
     </div>
   </div>
 
-  <div class="orange-line"></div>
-  <h1 class="step1-title">JR열차를 타고 떠나는<br>하우스텐보스 초대장 선물하기</h1>
-  <p class="step1-sub">봉투를 클릭해 나만의 초대장을 만들어 보세요</p>
-  <button class="btn-primary" onclick="goTo(2)">시작하기</button>
-</div>
-
-<!-- ═══════════ STEP 2 ═══════════ -->
-<div class="step" id="step2">
-  <h2 class="step2-question">기차 여행을<br>함께하고 싶은 소중한 사람은?</h2>
-  <div class="target-grid">
-    <button class="target-btn" onclick="selectTarget('연인')">연인</button>
-    <button class="target-btn" onclick="selectTarget('친구')">친구</button>
-    <button class="target-btn" onclick="selectTarget('가족')">가족</button>
-    <button class="target-btn" onclick="selectTarget('나 자신')">나 자신</button>
-  </div>
-</div>
-
-<!-- ═══════════ STEP 3 ═══════════ -->
-<div class="step" id="step3">
-  <div class="letter-card">
-    <div class="letter-header">
-      <div class="letter-eyebrow" id="stepLabel">초대장 작성</div>
-      <div class="letter-title">함께 떠나고 싶은 이유를 알려주세요</div>
-      <div class="orange-line" style="margin:10px auto;"></div>
+  <!-- ═══════════ STEP 1 ═══════════ -->
+  <div class="step" id="step1">
+    <div class="step1-eyebrow">
+      JR KYUSHU OFFICIAL EVENT
     </div>
-    <div class="form-group">
-      <label class="form-label">To. 함께 탑승할 승객 이름</label>
-      <input class="form-input" id="nameInput" type="text" placeholder="이름을 입력해 주세요" maxlength="30">
-    </div>
-    <div class="form-group">
-      <label class="form-label">같이 떠나고 싶은 이유를 적어주세요</label>
-      <textarea class="form-textarea" id="messageInput" placeholder="하우스텐보스로 함께 떠나고 싶은 이유를 자유롭게 적어주세요." maxlength="500"></textarea>
-      <div class="char-count"><span id="charCount">0</span> / 500</div>
-    </div>
-    <button class="btn-issue" onclick="issueTicket()">탑승권 발권하기</button>
-  </div>
-</div>
 
-<!-- ═══════════ STEP 4 ═══════════ -->
-<div class="step" id="step4">
-  <p class="step4-label">탑승권이 발행되었습니다.<br>이미지를 저장해 블로그 댓글에 응모해 주세요.</p>
+    <div
+      class="envelope-scene"
+      id="envelopeScene"
+      role="button"
+      tabindex="0"
+      aria-label="하우스텐보스 초대장 열기"
+      onclick="openEnvelope()"
+      onkeydown="handleEnvelopeKey(event)"
+    >
+      <div class="envelope-wrap">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
 
-  <div id="ticketEl">
-    <div class="ticket-texture"></div>
-    <div class="ticket-content">
-      <div class="ticket-header-row">
-        <div class="jr-logo-area">JR</div>
-        <div class="htb-express-title">
-          <div class="main-txt">BOARDING PASS</div>
-          <div class="sub-txt">KYUSHU RAILWAY COMPANY</div>
+        <div class="boarding-card">
+          <div class="boarding-card-top">
+            <div class="boarding-card-invite">
+              Invitation
+            </div>
+
+            <div class="boarding-card-jr">
+              JR
+            </div>
+          </div>
+
+          <div class="boarding-card-divider"></div>
+
+          <div class="boarding-card-pass">
+            BOARDING PASS
+          </div>
+
+          <div class="boarding-card-sub">
+            JR 특급 하우스텐보스호
+          </div>
+
+          <div class="boarding-card-route">
+            <span>HAKATA</span>
+            <span style="color: var(--orange); font-size: 12px;">➔</span>
+            <span>HUIS TEN BOSCH</span>
+          </div>
         </div>
-      </div>
-      <div class="ticket-route">
-        <div class="ticket-station">
-          <div class="ticket-station-label">출발 · FROM</div>
-          <div class="ticket-station-name">HAKATA</div>
+
+        <div class="envelope-front">
+          <div class="envelope-bottom-flap"></div>
+          <div class="envelope-front-label">
+            HUIS TEN BOSCH
+          </div>
         </div>
-        <div class="ticket-arrow">
-          <div class="ticket-arrow-line"></div>
-        </div>
-        <div class="ticket-station" style="text-align:right;">
-          <div class="ticket-station-label">도착 · TO</div>
-          <div class="ticket-station-name">HUIS TEN BOSCH</div>
-          <div class="ticket-station-jp">ハウステンボス</div>
-        </div>
-      </div>
-      <hr class="ticket-divider">
-      <div class="ticket-info-grid">
-        <div class="ticket-field">
-          <div class="ticket-field-label">PASSENGER</div>
-          <div class="ticket-field-value" id="t-name">—</div>
-        </div>
-        <div class="ticket-field">
-          <div class="ticket-field-label">FOR</div>
-          <div class="ticket-field-value" id="t-target">—</div>
-        </div>
-      </div>
-      <div class="ticket-message-block">
-        <div class="ticket-message-label">MESSAGE</div>
-        <div class="ticket-message-text" id="t-message">—</div>
-      </div>
-      <div class="ticket-bottom-row">
-        <div class="ticket-train-plate">JR큐슈 블로그 이벤트</div>
       </div>
     </div>
+
+    <div class="orange-line"></div>
+
+    <h1 class="step1-title">
+      JR열차를 타고 떠나는<br>
+      하우스텐보스 초대장 선물하기
+    </h1>
+
+    <p class="step1-sub">
+      봉투를 클릭해 나만의 초대장을 만들어 보세요
+    </p>
+
+    <button
+      class="btn-primary"
+      type="button"
+      onclick="openEnvelope()"
+    >
+      시작하기
+    </button>
   </div>
 
-  <div class="step4-actions">
-    <button class="btn-download" onclick="downloadTicket()">초대장 이미지 저장하고 블로그에 응모하기</button>
-    <button class="btn-restart" onclick="restart()">처음으로 돌아가기</button>
+  <!-- ═══════════ STEP 2 ═══════════ -->
+  <div class="step" id="step2">
+    <h2 class="step2-question">
+      기차 여행을<br>
+      함께하고 싶은 소중한 사람은?
+    </h2>
+
+    <div class="target-grid">
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('연인')"
+      >
+        연인
+      </button>
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('친구')"
+      >
+        친구
+      </button>
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('가족')"
+      >
+        가족
+      </button>
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('나 자신')"
+      >
+        나 자신
+      </button>
+    </div>
   </div>
-</div>
+
+  <!-- ═══════════ STEP 3 ═══════════ -->
+  <div class="step" id="step3">
+    <div class="letter-card">
+      <div class="letter-header">
+        <div
+          class="letter-eyebrow"
+          id="stepLabel"
+        >
+          초대장 작성
+        </div>
+
+        <div class="letter-title">
+          함께 떠나고 싶은 이유를 알려주세요
+        </div>
+
+        <div
+          class="orange-line"
+          style="margin: 10px auto;"
+        ></div>
+      </div>
+
+      <div class="form-group">
+        <label
+          class="form-label"
+          for="nameInput"
+        >
+          To. 함께 탑승할 승객 이름
+        </label>
+
+        <input
+          class="form-input"
+          id="nameInput"
+          type="text"
+          placeholder="이름을 입력해 주세요"
+          maxlength="30"
+        >
+      </div>
+
+      <div class="form-group">
+        <label
+          class="form-label"
+          for="messageInput"
+        >
+          같이 떠나고 싶은 이유를 적어주세요
+        </label>
+
+        <textarea
+          class="form-textarea"
+          id="messageInput"
+          placeholder="하우스텐보스로 함께 떠나고 싶은 이유를 자유롭게 적어주세요."
+          maxlength="500"
+        ></textarea>
+
+        <div class="char-count">
+          <span id="charCount">0</span> / 500
+        </div>
+      </div>
+
+      <button
+        class="btn-issue"
+        type="button"
+        onclick="issueTicket()"
+      >
+        탑승권 발권하기
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════ STEP 4 ═══════════ -->
+  <div class="step" id="step4">
+    <p class="step4-label">
+      탑승권이 발행되었습니다.<br>
+      이미지를 저장해 블로그 댓글에 응모해 주세요.
+    </p>
+
+    <div id="ticketEl">
+      <div class="ticket-texture"></div>
+
+      <div class="ticket-content">
+        <div class="ticket-header-row">
+          <div class="jr-logo-area">
+            JR
+          </div>
+
+          <div class="htb-express-title">
+            <div class="main-txt">
+              BOARDING PASS
+            </div>
+
+            <div class="sub-txt">
+              KYUSHU RAILWAY COMPANY
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-route">
+          <div class="ticket-station">
+            <div class="ticket-station-label">
+              출발 · FROM
+            </div>
+
+            <div class="ticket-station-name">
+              HAKATA
+            </div>
+          </div>
+
+          <div class="ticket-arrow">
+            <div class="ticket-arrow-line"></div>
+          </div>
+
+          <div
+            class="ticket-station"
+            style="text-align: right;"
+          >
+            <div class="ticket-station-label">
+              도착 · TO
+            </div>
+
+            <div class="ticket-station-name">
+              HUIS TEN BOSCH
+            </div>
+
+            <div class="ticket-station-jp">
+              ハウステンボス
+            </div>
+          </div>
+        </div>
+
+        <hr class="ticket-divider">
+
+        <div class="ticket-info-grid">
+          <div class="ticket-field">
+            <div class="ticket-field-label">
+              PASSENGER
+            </div>
+
+            <div
+              class="ticket-field-value"
+              id="t-name"
+            >
+              —
+            </div>
+          </div>
+
+          <div class="ticket-field">
+            <div class="ticket-field-label">
+              FOR
+            </div>
+
+            <div
+              class="ticket-field-value"
+              id="t-target"
+            >
+              —
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-message-block">
+          <div class="ticket-message-label">
+            MESSAGE
+          </div>
+
+          <div
+            class="ticket-message-text"
+            id="t-message"
+          >
+            —
+          </div>
+        </div>
+
+        <div class="ticket-bottom-row">
+          <div class="ticket-train-plate">
+            JR큐슈 블로그 이벤트
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step4-actions">
+      <button
+        class="btn-download"
+        type="button"
+        onclick="downloadTicket()"
+      >
+        초대장 이미지 저장하고 블로그에 응모하기
+      </button>
+
+      <button
+        class="btn-restart"
+        type="button"
+        onclick="restart()"
+      >
+        처음으로 돌아가기
+      </button>
+    </div>
+  </div>
 
 <script>
-  const state = { target: '', name: '', message: '' };
+  const state = {
+    target: '',
+    name: '',
+    message: ''
+  };
+
+  let envelopeOpening = false;
 
   function goTo(n) {
-    document.querySelectorAll('.step').forEach(s => { s.style.display = 'none'; });
-    const t = document.getElementById('step' + n);
-    t.style.display = 'flex';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelectorAll('.step').forEach(function (step) {
+      step.style.display = 'none';
+    });
+
+    const targetStep = document.getElementById('step' + n);
+
+    if (!targetStep) {
+      return;
+    }
+
+    targetStep.style.display = 'flex';
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
-  function selectTarget(t) {
-    state.target = t;
-    document.getElementById('nameInput').value = (t === '나 자신') ? '나 자신' : '';
-    document.getElementById('stepLabel').textContent = t + '에게 보내는 초대장';
+  function openEnvelope() {
+    if (envelopeOpening) {
+      return;
+    }
+
+    const envelope = document.getElementById('envelopeScene');
+
+    if (!envelope) {
+      goTo(2);
+      return;
+    }
+
+    envelopeOpening = true;
+    envelope.classList.add('open');
+
+    window.setTimeout(function () {
+      goTo(2);
+
+      envelope.classList.remove('open');
+      envelopeOpening = false;
+    }, 820);
+  }
+
+  function handleEnvelopeKey(event) {
+    if (
+      event.key === 'Enter' ||
+      event.key === ' '
+    ) {
+      event.preventDefault();
+      openEnvelope();
+    }
+  }
+
+  function selectTarget(target) {
+    state.target = target;
+
+    document.getElementById('nameInput').value =
+      target === '나 자신' ? '나 자신' : '';
+
+    document.getElementById('stepLabel').textContent =
+      target + '에게 보내는 초대장';
+
     goTo(3);
   }
 
   const textarea = document.getElementById('messageInput');
-  textarea.addEventListener('input', function() {
-    document.getElementById('charCount').textContent = this.value.length;
+
+  textarea.addEventListener('input', function () {
+    document.getElementById('charCount').textContent =
+      this.value.length;
+
     this.style.height = 'auto';
     this.style.height = this.scrollHeight + 'px';
   });
 
   function issueTicket() {
-    const name = document.getElementById('nameInput').value.trim();
-    const msg = document.getElementById('messageInput').value.trim();
-    if (!name) { alert('승객 이름을 입력해 주세요.'); return; }
-    if (!msg) { alert('내용을 입력해 주세요.'); return; }
+    const name =
+      document.getElementById('nameInput').value.trim();
+
+    const message =
+      document.getElementById('messageInput').value.trim();
+
+    if (!name) {
+      alert('승객 이름을 입력해 주세요.');
+      return;
+    }
+
+    if (!message) {
+      alert('내용을 입력해 주세요.');
+      return;
+    }
 
     state.name = name;
-    state.message = msg;
-    document.getElementById('t-name').textContent = name;
-    document.getElementById('t-target').textContent = state.target;
-    document.getElementById('t-message').textContent = msg;
+    state.message = message;
+
+    document.getElementById('t-name').textContent =
+      name;
+
+    document.getElementById('t-target').textContent =
+      state.target;
+
+    document.getElementById('t-message').textContent =
+      message;
+
     goTo(4);
   }
 
   function downloadTicket() {
-    // 구글 시트에 데이터 저장
-    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
+    /*
+      구글 시트 저장 주소.
+      기존에 사용하던 Apps Script URL을 그대로 유지했다.
+    */
+    const APPS_SCRIPT_URL =
+      'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
 
     fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: state.name,
         target: state.target,
         message: state.message
       })
-    }).catch(function(err) {
-      console.log('시트 저장 오류:', err);
+    }).catch(function (error) {
+      console.log('시트 저장 오류:', error);
     });
 
-    const overlay = document.getElementById('loadingOverlay');
+    const overlay =
+      document.getElementById('loadingOverlay');
+
+    const ticket =
+      document.getElementById('ticketEl');
+
     overlay.classList.add('active');
-    const ticket = document.getElementById('ticketEl');
 
     html2canvas(ticket, {
-      scale: 3, useCORS: true,
-      backgroundColor: '#d45f1e', logging: false
-    }).then(canvas => {
-      overlay.classList.remove('active');
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile) {
-        showImageOverlay(canvas.toDataURL('image/png', 1.0));
-      } else {
-        canvas.toBlob(blob => {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.download = '하우스텐보스_초대장.jpg';
-          link.href = url;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => URL.revokeObjectURL(url), 1000);
-        }, 'image/jpeg', 0.95);
-      }
-    }).catch(() => {
-      overlay.classList.remove('active');
-      alert('이미지 저장에 실패했습니다. 다시 시도해 주세요.');
-    });
+      scale: 3,
+      useCORS: true,
+      backgroundColor: '#d45f1e',
+      logging: false
+    })
+      .then(function (canvas) {
+        overlay.classList.remove('active');
+
+        const isMobile =
+          /Android|iPhone|iPad|iPod/i.test(
+            navigator.userAgent
+          );
+
+        if (isMobile) {
+          showImageOverlay(
+            canvas.toDataURL('image/png', 1.0)
+          );
+
+          return;
+        }
+
+        canvas.toBlob(
+          function (blob) {
+            if (!blob) {
+              alert('이미지를 생성하지 못했습니다. 다시 시도해 주세요.');
+              return;
+            }
+
+            const url =
+              URL.createObjectURL(blob);
+
+            const link =
+              document.createElement('a');
+
+            link.download =
+              '하우스텐보스_초대장.jpg';
+
+            link.href = url;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            window.setTimeout(function () {
+              URL.revokeObjectURL(url);
+            }, 1000);
+          },
+          'image/jpeg',
+          0.95
+        );
+      })
+      .catch(function () {
+        overlay.classList.remove('active');
+
+        alert(
+          '이미지 저장에 실패했습니다. 다시 시도해 주세요.'
+        );
+      });
   }
 
   function showImageOverlay(dataUrl) {
-    const ov = document.createElement('div');
-    ov.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(15,20,32,0.98);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:24px;';
-    ov.innerHTML =
-      '<p style="color:#d45f1e;font-size:14px;text-align:center;line-height:1.8;font-weight:700;">' +
+    const overlay =
+      document.createElement('div');
+
+    overlay.style.cssText =
+      'position:fixed;' +
+      'inset:0;' +
+      'z-index:200;' +
+      'padding:24px;' +
+      'display:flex;' +
+      'flex-direction:column;' +
+      'align-items:center;' +
+      'justify-content:center;' +
+      'gap:20px;' +
+      'background:rgba(15,20,32,0.98);';
+
+    const guide =
+      document.createElement('p');
+
+    guide.style.cssText =
+      'font-size:14px;' +
+      'font-weight:700;' +
+      'line-height:1.8;' +
+      'text-align:center;' +
+      'color:#d45f1e;';
+
+    guide.innerHTML =
       '📱 이미지를 <strong>꾹 눌러서</strong> 저장해 주세요!<br>' +
-      '<span style="font-size:12px;color:#8a9ab5;font-weight:400;">저장 후 블로그 댓글에 첨부해 주세요.</span></p>' +
-      '<img src="' + dataUrl + '" style="max-width:100%;max-height:65vh;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.5);"/>' +
-      '<button onclick="this.parentNode.remove()" style="background:transparent;border:1px solid #d45f1e;color:#fff;font-size:13px;padding:12px 40px;cursor:pointer;border-radius:4px;">창 닫기</button>';
-    document.body.appendChild(ov);
+      '<span style="font-size:12px;color:#8a9ab5;font-weight:400;">' +
+      '저장 후 블로그 댓글에 첨부해 주세요.' +
+      '</span>';
+
+    const image =
+      document.createElement('img');
+
+    image.src = dataUrl;
+    image.alt = '완성된 하우스텐보스 초대장';
+
+    image.style.cssText =
+      'max-width:100%;' +
+      'max-height:65vh;' +
+      'border-radius:10px;' +
+      'box-shadow:0 12px 40px rgba(0,0,0,0.5);';
+
+    const closeButton =
+      document.createElement('button');
+
+    closeButton.type = 'button';
+    closeButton.textContent = '창 닫기';
+
+    closeButton.style.cssText =
+      'padding:12px 40px;' +
+      'border:1px solid #d45f1e;' +
+      'border-radius:4px;' +
+      'cursor:pointer;' +
+      'font-size:13px;' +
+      'color:#fff;' +
+      'background:transparent;';
+
+    closeButton.addEventListener(
+      'click',
+      function () {
+        overlay.remove();
+      }
+    );
+
+    overlay.appendChild(guide);
+    overlay.appendChild(image);
+    overlay.appendChild(closeButton);
+
+    document.body.appendChild(overlay);
   }
 
   function restart() {
+    state.target = '';
+    state.name = '';
+    state.message = '';
+
     document.getElementById('nameInput').value = '';
     document.getElementById('messageInput').value = '';
     document.getElementById('charCount').textContent = '0';
     document.getElementById('messageInput').style.height = 'auto';
     document.getElementById('stepLabel').textContent = '초대장 작성';
+
+    const envelope =
+      document.getElementById('envelopeScene');
+
+    if (envelope) {
+      envelope.classList.remove('open');
+    }
+
+    envelopeOpening = false;
+
     goTo(1);
   }
 
-  document.addEventListener('DOMContentLoaded', () => { goTo(1); });
+  document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+      goTo(1);
+    }
+  );
 </script>
 </body>
 </html>
