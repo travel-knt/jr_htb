@@ -57,6 +57,8 @@
     z-index: 0;
     pointer-events: none;
 
+    background-color: var(--navy-deep);
+
     background-image:
       linear-gradient(
         to bottom,
@@ -66,8 +68,8 @@
       ),
       url('zzzzz.jpg');
 
-    background-size: 100%;
-    background-position: center;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
   }
 
@@ -172,50 +174,42 @@
     transform-origin: 50% 70%;
   }
 
-  /* 봉투 뒤판 */
+  /* 봉투 뒤판 몸체 */
   .envelope-back {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  height: 230px;
-  z-index: 1;
+    height: 200px;
+    z-index: 1;
 
-  background: linear-gradient(
-    180deg,
-    #990000 0%,
-    #741817 100%
-  );
+    border-radius: 18px 18px 10px 10px;
 
-  clip-path: polygon(
-    0 100%,
-    0 48%,
-    50% 0,
-    100% 48%,
-    100% 100%
-  );
-
-  border-radius: 0 0 10px 10px;
-}
+    background:
+      linear-gradient(
+        180deg,
+        var(--envelope-main) 0%,
+        var(--envelope-dark) 100%
+      );
 
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
       inset 0 -14px 24px rgba(0, 0, 0, 0.16);
   }
 
-  /* 뒤로 펼쳐진 윗덮개 */
-  .envelope-flap {
+  /* 봉투 뒤판 위쪽 삼각형 */
+  .envelope-back::before {
+    content: '';
+
     position: absolute;
     left: 50%;
-    top: 0;
+    top: -90px;
 
-    width: 94%;
-    height: 150px;
-    z-index: 2;
+    width: 100%;
+    height: 110px;
 
     transform: translateX(-50%);
-    transform-origin: 50% 100%;
 
     background:
       linear-gradient(
@@ -224,20 +218,28 @@
         var(--envelope-dark) 100%
       );
 
-    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    clip-path: polygon(
+      0 100%,
+      50% 0,
+      100% 100%
+    );
 
-    filter: drop-shadow(0 -2px 1px rgba(0, 0, 0, 0.12));
-    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1;
+  }
+
+  /* 별도의 윗덮개는 사용하지 않음 */
+  .envelope-flap {
+    display: none;
   }
 
   /* 봉투 안 초대장 */
   .boarding-card {
     position: absolute;
     left: 50%;
-    bottom: 46px;
+    bottom: 42px;
 
     width: 286px;
-    min-height: 180px;
+    min-height: 190px;
     z-index: 4;
 
     padding: 23px 22px 20px;
@@ -364,7 +366,7 @@
     right: 0;
     bottom: 0;
 
-    height: 142px;
+    height: 130px;
     z-index: 5;
 
     overflow: hidden;
@@ -460,9 +462,6 @@
     filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.22));
   }
 
-  .envelope-scene.open .envelope-flap {
-    transform: translateX(-50%) translateY(5px) scaleY(0.97);
-  }
 
   .step1-title {
     margin-bottom: 1rem;
@@ -1031,22 +1030,27 @@
     }
 
     .envelope-back {
-      height: 170px;
+      height: 190px;
+    }
+
+    .envelope-back::before {
+      top: -85px;
+      height: 105px;
     }
 
     .envelope-flap {
-      height: 136px;
+      display: none;
     }
 
     .boarding-card {
       width: 260px;
-      min-height: 168px;
-      bottom: 43px;
+      min-height: 178px;
+      bottom: 39px;
       padding: 20px 19px 18px;
     }
 
     .envelope-front {
-      height: 132px;
+      height: 122px;
     }
 
     .envelope-scene.open .boarding-card {
@@ -1100,8 +1104,7 @@
       animation: none;
     }
 
-    .boarding-card,
-    .envelope-flap {
+    .boarding-card {
       transition-duration: 0.01ms;
     }
   }
