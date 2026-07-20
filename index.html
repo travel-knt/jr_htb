@@ -23,10 +23,10 @@
     --white: #ffffff;
 
     /* 봉투 색상 */
-    --envelope-dark: #741817;
-    --envelope-main: #8f2522;
-    --envelope-mid: #9e2d29;
-    --envelope-light: #a93732;
+    --envelope-dark: #d8d2c8;
+    --envelope-main: #f2eee7;
+    --envelope-mid: #e7e1d8;
+    --envelope-light: #fffdf9;
   }
 
   * {
@@ -207,10 +207,10 @@
     border-radius: 0 0 10px 10px;
 
     filter:
-      drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.10));
+      drop-shadow(0 -1px 1px rgba(92, 79, 62, 0.16));
 
     box-shadow:
-      inset 0 -14px 24px rgba(0, 0, 0, 0.16);
+      inset 0 -14px 24px rgba(92, 79, 62, 0.10);
   }
 
   .envelope-back::before {
@@ -221,26 +221,38 @@
     display: none;
   }
 
-  /* 봉투 안 초대장 */
+  /* 봉투 안 미니 탑승권 */
   .boarding-card {
     position: absolute;
     left: 50%;
-    bottom: 36px;
+    bottom: 34px;
 
     width: 246px;
-    min-height: 162px;
+    min-height: 168px;
     z-index: 4;
 
-    padding: 20px 18px 17px;
+    padding: 15px 15px 13px;
 
     transform: translateX(-50%);
     transform-origin: 50% 100%;
 
-    background: #fbf8f1;
-    border: 1px solid rgba(200, 180, 140, 0.28);
-    border-radius: 6px;
+    color: #fff;
+    background:
+      linear-gradient(
+        145deg,
+        #e56b20 0%,
+        var(--orange) 58%,
+        #bf4d16 100%
+      );
 
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 7px;
+
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+
+    overflow: hidden;
 
     transition:
       transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
@@ -253,95 +265,164 @@
     position: absolute;
     inset: 0;
 
-    border-radius: 6px;
     pointer-events: none;
 
     background:
-      linear-gradient(
+      repeating-linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.025) 1px,
-        transparent 1px
-      ) 0 0 / 9px 9px,
+        transparent 0,
+        transparent 4px,
+        rgba(0, 0, 0, 0.025) 4px,
+        rgba(0, 0, 0, 0.025) 5px
+      ),
       linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.78),
-        transparent 34%
+        rgba(255, 255, 255, 0.08),
+        transparent 38%
       );
   }
 
-  .boarding-card-top {
+  .mini-ticket-header,
+  .mini-ticket-route,
+  .mini-ticket-info,
+  .mini-ticket-message {
     position: relative;
     z-index: 1;
+  }
 
+  .mini-ticket-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: 12px;
+  }
 
+  .mini-ticket-jr {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .mini-ticket-title {
+    text-align: right;
+  }
+
+  .mini-ticket-title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    color: #fff;
+  }
+
+  .mini-ticket-title-sub {
+    margin-top: 3px;
+    font-size: 5px;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .mini-ticket-route {
+    display: grid;
+    grid-template-columns: 1fr 26px 1.35fr;
+    align-items: end;
+    gap: 7px;
     margin-bottom: 10px;
   }
 
-  .boarding-card-invite {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 21px;
-    font-style: italic;
-    line-height: 1;
-    color: #2a1f10;
+  .mini-ticket-station:last-child {
+    text-align: right;
   }
 
-  .boarding-card-jr {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 1;
-    color: var(--orange);
-  }
-
-  .boarding-card-divider {
-    position: relative;
-    z-index: 1;
-
-    height: 1px;
-    margin-bottom: 12px;
-
-    background: #dfd1b8;
-  }
-
-  .boarding-card-pass {
-    position: relative;
-    z-index: 1;
-
-    margin-bottom: 3px;
-
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--orange);
-  }
-
-  .boarding-card-sub {
-    position: relative;
-    z-index: 1;
-
-    margin-bottom: 12px;
-
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    color: #9c958c;
-  }
-
-  .boarding-card-route {
-    position: relative;
-    z-index: 1;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    font-size: 10px;
-    font-weight: 700;
+  .mini-ticket-label {
+    margin-bottom: 2px;
+    font-size: 5px;
+    font-weight: 500;
     letter-spacing: 0.04em;
-    color: #555;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .mini-ticket-station-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.05;
+    white-space: nowrap;
+    color: #fff;
+  }
+
+  .mini-ticket-station-jp {
+    margin-top: 2px;
+    font-size: 5px;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .mini-ticket-arrow {
+    position: relative;
+    height: 1px;
+    margin-bottom: 6px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .mini-ticket-arrow::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    top: -2px;
+
+    border-left: 4px solid #fff;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+  }
+
+  .mini-ticket-divider {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 -15px 9px;
+
+    border: none;
+    border-top: 1px dashed rgba(255, 255, 255, 0.38);
+  }
+
+  .mini-ticket-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-bottom: 8px;
+  }
+
+  .mini-ticket-info-label,
+  .mini-ticket-message-label {
+    margin-bottom: 2px;
+    font-size: 5px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .mini-ticket-info-value {
+    font-size: 7px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .mini-ticket-message {
+    padding: 7px 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 4px;
+
+    background: rgba(0, 0, 0, 0.13);
+  }
+
+  .mini-ticket-message-text {
+    font-size: 6px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.94);
   }
 
   /*
@@ -383,7 +464,7 @@
 
     clip-path: polygon(0 0, 100% 60%, 0 100%);
 
-    filter: drop-shadow(1px 0 1px rgba(0, 0, 0, 0.14));
+    filter: drop-shadow(1px 0 1px rgba(92, 79, 62, 0.18));
   }
 
   .envelope-front::after {
@@ -406,7 +487,7 @@
 
     clip-path: polygon(100% 0, 0 60%, 100% 100%);
 
-    filter: drop-shadow(-1px 0 1px rgba(0, 0, 0, 0.14));
+    filter: drop-shadow(-1px 0 1px rgba(92, 79, 62, 0.18));
   }
 
   .envelope-bottom-flap {
@@ -428,7 +509,7 @@
 
     clip-path: polygon(0 100%, 50% 39%, 100% 100%);
 
-    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.16));
+    filter: drop-shadow(0 -1px 1px rgba(92, 79, 62, 0.20));
   }
 
   .envelope-front-label {
@@ -442,7 +523,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 8px;
     letter-spacing: 0.34em;
-    color: rgba(255, 255, 255, 0.30);
+    color: rgba(92, 79, 62, 0.48);
   }
 
   /* 클릭하면 초대장 종이가 위로 올라온다 */
@@ -1032,9 +1113,26 @@
 
     .boarding-card {
       width: 222px;
-      min-height: 150px;
-      bottom: 33px;
-      padding: 18px 16px 15px;
+      min-height: 152px;
+      bottom: 31px;
+      padding: 13px 13px 11px;
+    }
+
+    .mini-ticket-jr {
+      font-size: 22px;
+    }
+
+    .mini-ticket-title-main {
+      font-size: 10px;
+    }
+
+    .mini-ticket-station-name {
+      font-size: 10px;
+    }
+
+    .mini-ticket-divider {
+      margin-left: -13px;
+      margin-right: -13px;
     }
 
     .envelope-front {
@@ -1129,30 +1227,73 @@
         <div class="envelope-flap"></div>
 
         <div class="boarding-card">
-          <div class="boarding-card-top">
-            <div class="boarding-card-invite">
-              Invitation
+          <div class="mini-ticket-header">
+            <div class="mini-ticket-jr">JR</div>
+
+            <div class="mini-ticket-title">
+              <div class="mini-ticket-title-main">
+                BOARDING PASS
+              </div>
+              <div class="mini-ticket-title-sub">
+                KYUSHU RAILWAY COMPANY
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-ticket-route">
+            <div class="mini-ticket-station">
+              <div class="mini-ticket-label">
+                출발 · FROM
+              </div>
+              <div class="mini-ticket-station-name">
+                HAKATA
+              </div>
             </div>
 
-            <div class="boarding-card-jr">
-              JR
+            <div class="mini-ticket-arrow"></div>
+
+            <div class="mini-ticket-station">
+              <div class="mini-ticket-label">
+                도착 · TO
+              </div>
+              <div class="mini-ticket-station-name">
+                HUIS TEN BOSCH
+              </div>
+              <div class="mini-ticket-station-jp">
+                ハウステンボス
+              </div>
             </div>
           </div>
 
-          <div class="boarding-card-divider"></div>
+          <hr class="mini-ticket-divider">
 
-          <div class="boarding-card-pass">
-            BOARDING PASS
+          <div class="mini-ticket-info">
+            <div>
+              <div class="mini-ticket-info-label">
+                PASSENGER
+              </div>
+              <div class="mini-ticket-info-value">
+                SPECIAL GUEST
+              </div>
+            </div>
+
+            <div>
+              <div class="mini-ticket-info-label">
+                FOR
+              </div>
+              <div class="mini-ticket-info-value">
+                HUIS TEN BOSCH
+              </div>
+            </div>
           </div>
 
-          <div class="boarding-card-sub">
-            JR 특급 하우스텐보스호
-          </div>
-
-          <div class="boarding-card-route">
-            <span>HAKATA</span>
-            <span style="color: var(--orange); font-size: 12px;">➔</span>
-            <span>HUIS TEN BOSCH</span>
+          <div class="mini-ticket-message">
+            <div class="mini-ticket-message-label">
+              MESSAGE
+            </div>
+            <div class="mini-ticket-message-text">
+              JR큐슈 열차를 타고 함께 떠나요.
+            </div>
           </div>
         </div>
 
