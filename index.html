@@ -2408,31 +2408,12 @@
             'application/json'
         },
 
-        body:
-          JSON.stringify({
-
-            /*
-              이름 =
-              From. 보내는 사람 이름
-            */
-
-            name:
-              state.senderName,
-
-
-            /*
-              대상 =
-              연인 / 친구 / 가족 / 나 자신
-            */
-
-            target:
-              state.target,
-
-
-            message:
-              state.message
-
-          })
+        body: JSON.stringify({
+  name: state.senderName,
+  passengerName: state.passengerName,
+  target: state.target,
+  message: state.message
+})
 
       }
     )
