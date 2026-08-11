@@ -11,20 +11,15 @@
   :root {
     --navy: #1a1f2e;
     --navy-deep: #0f1420;
-
     --orange: #d45f1e;
     --orange-deep: #b84e15;
-
     --cream: #fdfbf7;
     --text-cream: #f0e8d8;
     --text-muted: #8a9ab5;
-    --gold: #c9a84c;
     --white: #ffffff;
 
-    /* 봉투 색상 */
     --envelope-dark: #d8d2c8;
     --envelope-main: #f2eee7;
-    --envelope-mid: #e7e1d8;
     --envelope-light: #fffdf9;
   }
 
@@ -98,9 +93,9 @@
     );
   }
 
-  /* ═══════════════════════════════
-     STEP 1 — 봉투
-  ═══════════════════════════════ */
+  /* =========================
+     STEP 1
+  ========================= */
 
   .step1-eyebrow {
     margin-bottom: 2rem;
@@ -207,15 +202,12 @@
       inset 0 -14px 24px rgba(92, 79, 62, 0.10);
   }
 
-  .envelope-back::before {
-    display: none;
-  }
-
   .envelope-flap {
     display: none;
   }
 
   /* 봉투 안 미니 탑승권 */
+
   .boarding-card {
     position: absolute;
     left: 50%;
@@ -231,6 +223,7 @@
     transform-origin: 50% 100%;
 
     color: #fff;
+
     background:
       linear-gradient(
         145deg,
@@ -278,7 +271,6 @@
 
   .mini-ticket-header,
   .mini-ticket-route,
-  .mini-ticket-info,
   .mini-ticket-message {
     position: relative;
     z-index: 1;
@@ -288,7 +280,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
   }
 
   .mini-ticket-jr {
@@ -319,12 +311,22 @@
     color: rgba(255, 255, 255, 0.72);
   }
 
+  /*
+    좌우를 완전히 같은 너비로 설정
+    HAKATA / HUIS TEN BOSCH
+    출발 / 도착 높이를 동일하게 맞춤
+  */
+
   .mini-ticket-route {
     display: grid;
-    grid-template-columns: 1fr 26px 1.35fr;
-    align-items: end;
+    grid-template-columns: 1fr 26px 1fr;
+    align-items: start;
     gap: 7px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .mini-ticket-station {
+    min-width: 0;
   }
 
   .mini-ticket-station:last-child {
@@ -332,10 +334,14 @@
   }
 
   .mini-ticket-label {
+    height: 10px;
     margin-bottom: 2px;
+
     font-size: 5px;
+    line-height: 10px;
     font-weight: 500;
     letter-spacing: 0.04em;
+
     color: rgba(255, 255, 255, 0.68);
   }
 
@@ -348,16 +354,11 @@
     color: #fff;
   }
 
-  .mini-ticket-station-jp {
-    margin-top: 2px;
-    font-size: 5px;
-    color: rgba(255, 255, 255, 0.82);
-  }
-
   .mini-ticket-arrow {
     position: relative;
     height: 1px;
-    margin-bottom: 6px;
+    margin-top: 17px;
+
     background: rgba(255, 255, 255, 0.9);
   }
 
@@ -377,35 +378,14 @@
     position: relative;
     z-index: 1;
 
-    margin: 0 -15px 9px;
+    margin: 0 -15px 10px;
 
     border: none;
     border-top: 1px dashed rgba(255, 255, 255, 0.38);
   }
 
-  .mini-ticket-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-    margin-bottom: 8px;
-  }
-
-  .mini-ticket-info-label,
-  .mini-ticket-message-label {
-    margin-bottom: 2px;
-    font-size: 5px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.68);
-  }
-
-  .mini-ticket-info-value {
-    font-size: 7px;
-    font-weight: 700;
-    color: #fff;
-  }
-
   .mini-ticket-message {
-    padding: 7px 8px;
+    padding: 8px 8px;
 
     border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 4px;
@@ -413,9 +393,19 @@
     background: rgba(0, 0, 0, 0.13);
   }
 
+  .mini-ticket-message-label {
+    margin-bottom: 3px;
+
+    font-size: 5px;
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.68);
+  }
+
   .mini-ticket-message-text {
     font-size: 6px;
     line-height: 1.4;
+
     color: rgba(255, 255, 255, 0.94);
   }
 
@@ -451,9 +441,14 @@
         var(--envelope-main) 100%
       );
 
-    clip-path: polygon(0 0, 100% 60%, 0 100%);
+    clip-path: polygon(
+      0 0,
+      100% 60%,
+      0 100%
+    );
 
-    filter: drop-shadow(1px 0 1px rgba(92, 79, 62, 0.18));
+    filter:
+      drop-shadow(1px 0 1px rgba(92, 79, 62, 0.18));
   }
 
   .envelope-front::after {
@@ -474,9 +469,14 @@
         var(--envelope-main) 100%
       );
 
-    clip-path: polygon(100% 0, 0 60%, 100% 100%);
+    clip-path: polygon(
+      100% 0,
+      0 60%,
+      100% 100%
+    );
 
-    filter: drop-shadow(-1px 0 1px rgba(92, 79, 62, 0.18));
+    filter:
+      drop-shadow(-1px 0 1px rgba(92, 79, 62, 0.18));
   }
 
   .envelope-bottom-flap {
@@ -496,9 +496,14 @@
         var(--envelope-dark) 100%
       );
 
-    clip-path: polygon(0 100%, 50% 39%, 100% 100%);
+    clip-path: polygon(
+      0 100%,
+      50% 39%,
+      100% 100%
+    );
 
-    filter: drop-shadow(0 -1px 1px rgba(92, 79, 62, 0.20));
+    filter:
+      drop-shadow(0 -1px 1px rgba(92, 79, 62, 0.20));
   }
 
   .envelope-front-label {
@@ -509,15 +514,23 @@
     z-index: 3;
 
     text-align: center;
+
     font-family: 'Cormorant Garamond', serif;
     font-size: 8px;
     letter-spacing: 0.34em;
+
     color: rgba(92, 79, 62, 0.48);
   }
 
   .envelope-scene.open .boarding-card {
-    transform: translateX(-50%) translateY(-66px);
-    filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.22));
+    transform:
+      translateX(-50%)
+      translateY(-66px);
+
+    filter:
+      drop-shadow(
+        0 18px 18px rgba(0, 0, 0, 0.22)
+      );
   }
 
   .step1-title {
@@ -527,6 +540,7 @@
     font-weight: 700;
     line-height: 1.5;
     text-align: center;
+
     color: var(--text-cream);
   }
 
@@ -536,86 +550,48 @@
 
     font-size: 13px;
     text-align: center;
+
     color: var(--text-muted);
   }
 
-  /* ═══════════════════════════════
-     STEP 2
-  ═══════════════════════════════ */
-
-  .step2-question {
-    margin-bottom: 2.5rem;
-
-    font-size: clamp(18px, 3.5vw, 22px);
-    font-weight: 700;
-    line-height: 1.5;
-    text-align: center;
-    color: var(--text-cream);
-  }
-
-  .target-grid {
-    width: 100%;
-    max-width: 480px;
-
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .target-btn {
-    flex: 1;
-    padding: 14px 16px;
-
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-
-    white-space: nowrap;
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-    background: var(--orange);
-
-    transition:
-      background 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  .target-btn:hover {
-    background: var(--orange-deep);
-    transform: translateY(-2px);
-  }
-
-  /* STEP 2 — NAVER NICKNAME */
+  /* =========================
+     STEP 2 — 닉네임
+  ========================= */
 
   .nickname-card {
     width: 100%;
     max-width: 480px;
+
     padding: 38px 30px 34px;
 
     text-align: center;
 
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    border:
+      1px solid rgba(255, 255, 255, 0.10);
+
     border-radius: 10px;
 
-    background: rgba(15, 20, 32, 0.78);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.38);
-    backdrop-filter: blur(8px);
-  }
+    background:
+      rgba(15, 20, 32, 0.78);
 
-  .nickname-eyebrow {
-    margin-bottom: 12px;
+    box-shadow:
+      0 24px 50px rgba(0, 0, 0, 0.38);
 
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    color: var(--orange);
+    backdrop-filter:
+      blur(8px);
   }
 
   .nickname-question {
     margin-bottom: 10px;
+
+    font-size:
+      clamp(18px, 3.5vw, 22px);
+
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+
+    color: var(--text-cream);
   }
 
   .nickname-guide {
@@ -623,75 +599,62 @@
 
     font-size: 12px;
     line-height: 1.7;
+
     color: var(--text-muted);
   }
 
   .nickname-input {
     width: 100%;
+
     padding: 14px 4px;
     margin-bottom: 20px;
 
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+
+    border-bottom:
+      1px solid
+      rgba(255, 255, 255, 0.28);
+
     outline: none;
 
     text-align: center;
     font-size: 15px;
+
     color: #fff;
     background: transparent;
   }
 
   .nickname-input::placeholder {
-    color: rgba(255, 255, 255, 0.40);
+    color:
+      rgba(255, 255, 255, 0.40);
   }
 
   .nickname-input:focus {
-    border-bottom-color: var(--orange);
+    border-bottom-color:
+      var(--orange);
   }
 
   .nickname-next {
     width: 100%;
   }
 
-  .target-grid-inline {
-    max-width: none;
-    gap: 8px;
-  }
-
-  .target-grid-inline .target-btn {
-    padding: 11px 8px;
-    font-size: 13px;
-    background: #efe7df;
-    color: #6f6258;
-    border: 1px solid #e0d4ca;
-  }
-
-  .target-grid-inline .target-btn:hover {
-    background: #e7dbd1;
-    transform: translateY(-1px);
-  }
-
-  .target-grid-inline .target-btn.selected {
-    background: var(--orange);
-    color: #fff;
-    border-color: var(--orange);
-    box-shadow: 0 4px 12px rgba(212, 95, 30, 0.22);
-  }
-
-  /* ═══════════════════════════════
-     STEP 3
-  ═══════════════════════════════ */
+  /* =========================
+     STEP 3 — 초대장 작성
+  ========================= */
 
   .letter-card {
     width: 100%;
     max-width: 480px;
+
     padding: 36px 30px;
 
     color: #222;
     background: #faf8f5;
+
     border-radius: 8px;
 
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      0 24px 50px rgba(0, 0, 0, 0.5);
   }
 
   .letter-header {
@@ -700,19 +663,27 @@
   }
 
   .letter-eyebrow {
-    font-family: 'Cormorant Garamond', serif;
+    font-family:
+      'Cormorant Garamond',
+      serif;
+
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.2em;
+
     color: var(--orange);
   }
 
   .letter-title {
     margin-top: 6px;
 
-    font-family: 'Playfair Display', serif;
+    font-family:
+      'Playfair Display',
+      serif;
+
     font-size: 15px;
     font-weight: 700;
+
     color: #333;
   }
 
@@ -722,34 +693,46 @@
 
   .form-label {
     display: block;
+
     margin-bottom: 8px;
 
-    font-family: 'Playfair Display', serif;
+    font-family:
+      'Playfair Display',
+      serif;
+
     font-size: 14px;
     font-weight: 700;
+
     color: #333;
   }
 
   .form-input {
     width: 100%;
+
     padding: 8px 0;
 
     border: none;
-    border-bottom: 1px solid #d1c2b8;
+
+    border-bottom:
+      1px solid #d1c2b8;
+
     outline: none;
 
     font-size: 14px;
+
     color: #111;
     background: transparent;
   }
 
   .form-input:focus {
-    border-bottom-color: var(--orange);
+    border-bottom-color:
+      var(--orange);
   }
 
   .form-textarea {
     width: 100%;
     min-height: 300px;
+
     padding: 14px;
 
     border: none;
@@ -761,6 +744,7 @@
 
     font-size: 14px;
     line-height: 1.8;
+
     color: #222;
     background: #f3ede8;
   }
@@ -770,12 +754,13 @@
 
     text-align: right;
     font-size: 11px;
+
     color: #777;
   }
 
-  /* ═══════════════════════════════
-     STEP 4
-  ═══════════════════════════════ */
+  /* =========================
+     STEP 4 — 완성 탑승권
+  ========================= */
 
   .step4-label {
     margin-bottom: 2rem;
@@ -783,6 +768,7 @@
     font-size: 13px;
     line-height: 1.6;
     text-align: center;
+
     color: var(--text-muted);
   }
 
@@ -791,21 +777,25 @@
 
     width: 100%;
     max-width: 520px;
-    height: auto;
 
     overflow: hidden;
+
     border-radius: 10px;
 
-    background: var(--orange);
-    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6);
+    background:
+      var(--orange);
+
+    box-shadow:
+      0 25px 55px rgba(0, 0, 0, 0.6);
   }
 
   .ticket-texture {
     position: absolute;
     inset: 0;
 
-    border-radius: 10px;
     pointer-events: none;
+
+    border-radius: 10px;
 
     background:
       repeating-linear-gradient(
@@ -826,6 +816,7 @@
 
   .ticket-header-row {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 
@@ -833,10 +824,14 @@
   }
 
   .jr-logo-area {
-    font-family: 'Playfair Display', serif;
+    font-family:
+      'Playfair Display',
+      serif;
+
     font-size: 32px;
     font-weight: 700;
     line-height: 1;
+
     color: #fff;
   }
 
@@ -845,10 +840,14 @@
   }
 
   .htb-express-title .main-txt {
-    font-family: 'Playfair Display', serif;
+    font-family:
+      'Playfair Display',
+      serif;
+
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.1em;
+
     color: #fff;
   }
 
@@ -857,45 +856,70 @@
 
     font-size: 9px;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.7);
+
+    color:
+      rgba(255, 255, 255, 0.7);
   }
 
+  /*
+    앞장과 동일하게
+    좌우 동일 너비
+  */
+
   .ticket-route {
-    display: flex;
-    align-items: center;
+    display: grid;
+
+    grid-template-columns:
+      1fr 50px 1fr;
+
+    align-items: start;
+
+    gap: 15px;
 
     margin-bottom: 22px;
   }
 
   .ticket-station {
-    flex: 1;
+    min-width: 0;
+  }
+
+  .ticket-station:last-child {
+    text-align: right;
   }
 
   .ticket-station-label {
+    height: 16px;
+
     margin-bottom: 3px;
 
     font-size: 8px;
+    line-height: 16px;
+
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.6);
+
+    color:
+      rgba(255, 255, 255, 0.6);
   }
 
   .ticket-station-name {
-    font-family: 'Playfair Display', serif;
+    font-family:
+      'Playfair Display',
+      serif;
+
     font-size: 22px;
     font-weight: 700;
     line-height: 1;
+
+    white-space: nowrap;
+
     color: #fff;
   }
 
-  .ticket-station-jp {
-    margin-top: 2px;
-
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
   .ticket-arrow {
-    padding: 0 15px;
+    align-self: end;
+
+    padding: 0;
+    margin-bottom: 4px;
   }
 
   .ticket-arrow-line {
@@ -911,21 +935,31 @@
     content: '';
 
     position: absolute;
+
     right: 0;
     top: -3px;
 
-    border-left: 5px solid #fff;
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent;
+    border-left:
+      5px solid #fff;
+
+    border-top:
+      3px solid transparent;
+
+    border-bottom:
+      3px solid transparent;
   }
 
   .ticket-divider {
     position: relative;
 
-    margin: 0 -32px 20px;
+    margin:
+      0 -32px 20px;
 
     border: none;
-    border-top: 1px dashed rgba(255, 255, 255, 0.3);
+
+    border-top:
+      1px dashed
+      rgba(255, 255, 255, 0.3);
   }
 
   .ticket-divider::before,
@@ -939,7 +973,9 @@
     height: 18px;
 
     border-radius: 50%;
-    background: var(--navy-deep);
+
+    background:
+      var(--navy-deep);
   }
 
   .ticket-divider::before {
@@ -952,7 +988,10 @@
 
   .ticket-info-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+      1fr 1fr;
+
     gap: 14px;
 
     margin-bottom: 20px;
@@ -963,26 +1002,36 @@
 
     font-size: 9px;
     font-weight: 500;
+
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
+
+    color:
+      rgba(255, 255, 255, 0.6);
   }
 
   .ticket-field-value {
     font-size: 14px;
     font-weight: 700;
+
     color: #fff;
+
     word-break: break-all;
   }
 
   .ticket-message-block {
     width: 100%;
+
     margin-bottom: 20px;
     padding: 14px 16px;
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.1);
+
     border-radius: 6px;
 
-    background: rgba(0, 0, 0, 0.15);
+    background:
+      rgba(0, 0, 0, 0.15);
   }
 
   .ticket-message-label {
@@ -990,95 +1039,117 @@
 
     font-size: 9px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.7);
+
+    color:
+      rgba(255, 255, 255, 0.7);
   }
 
   .ticket-message-text {
     display: block;
+
     width: 100%;
 
     white-space: pre-wrap;
+
     overflow-wrap: break-word;
     word-break: break-all;
 
     font-size: 13px;
     line-height: 1.7;
+
     color: #fff;
   }
 
   .ticket-bottom-row {
     display: flex;
+
     justify-content: flex-end;
 
     padding-top: 14px;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top:
+      1px solid
+      rgba(255, 255, 255, 0.15);
   }
 
   .ticket-train-plate {
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.5);
+
+    color:
+      rgba(255, 255, 255, 0.5);
   }
 
-  /* ═══════════════════════════════
+  /* =========================
      BUTTONS
-  ═══════════════════════════════ */
+  ========================= */
 
   .btn-primary {
     padding: 15px 40px;
 
     border: none;
     border-radius: 4px;
+
     cursor: pointer;
 
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.08em;
+
     color: #fff;
-    background: var(--orange);
 
-    box-shadow: 0 4px 15px rgba(212, 95, 30, 0.35);
+    background:
+      var(--orange);
 
-    transition:
-      background 0.2s ease,
-      transform 0.2s ease;
+    box-shadow:
+      0 4px 15px
+      rgba(212, 95, 30, 0.35);
   }
 
   .btn-primary:hover {
-    background: var(--orange-deep);
-    transform: translateY(-1px);
+    background:
+      var(--orange-deep);
   }
 
   .btn-issue {
     width: 100%;
+
     margin-top: 8px;
     padding: 15px;
 
     border: none;
     border-radius: 4px;
+
     cursor: pointer;
 
     font-size: 14px;
     font-weight: 700;
+
     color: #fff;
-    background: var(--orange);
+
+    background:
+      var(--orange);
   }
 
   .btn-issue:hover {
-    background: var(--orange-deep);
+    background:
+      var(--orange-deep);
   }
 
   .btn-download {
     width: 100%;
+
     padding: 15px 36px;
 
     border: none;
     border-radius: 4px;
+
     cursor: pointer;
 
     text-align: center;
+
     font-size: 14px;
     font-weight: 700;
+
     color: #fff;
 
     background:
@@ -1088,7 +1159,9 @@
         #8b2020
       );
 
-    box-shadow: 0 4px 15px rgba(139, 32, 32, 0.4);
+    box-shadow:
+      0 4px 15px
+      rgba(139, 32, 32, 0.4);
   }
 
   .btn-download:disabled {
@@ -1098,115 +1171,162 @@
 
   .btn-restart {
     width: 100%;
+
     padding: 12px 24px;
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.2);
+
     border-radius: 4px;
+
     cursor: pointer;
 
     text-align: center;
+
     font-size: 12px;
-    color: var(--text-muted);
+
+    color:
+      var(--text-muted);
+
     background: transparent;
   }
 
   .step4-actions {
     width: 100%;
     max-width: 520px;
+
     margin-top: 2.5rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+
     gap: 16px;
   }
 
-  /* ═══════════════════════════════
-     STEP 5 — COMPLETE
-  ═══════════════════════════════ */
+  /* =========================
+     STEP 5
+  ========================= */
 
   .complete-card {
     width: 100%;
     max-width: 480px;
+
     padding: 42px 30px;
 
     text-align: center;
 
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.10);
+
     border-radius: 10px;
 
-    background: rgba(15, 20, 32, 0.78);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.38);
-    backdrop-filter: blur(8px);
+    background:
+      rgba(15, 20, 32, 0.78);
+
+    box-shadow:
+      0 24px 50px
+      rgba(0, 0, 0, 0.38);
+
+    backdrop-filter:
+      blur(8px);
   }
 
   .complete-icon {
     width: 58px;
     height: 58px;
-    margin: 0 auto 20px;
+
+    margin:
+      0 auto 20px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(212, 95, 30, 0.45);
+    border:
+      1px solid
+      rgba(212, 95, 30, 0.45);
+
     border-radius: 50%;
 
     font-size: 28px;
     font-weight: 700;
+
     color: #fff;
-    background: var(--orange);
+
+    background:
+      var(--orange);
   }
 
   .complete-eyebrow {
     margin-bottom: 10px;
 
-    font-family: 'Cormorant Garamond', serif;
+    font-family:
+      'Cormorant Garamond',
+      serif;
+
     font-size: 11px;
     font-weight: 600;
+
     letter-spacing: 0.24em;
+
     color: var(--orange);
   }
 
   .complete-title {
     margin-bottom: 14px;
 
-    font-size: clamp(20px, 4vw, 26px);
+    font-size:
+      clamp(20px, 4vw, 26px);
+
     line-height: 1.5;
-    color: var(--text-cream);
+
+    color:
+      var(--text-cream);
   }
 
   .complete-text {
     font-size: 13px;
     line-height: 1.8;
-    color: var(--text-muted);
+
+    color:
+      var(--text-muted);
   }
 
   .complete-restart {
     margin-top: 28px;
   }
 
-  /* ═══════════════════════════════
+  /* =========================
      LOADING
-  ═══════════════════════════════ */
+  ========================= */
 
   .loading-overlay {
     position: fixed;
+
     inset: 0;
     z-index: 100;
 
     display: flex;
+
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     gap: 12px;
 
     opacity: 0;
+
     pointer-events: none;
 
-    background: var(--navy-deep);
+    background:
+      var(--navy-deep);
 
-    transition: opacity 0.2s ease;
+    transition:
+      opacity 0.2s ease;
   }
 
   .loading-overlay.active {
@@ -1218,39 +1338,41 @@
     width: 28px;
     height: 28px;
 
-    border: 2px solid rgba(212, 95, 30, 0.2);
-    border-top-color: var(--orange);
+    border:
+      2px solid
+      rgba(212, 95, 30, 0.2);
+
+    border-top-color:
+      var(--orange);
+
     border-radius: 50%;
 
-    animation: spin 0.8s linear infinite;
+    animation:
+      spin 0.8s linear infinite;
   }
 
   @keyframes spin {
     to {
-      transform: rotate(360deg);
+      transform:
+        rotate(360deg);
     }
   }
 
-  /* ═══════════════════════════════
+  /* =========================
      MOBILE
-  ═══════════════════════════════ */
+  ========================= */
 
   @media (max-width: 600px) {
 
     .nickname-card {
-      padding: 32px 22px 28px;
-    }
-
-    .target-grid-inline {
-      flex-wrap: wrap;
-    }
-
-    .target-grid-inline .target-btn {
-      flex: 1 1 calc(50% - 8px);
+      padding:
+        32px 22px 28px;
     }
 
     .envelope-scene {
-      width: min(82vw, 280px);
+      width:
+        min(82vw, 280px);
+
       height: 250px;
     }
 
@@ -1264,19 +1386,14 @@
       height: 204px;
     }
 
-    .envelope-back::before {
-      display: none;
-    }
-
-    .envelope-flap {
-      display: none;
-    }
-
     .boarding-card {
       width: 222px;
       min-height: 152px;
+
       bottom: 31px;
-      padding: 13px 13px 11px;
+
+      padding:
+        13px 13px 11px;
     }
 
     .mini-ticket-jr {
@@ -1291,25 +1408,35 @@
       font-size: 10px;
     }
 
-    .mini-ticket-divider {
-      margin-left: -13px;
-      margin-right: -13px;
-    }
-
     .envelope-front {
       height: 101px;
     }
 
     .envelope-scene.open .boarding-card {
-      transform: translateX(-50%) translateY(-56px);
+      transform:
+        translateX(-50%)
+        translateY(-56px);
     }
 
     .ticket-content {
-      padding: 18px 16px;
+      padding:
+        18px 16px;
+    }
+
+    .ticket-route {
+      grid-template-columns:
+        1fr 34px 1fr;
+
+      gap: 8px;
+    }
+
+    .ticket-arrow-line {
+      width: 34px;
     }
 
     .ticket-divider {
-      margin: 0 -16px 16px;
+      margin:
+        0 -16px 16px;
     }
 
     .ticket-divider::before {
@@ -1332,581 +1459,587 @@
       max-width: 100%;
     }
 
-    .target-grid {
-      gap: 8px;
-    }
-
-    .target-btn {
-      padding: 12px 8px;
-      font-size: 13px;
-    }
-
     .step4-actions {
       padding: 0 4px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+
     .envelope-scene {
       animation: none;
     }
 
     .boarding-card {
-      transition-duration: 0.01ms;
+      transition-duration:
+        0.01ms;
     }
   }
 </style>
 </head>
 
+
 <body>
 
-  <div class="bg-layer"></div>
+<div class="bg-layer"></div>
 
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"></div>
 
-    <div style="font-size: 13px; color: var(--text-muted);">
-      응모 처리 중...
-    </div>
+<div
+  class="loading-overlay"
+  id="loadingOverlay"
+>
+  <div class="loading-spinner"></div>
+
+  <div
+    style="
+      font-size: 13px;
+      color: var(--text-muted);
+    "
+  >
+    응모 처리 중...
   </div>
+</div>
 
-  <!-- ═══════════ STEP 1 ═══════════ -->
 
-  <div class="step" id="step1">
+<!-- =========================
+     STEP 1
+========================= -->
 
-    <div class="step1-eyebrow">
-      JR KYUSHU OFFICIAL EVENT
-    </div>
+<div
+  class="step"
+  id="step1"
+>
 
-    <div
-      class="envelope-scene"
-      id="envelopeScene"
-      role="button"
-      tabindex="0"
-      aria-label="하우스텐보스 초대장 열기"
-      onclick="openEnvelope()"
-      onkeydown="handleEnvelopeKey(event)"
-    >
-
-      <div class="envelope-wrap">
-
-        <div class="envelope-back"></div>
-        <div class="envelope-flap"></div>
-
-        <div class="boarding-card">
-
-          <div class="mini-ticket-header">
-
-            <div class="mini-ticket-jr">
-              JR
-            </div>
-
-            <div class="mini-ticket-title">
-
-              <div class="mini-ticket-title-main">
-                BOARDING PASS
-              </div>
-
-              <div class="mini-ticket-title-sub">
-                KYUSHU RAILWAY COMPANY
-              </div>
-
-            </div>
-          </div>
-
-          <div class="mini-ticket-route">
-
-            <div class="mini-ticket-station">
-
-              <div class="mini-ticket-label">
-                출발 · FROM
-              </div>
-
-              <div class="mini-ticket-station-name">
-                HAKATA
-              </div>
-
-            </div>
-
-            <div class="mini-ticket-arrow"></div>
-
-            <div class="mini-ticket-station">
-
-              <div class="mini-ticket-label">
-                도착 · TO
-              </div>
-
-              <div class="mini-ticket-station-name">
-                HUIS TEN BOSCH
-              </div>
-
-              <div class="mini-ticket-station-jp">
-                ハウステンボス
-              </div>
-
-            </div>
-          </div>
-
-          <hr class="mini-ticket-divider">
-
-          <div class="mini-ticket-info">
-
-            <div>
-              <div class="mini-ticket-info-label">
-                PASSENGER
-              </div>
-
-              <div class="mini-ticket-info-value">
-                SPECIAL GUEST
-              </div>
-            </div>
-
-            <div>
-              <div class="mini-ticket-info-label">
-                FOR
-              </div>
-
-              <div class="mini-ticket-info-value">
-                HUIS TEN BOSCH
-              </div>
-            </div>
-
-          </div>
-
-          <div class="mini-ticket-message">
-
-            <div class="mini-ticket-message-label">
-              MESSAGE
-            </div>
-
-            <div class="mini-ticket-message-text">
-              JR큐슈 열차를 타고 함께 떠나요.
-            </div>
-
-          </div>
-        </div>
-
-        <div class="envelope-front">
-          <div class="envelope-bottom-flap"></div>
-
-          <div class="envelope-front-label">
-            HUIS TEN BOSCH
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="orange-line"></div>
-
-    <h1 class="step1-title">
-      JR열차를 타고 떠나는<br>
-      하우스텐보스 초대장 선물하기
-    </h1>
-
-    <p class="step1-sub">
-      봉투를 클릭해 나만의 초대장을 만들어 보세요
-    </p>
-
+  <div class="step1-eyebrow">
+    JR KYUSHU OFFICIAL EVENT
   </div>
 
 
-  <!-- ═══════════ STEP 2 ═══════════ -->
+  <div
+    class="envelope-scene"
+    id="envelopeScene"
+    role="button"
+    tabindex="0"
+    aria-label="하우스텐보스 초대장 열기"
+    onclick="openEnvelope()"
+    onkeydown="handleEnvelopeKey(event)"
+  >
 
-  <div class="step" id="step2">
+    <div class="envelope-wrap">
 
-    <div class="nickname-card">
+      <div class="envelope-back"></div>
 
-      <div class="nickname-eyebrow">
-        EVENT ENTRY
-      </div>
-
-      <h2 class="step2-question nickname-question">
-        이벤트에 응모할<br>
-        네이버 닉네임을 입력해 주세요
-      </h2>
-
-      <p class="nickname-guide">
-        당첨자 확인을 위해 실제 사용하는 네이버 닉네임을 입력해 주세요.
-      </p>
-
-      <input
-        class="nickname-input"
-        id="nicknameInput"
-        type="text"
-        placeholder="네이버 닉네임"
-        maxlength="30"
-        onkeydown="handleNicknameKey(event)"
-      >
-
-      <button
-        class="btn-primary nickname-next"
-        type="button"
-        onclick="submitNickname()"
-      >
-        다음으로
-      </button>
-
-    </div>
-  </div>
+      <div class="envelope-flap"></div>
 
 
-  <!-- ═══════════ STEP 3 ═══════════ -->
+      <div class="boarding-card">
 
-  <div class="step" id="step3">
+        <div class="mini-ticket-header">
 
-    <div class="letter-card">
-
-      <div class="letter-header">
-
-        <div
-          class="letter-eyebrow"
-          id="stepLabel"
-        >
-          초대장 작성
-        </div>
-
-        <div class="letter-title">
-          함께 떠나고 싶은 사람에게 초대장을 보내보세요
-        </div>
-
-        <div
-          class="orange-line"
-          style="margin: 10px auto;"
-        ></div>
-
-      </div>
-
-      <div class="form-group">
-
-        <span class="form-label">
-          함께 떠나고 싶은 사람은?
-        </span>
-
-        <div class="target-grid target-grid-inline">
-
-          <button
-            class="target-btn"
-            type="button"
-            data-target="연인"
-            onclick="selectTarget('연인', this)"
-          >
-            연인
-          </button>
-
-          <button
-            class="target-btn"
-            type="button"
-            data-target="친구"
-            onclick="selectTarget('친구', this)"
-          >
-            친구
-          </button>
-
-          <button
-            class="target-btn"
-            type="button"
-            data-target="가족"
-            onclick="selectTarget('가족', this)"
-          >
-            가족
-          </button>
-
-          <button
-            class="target-btn"
-            type="button"
-            data-target="나 자신"
-            onclick="selectTarget('나 자신', this)"
-          >
-            나 자신
-          </button>
-
-        </div>
-      </div>
-
-      <div class="form-group">
-
-        <label
-          class="form-label"
-          for="senderNameInput"
-        >
-          From. 보내는 사람 이름
-        </label>
-
-        <input
-          class="form-input"
-          id="senderNameInput"
-          type="text"
-          placeholder="보내는 사람 이름을 입력해 주세요"
-          maxlength="30"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label
-          class="form-label"
-          for="passengerNameInput"
-        >
-          To. 함께 탑승할 승객 이름
-        </label>
-
-        <input
-          class="form-input"
-          id="passengerNameInput"
-          type="text"
-          placeholder="함께 떠나고 싶은 사람의 이름을 입력해 주세요"
-          maxlength="30"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label
-          class="form-label"
-          for="messageInput"
-        >
-          같이 떠나고 싶은 이유
-        </label>
-
-        <textarea
-          class="form-textarea"
-          id="messageInput"
-          placeholder="하우스텐보스로 함께 떠나고 싶은 이유를 자유롭게 적어주세요."
-          maxlength="500"
-        ></textarea>
-
-        <div class="char-count">
-          <span id="charCount">0</span> / 500
-        </div>
-
-      </div>
-
-      <button
-        class="btn-issue"
-        type="button"
-        onclick="issueTicket()"
-      >
-        탑승권 발권하기
-      </button>
-
-    </div>
-  </div>
-
-
-  <!-- ═══════════ STEP 4 ═══════════ -->
-
-  <div class="step" id="step4">
-
-    <p class="step4-label">
-      초대장이 완성되었습니다.<br>
-      내용을 확인한 뒤 아래 버튼을 눌러 이벤트에 응모해 주세요.
-    </p>
-
-    <div id="ticketEl">
-
-      <div class="ticket-texture"></div>
-
-      <div class="ticket-content">
-
-        <div class="ticket-header-row">
-
-          <div class="jr-logo-area">
+          <div class="mini-ticket-jr">
             JR
           </div>
 
-          <div class="htb-express-title">
 
-            <div class="main-txt">
+          <div class="mini-ticket-title">
+
+            <div
+              class="mini-ticket-title-main"
+            >
               BOARDING PASS
             </div>
 
-            <div class="sub-txt">
+            <div
+              class="mini-ticket-title-sub"
+            >
               KYUSHU RAILWAY COMPANY
             </div>
 
           </div>
+
         </div>
 
-        <div class="ticket-route">
 
-          <div class="ticket-station">
+        <div class="mini-ticket-route">
 
-            <div class="ticket-station-label">
+          <div class="mini-ticket-station">
+
+            <div class="mini-ticket-label">
               출발 · FROM
             </div>
 
-            <div class="ticket-station-name">
+            <div
+              class="mini-ticket-station-name"
+            >
               HAKATA
             </div>
 
           </div>
 
-          <div class="ticket-arrow">
-            <div class="ticket-arrow-line"></div>
-          </div>
 
-          <div
-            class="ticket-station"
-            style="text-align: right;"
-          >
+          <div class="mini-ticket-arrow"></div>
 
-            <div class="ticket-station-label">
+
+          <div class="mini-ticket-station">
+
+            <div class="mini-ticket-label">
               도착 · TO
             </div>
 
-            <div class="ticket-station-name">
+            <div
+              class="mini-ticket-station-name"
+            >
               HUIS TEN BOSCH
             </div>
 
-            <div class="ticket-station-jp">
-              ハウステンボス
-            </div>
-
-          </div>
-        </div>
-
-        <hr class="ticket-divider">
-
-        <div class="ticket-info-grid">
-
-          <div class="ticket-field">
-
-            <div class="ticket-field-label">
-              FROM
-            </div>
-
-            <div
-              class="ticket-field-value"
-              id="t-sender"
-            >
-              —
-            </div>
-
-          </div>
-
-          <div class="ticket-field">
-
-            <div class="ticket-field-label">
-              PASSENGER
-            </div>
-
-            <div
-              class="ticket-field-value"
-              id="t-name"
-            >
-              —
-            </div>
-
-          </div>
-
-          <div class="ticket-field">
-
-            <div class="ticket-field-label">
-              FOR
-            </div>
-
-            <div
-              class="ticket-field-value"
-              id="t-target"
-            >
-              —
-            </div>
-
           </div>
 
         </div>
 
-        <div class="ticket-message-block">
 
-          <div class="ticket-message-label">
+        <hr class="mini-ticket-divider">
+
+
+        <div class="mini-ticket-message">
+
+          <div
+            class="mini-ticket-message-label"
+          >
             MESSAGE
           </div>
 
           <div
-            class="ticket-message-text"
-            id="t-message"
+            class="mini-ticket-message-text"
+          >
+            JR큐슈 열차를 타고 함께 떠나요.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="envelope-front">
+
+        <div
+          class="envelope-bottom-flap"
+        ></div>
+
+        <div
+          class="envelope-front-label"
+        >
+          HUIS TEN BOSCH
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="orange-line"></div>
+
+
+  <h1 class="step1-title">
+    JR열차를 타고 떠나는<br>
+    하우스텐보스 초대장 선물하기
+  </h1>
+
+
+  <p class="step1-sub">
+    봉투를 클릭해 나만의 초대장을 만들어 보세요
+  </p>
+
+</div>
+
+
+<!-- =========================
+     STEP 2
+========================= -->
+
+<div
+  class="step"
+  id="step2"
+>
+
+  <div class="nickname-card">
+
+    <h2 class="nickname-question">
+      이벤트에 응모할<br>
+      네이버 닉네임을 입력해 주세요
+    </h2>
+
+
+    <p class="nickname-guide">
+      당첨자 확인을 위해 필요합니다.
+    </p>
+
+
+    <input
+      class="nickname-input"
+      id="nicknameInput"
+      type="text"
+      placeholder="네이버 닉네임"
+      maxlength="30"
+      onkeydown="handleNicknameKey(event)"
+    >
+
+
+    <button
+      class="btn-primary nickname-next"
+      type="button"
+      onclick="submitNickname()"
+    >
+      다음으로
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     STEP 3
+========================= -->
+
+<div
+  class="step"
+  id="step3"
+>
+
+  <div class="letter-card">
+
+    <div class="letter-header">
+
+      <div
+        class="letter-eyebrow"
+        id="stepLabel"
+      >
+        초대장 작성
+      </div>
+
+
+      <div class="letter-title">
+        함께 떠나고 싶은 사람에게 초대장을 보내보세요
+      </div>
+
+
+      <div
+        class="orange-line"
+        style="margin: 10px auto;"
+      ></div>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label
+        class="form-label"
+        for="senderNameInput"
+      >
+        From. 보내는 사람 이름
+      </label>
+
+
+      <input
+        class="form-input"
+        id="senderNameInput"
+        type="text"
+        placeholder="보내는 사람 이름을 입력해 주세요"
+        maxlength="30"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label
+        class="form-label"
+        for="passengerNameInput"
+      >
+        To. 함께 탑승할 승객 이름
+      </label>
+
+
+      <input
+        class="form-input"
+        id="passengerNameInput"
+        type="text"
+        placeholder="함께 떠나고 싶은 사람의 이름을 입력해 주세요"
+        maxlength="30"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label
+        class="form-label"
+        for="messageInput"
+      >
+        같이 떠나고 싶은 이유
+      </label>
+
+
+      <textarea
+        class="form-textarea"
+        id="messageInput"
+        placeholder="하우스텐보스로 함께 떠나고 싶은 이유를 자유롭게 적어주세요."
+        maxlength="500"
+      ></textarea>
+
+
+      <div class="char-count">
+        <span id="charCount">
+          0
+        </span>
+        / 500
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-issue"
+      type="button"
+      onclick="issueTicket()"
+    >
+      탑승권 발권하기
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     STEP 4
+========================= -->
+
+<div
+  class="step"
+  id="step4"
+>
+
+  <p class="step4-label">
+    초대장이 완성되었습니다.<br>
+    내용을 확인한 뒤 아래 버튼을 눌러 이벤트에 응모해 주세요.
+  </p>
+
+
+  <div id="ticketEl">
+
+    <div class="ticket-texture"></div>
+
+
+    <div class="ticket-content">
+
+
+      <div class="ticket-header-row">
+
+        <div class="jr-logo-area">
+          JR
+        </div>
+
+
+        <div class="htb-express-title">
+
+          <div class="main-txt">
+            BOARDING PASS
+          </div>
+
+          <div class="sub-txt">
+            KYUSHU RAILWAY COMPANY
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="ticket-route">
+
+        <div class="ticket-station">
+
+          <div class="ticket-station-label">
+            출발 · FROM
+          </div>
+
+          <div class="ticket-station-name">
+            HAKATA
+          </div>
+
+        </div>
+
+
+        <div class="ticket-arrow">
+          <div class="ticket-arrow-line"></div>
+        </div>
+
+
+        <div class="ticket-station">
+
+          <div class="ticket-station-label">
+            도착 · TO
+          </div>
+
+          <div class="ticket-station-name">
+            HUIS TEN BOSCH
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <hr class="ticket-divider">
+
+
+      <div class="ticket-info-grid">
+
+        <div class="ticket-field">
+
+          <div class="ticket-field-label">
+            FROM
+          </div>
+
+          <div
+            class="ticket-field-value"
+            id="t-sender"
           >
             —
           </div>
 
         </div>
 
-        <div class="ticket-bottom-row">
 
-          <div class="ticket-train-plate">
-            JR큐슈 블로그 이벤트
+        <div
+          class="ticket-field"
+          style="text-align:right;"
+        >
+
+          <div class="ticket-field-label">
+            PASSENGER
+          </div>
+
+          <div
+            class="ticket-field-value"
+            id="t-name"
+          >
+            —
           </div>
 
         </div>
 
       </div>
-    </div>
-
-    <div class="step4-actions">
-
-      <button
-        class="btn-download"
-        type="button"
-        id="submitEntryButton"
-        onclick="submitEntry()"
-      >
-        이벤트 응모 완료하기
-      </button>
-
-      <button
-        class="btn-restart"
-        type="button"
-        onclick="restart()"
-      >
-        처음으로 돌아가기
-      </button>
-
-    </div>
-  </div>
 
 
-  <!-- ═══════════ STEP 5 — 응모 완료 ═══════════ -->
+      <div class="ticket-message-block">
 
-  <div class="step" id="step5">
+        <div class="ticket-message-label">
+          MESSAGE
+        </div>
 
-    <div class="complete-card">
+        <div
+          class="ticket-message-text"
+          id="t-message"
+        >
+          —
+        </div>
 
-      <div class="complete-icon">
-        ✓
       </div>
 
-      <p class="complete-eyebrow">
-        JR KYUSHU OFFICIAL EVENT
-      </p>
 
-      <h2 class="complete-title">
-        이벤트 응모가 완료되었습니다!
-      </h2>
+      <div class="ticket-bottom-row">
 
-      <p class="complete-text">
-        참여해 주셔서 감사합니다.<br>
-        당첨자 발표는 JR큐슈 공식 블로그에서 확인해 주세요.
-      </p>
+        <div class="ticket-train-plate">
+          JR큐슈 블로그 이벤트
+        </div>
 
-      <button
-        class="btn-restart complete-restart"
-        type="button"
-        onclick="restart()"
-      >
-        처음으로 돌아가기
-      </button>
+      </div>
 
     </div>
+
   </div>
+
+
+  <div class="step4-actions">
+
+    <button
+      class="btn-download"
+      type="button"
+      id="submitEntryButton"
+      onclick="submitEntry()"
+    >
+      이벤트 응모 완료하기
+    </button>
+
+
+    <button
+      class="btn-restart"
+      type="button"
+      onclick="restart()"
+    >
+      처음으로 돌아가기
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     STEP 5
+========================= -->
+
+<div
+  class="step"
+  id="step5"
+>
+
+  <div class="complete-card">
+
+    <div class="complete-icon">
+      ✓
+    </div>
+
+
+    <p class="complete-eyebrow">
+      JR KYUSHU OFFICIAL EVENT
+    </p>
+
+
+    <h2 class="complete-title">
+      이벤트 응모가 완료되었습니다!
+    </h2>
+
+
+    <p class="complete-text">
+      참여해 주셔서 감사합니다.<br>
+      당첨자 발표는 JR큐슈 공식 블로그에서 확인해 주세요.
+    </p>
+
+
+    <button
+      class="btn-restart complete-restart"
+      type="button"
+      onclick="restart()"
+    >
+      처음으로 돌아가기
+    </button>
+
+  </div>
+
+</div>
 
 
 <script>
 
   const state = {
-    target: '',
     nickname: '',
     senderName: '',
     passengerName: '',
@@ -1916,26 +2049,41 @@
 
   let envelopeOpening = false;
 
+  let isSubmitting = false;
+
 
   function goTo(n) {
 
-    document.querySelectorAll('.step').forEach(function (step) {
-      step.style.display = 'none';
-    });
+    document
+      .querySelectorAll('.step')
+      .forEach(function (step) {
+
+        step.style.display =
+          'none';
+
+      });
+
 
     const targetStep =
-      document.getElementById('step' + n);
+      document.getElementById(
+        'step' + n
+      );
+
 
     if (!targetStep) {
       return;
     }
 
-    targetStep.style.display = 'flex';
+
+    targetStep.style.display =
+      'flex';
+
 
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+
   }
 
 
@@ -1945,27 +2093,46 @@
       return;
     }
 
+
     const envelope =
-      document.getElementById('envelopeScene');
+      document.getElementById(
+        'envelopeScene'
+      );
+
 
     if (!envelope) {
+
       goTo(2);
+
       return;
     }
 
+
     envelopeOpening = true;
 
-    envelope.classList.add('open');
 
-    window.setTimeout(function () {
+    envelope.classList.add(
+      'open'
+    );
 
-      goTo(2);
 
-      envelope.classList.remove('open');
+    window.setTimeout(
+      function () {
 
-      envelopeOpening = false;
+        goTo(2);
 
-    }, 820);
+
+        envelope.classList.remove(
+          'open'
+        );
+
+
+        envelopeOpening = false;
+
+      },
+      820
+    );
+
   }
 
 
@@ -1979,7 +2146,9 @@
       event.preventDefault();
 
       openEnvelope();
+
     }
+
   }
 
 
@@ -1987,74 +2156,52 @@
 
     const nickname =
       document
-        .getElementById('nicknameInput')
+        .getElementById(
+          'nicknameInput'
+        )
         .value
         .trim();
 
+
     if (!nickname) {
 
-      alert('네이버 닉네임을 입력해 주세요.');
+      alert(
+        '네이버 닉네임을 입력해 주세요.'
+      );
 
       return;
+
     }
 
-    state.nickname = nickname;
+
+    state.nickname =
+      nickname;
+
 
     goTo(3);
+
   }
 
 
   function handleNicknameKey(event) {
 
-    if (event.key === 'Enter') {
+    if (
+      event.key === 'Enter'
+    ) {
 
       event.preventDefault();
 
       submitNickname();
-    }
-  }
-
-
-  function selectTarget(target, button) {
-
-    state.target = target;
-
-    document
-      .querySelectorAll('.target-btn')
-      .forEach(function (btn) {
-
-        btn.classList.remove('selected');
-
-      });
-
-    if (button) {
-
-      button.classList.add('selected');
 
     }
 
-    const passengerInput =
-      document.getElementById('passengerNameInput');
-
-    if (target === '나 자신') {
-
-      passengerInput.value = '나 자신';
-
-    } else if (passengerInput.value === '나 자신') {
-
-      passengerInput.value = '';
-
-    }
-
-    document
-      .getElementById('stepLabel')
-      .textContent =
-        target + '에게 보내는 초대장';
   }
 
 
   const textarea =
-    document.getElementById('messageInput');
+    document.getElementById(
+      'messageInput'
+    );
 
 
   textarea.addEventListener(
@@ -2062,11 +2209,16 @@
     function () {
 
       document
-        .getElementById('charCount')
+        .getElementById(
+          'charCount'
+        )
         .textContent =
           this.value.length;
 
-      this.style.height = 'auto';
+
+      this.style.height =
+        'auto';
+
 
       this.style.height =
         this.scrollHeight + 'px';
@@ -2079,106 +2231,116 @@
 
     const senderName =
       document
-        .getElementById('senderNameInput')
+        .getElementById(
+          'senderNameInput'
+        )
         .value
         .trim();
 
 
     const passengerName =
       document
-        .getElementById('passengerNameInput')
+        .getElementById(
+          'passengerNameInput'
+        )
         .value
         .trim();
 
 
     const message =
       document
-        .getElementById('messageInput')
+        .getElementById(
+          'messageInput'
+        )
         .value
         .trim();
 
 
     if (!state.nickname) {
 
-      alert('네이버 닉네임을 먼저 입력해 주세요.');
+      alert(
+        '네이버 닉네임을 먼저 입력해 주세요.'
+      );
 
       goTo(2);
 
       return;
-    }
 
-
-    if (!state.target) {
-
-      alert('함께 떠나고 싶은 사람을 선택해 주세요.');
-
-      return;
     }
 
 
     if (!senderName) {
 
-      alert('보내는 사람 이름을 입력해 주세요.');
+      alert(
+        '보내는 사람 이름을 입력해 주세요.'
+      );
 
       return;
+
     }
 
 
     if (!passengerName) {
 
-      alert('함께 탑승할 승객 이름을 입력해 주세요.');
+      alert(
+        '함께 탑승할 승객 이름을 입력해 주세요.'
+      );
 
       return;
+
     }
 
 
     if (!message) {
 
-      alert('같이 떠나고 싶은 이유를 입력해 주세요.');
+      alert(
+        '같이 떠나고 싶은 이유를 입력해 주세요.'
+      );
 
       return;
+
     }
 
 
     state.senderName =
       senderName;
 
+
     state.passengerName =
       passengerName;
+
 
     state.message =
       message;
 
 
     document
-      .getElementById('t-sender')
+      .getElementById(
+        't-sender'
+      )
       .textContent =
         senderName;
 
 
     document
-      .getElementById('t-name')
+      .getElementById(
+        't-name'
+      )
       .textContent =
         passengerName;
 
 
     document
-      .getElementById('t-target')
-      .textContent =
-        state.target;
-
-
-    document
-      .getElementById('t-message')
+      .getElementById(
+        't-message'
+      )
       .textContent =
         message;
 
 
     goTo(4);
+
   }
-
-
-  let isSubmitting = false;
 
 
   function submitEntry() {
@@ -2192,13 +2354,15 @@
       !state.nickname ||
       !state.senderName ||
       !state.passengerName ||
-      !state.target ||
       !state.message
     ) {
 
-      alert('응모 정보를 다시 확인해 주세요.');
+      alert(
+        '응모 정보를 다시 확인해 주세요.'
+      );
 
       return;
+
     }
 
 
@@ -2207,11 +2371,15 @@
 
 
     const overlay =
-      document.getElementById('loadingOverlay');
+      document.getElementById(
+        'loadingOverlay'
+      );
 
 
     const submitButton =
-      document.getElementById('submitEntryButton');
+      document.getElementById(
+        'submitEntryButton'
+      );
 
 
     isSubmitting = true;
@@ -2219,7 +2387,9 @@
 
     if (submitButton) {
 
-      submitButton.disabled = true;
+      submitButton.disabled =
+        true;
+
 
       submitButton.textContent =
         '응모 처리 중...';
@@ -2227,7 +2397,9 @@
     }
 
 
-    overlay.classList.add('active');
+    overlay.classList.add(
+      'active'
+    );
 
 
     fetch(
@@ -2239,7 +2411,8 @@
         mode: 'no-cors',
 
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type':
+            'application/json'
         },
 
         body: JSON.stringify({
@@ -2250,8 +2423,13 @@
           name:
             state.senderName,
 
+          /*
+            친구/가족 선택을 삭제했으므로
+            Sheet의 "대상" 칸에는
+            To. 승객 이름을 저장
+          */
           target:
-            state.target,
+            state.passengerName,
 
           message:
             state.message
@@ -2261,48 +2439,59 @@
       }
     )
 
-    .then(function () {
+    .then(
+      function () {
 
-      overlay.classList.remove('active');
-
-      goTo(5);
-
-    })
-
-    .catch(function (error) {
-
-      console.log(
-        '시트 저장 오류:',
-        error
-      );
-
-      overlay.classList.remove('active');
-
-      isSubmitting = false;
+        overlay.classList.remove(
+          'active'
+        );
 
 
-      if (submitButton) {
-
-        submitButton.disabled = false;
-
-        submitButton.textContent =
-          '이벤트 응모 완료하기';
+        goTo(5);
 
       }
+    )
+
+    .catch(
+      function (error) {
+
+        console.log(
+          '시트 저장 오류:',
+          error
+        );
 
 
-      alert(
-        '응모 처리 중 오류가 발생했습니다. 다시 시도해 주세요.'
-      );
+        overlay.classList.remove(
+          'active'
+        );
 
-    });
+
+        isSubmitting = false;
+
+
+        if (submitButton) {
+
+          submitButton.disabled =
+            false;
+
+
+          submitButton.textContent =
+            '이벤트 응모 완료하기';
+
+        }
+
+
+        alert(
+          '응모 처리 중 오류가 발생했습니다. 다시 시도해 주세요.'
+        );
+
+      }
+    );
 
   }
 
 
   function restart() {
-
-    state.target = '';
 
     state.nickname = '';
 
@@ -2314,57 +2503,59 @@
 
 
     document
-      .getElementById('nicknameInput')
+      .getElementById(
+        'nicknameInput'
+      )
       .value = '';
 
 
     document
-      .getElementById('senderNameInput')
+      .getElementById(
+        'senderNameInput'
+      )
       .value = '';
 
 
     document
-      .getElementById('passengerNameInput')
+      .getElementById(
+        'passengerNameInput'
+      )
       .value = '';
 
 
     document
-      .getElementById('messageInput')
+      .getElementById(
+        'messageInput'
+      )
       .value = '';
 
 
     document
-      .getElementById('charCount')
+      .getElementById(
+        'charCount'
+      )
       .textContent = '0';
 
 
     document
-      .getElementById('messageInput')
-      .style.height = 'auto';
-
-
-    document
-      .getElementById('stepLabel')
-      .textContent =
-        '초대장 작성';
-
-
-    document
-      .querySelectorAll('.target-btn')
-      .forEach(function (btn) {
-
-        btn.classList.remove('selected');
-
-      });
+      .getElementById(
+        'messageInput'
+      )
+      .style.height =
+        'auto';
 
 
     const submitButton =
-      document.getElementById('submitEntryButton');
+      document.getElementById(
+        'submitEntryButton'
+      );
 
 
     if (submitButton) {
 
-      submitButton.disabled = false;
+      submitButton.disabled =
+        false;
+
 
       submitButton.textContent =
         '이벤트 응모 완료하기';
@@ -2373,12 +2564,16 @@
 
 
     const envelope =
-      document.getElementById('envelopeScene');
+      document.getElementById(
+        'envelopeScene'
+      );
 
 
     if (envelope) {
 
-      envelope.classList.remove('open');
+      envelope.classList.remove(
+        'open'
+      );
 
     }
 
