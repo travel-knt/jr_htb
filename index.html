@@ -2408,15 +2408,11 @@
             'application/json'
         },
 
-        body: JSON.stringify({
-  name: state.senderName,
+       body: JSON.stringify({
+  senderName: state.senderName,
   passengerName: state.passengerName,
-  target: state.target,
   message: state.message
 })
-
-      }
-    )
     .catch(
       function(error) {
 
