@@ -7,1777 +7,1870 @@
 <title>하우스텐보스행 초대장</title>
 
 <link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap"
   rel="stylesheet"
 >
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
-:root {
-  --navy-deep: #0f1420;
-  --orange: #d45f1e;
-  --orange-deep: #b84e15;
-  --text-cream: #f0e8d8;
-  --text-muted: #8a9ab5;
-  --white: #ffffff;
+  :root {
+    --navy: #1a1f2e;
+    --navy-deep: #0f1420;
 
-  --envelope-dark: #d8d2c8;
-  --envelope-main: #f2eee7;
-  --envelope-light: #fffdf9;
-}
+    --orange: #d45f1e;
+    --orange-deep: #b84e15;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    --cream: #fdfbf7;
+    --text-cream: #f0e8d8;
+    --text-muted: #8a9ab5;
+    --white: #ffffff;
 
-html,
-body {
-  width: 100%;
-  min-height: 100vh;
-
-  font-family: 'Noto Sans KR', sans-serif;
-
-  background: var(--navy-deep);
-  color: var(--text-cream);
-
-  overflow-x: hidden;
-}
-
-button,
-input,
-textarea {
-  font: inherit;
-}
-
-button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.bg-layer {
-  position: fixed;
-  inset: 0;
-
-  z-index: 0;
-
-  pointer-events: none;
-
-  background-color: var(--navy-deep);
-
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(15, 20, 32, 0.30) 0%,
-      rgba(15, 20, 32, 0.50) 50%,
-      rgba(15, 20, 32, 0.85) 100%
-    ),
-    url('./zzzzz.jpg');
-
-  background-size: 100% auto;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-}
-
-.step {
-  position: relative;
-
-  z-index: 1;
-
-  min-height: 100vh;
-
-  padding: 2rem 1rem;
-
-  display: flex;
-
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.orange-line {
-  width: 50px;
-  height: 1px;
-
-  margin: 1.2rem auto;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      var(--orange),
-      transparent
-    );
-}
-
-
-/* ========================================
-   STEP 1 — 봉투
-======================================== */
-
-.step1-eyebrow {
-  margin-bottom: 2rem;
-
-  font-family:
-    'Cormorant Garamond',
-    serif;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  letter-spacing: 0.35em;
-
-  text-transform: uppercase;
-
-  color: var(--white);
-}
-
-@keyframes bounceIn {
-  0% {
-    transform:
-      translateY(20px)
-      scale(0.96);
-
-    opacity: 0;
+    --envelope-dark: #d8d2c8;
+    --envelope-main: #f2eee7;
+    --envelope-light: #fffdf9;
   }
 
-  70% {
-    transform:
-      translateY(-3px)
-      scale(1.01);
-
-    opacity: 1;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  100% {
-    transform:
-      translateY(0)
-      scale(1);
+  html,
+  body {
+    width: 100%;
+    min-height: 100vh;
 
-    opacity: 1;
-  }
-}
+    font-family: 'Noto Sans KR', sans-serif;
 
-@keyframes softFloat {
-  0%,
-  100% {
-    transform:
-      translateY(0);
+    background: var(--navy-deep);
+    color: var(--text-cream);
+
+    overflow-x: hidden;
   }
 
-  50% {
-    transform:
-      translateY(-7px);
-  }
-}
-
-.envelope-scene {
-  width:
-    min(78vw, 310px);
-
-  height: 275px;
-
-  margin:
-    0 auto 1.9rem;
-
-  position: relative;
-
-  cursor: pointer;
-
-  animation:
-    bounceIn
-    0.75s
-    cubic-bezier(
-      0.175,
-      0.885,
-      0.32,
-      1.12
-    )
-    both,
-
-    softFloat
-    3.2s
-    ease-in-out
-    0.9s
-    infinite;
-
-  filter:
-    drop-shadow(
-      0 22px 34px
-      rgba(0, 0, 0, 0.36)
-    );
-}
-
-.envelope-scene.open {
-  animation-play-state: paused;
-}
-
-.envelope-wrap {
-  position: absolute;
-
-  left: 50%;
-  bottom: 14px;
-
-  width: 285px;
-  height: 195px;
-
-  transform:
-    translateX(-50%);
-}
-
-.envelope-back {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 225px;
-
-  z-index: 1;
-
-  background:
-    linear-gradient(
-      180deg,
-      var(--envelope-main) 0%,
-      var(--envelope-main) 42%,
-      var(--envelope-dark) 100%
-    );
-
-  clip-path:
-    polygon(
-      0 100%,
-      0 44%,
-      50% 0,
-      100% 44%,
-      100% 100%
-    );
-
-  border-radius:
-    0 0 10px 10px;
-
-  box-shadow:
-    inset
-    0 -14px 24px
-    rgba(92, 79, 62, 0.10);
-}
-
-.envelope-flap {
-  display: none;
-}
-
-
-/* 봉투 안 미니 탑승권 */
-
-.boarding-card {
-  position: absolute;
-
-  left: 50%;
-  bottom: 34px;
-
-  width: 246px;
-
-  min-height: 168px;
-
-  z-index: 4;
-
-  padding: 15px;
-
-  transform:
-    translateX(-50%);
-
-  color: #fff;
-
-  background:
-    linear-gradient(
-      145deg,
-      #e56b20 0%,
-      var(--orange) 58%,
-      #bf4d16 100%
-    );
-
-  border:
-    1px solid
-    rgba(255, 255, 255, 0.22);
-
-  border-radius: 7px;
-
-  box-shadow:
-    0 12px 24px
-    rgba(0, 0, 0, 0.22);
-
-  overflow: hidden;
-
-  transition:
-    transform
-    0.72s
-    cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
-}
-
-.boarding-card::before {
-  content: '';
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 4px,
-      rgba(0, 0, 0, 0.025) 4px,
-      rgba(0, 0, 0, 0.025) 5px
-    );
-}
-
-.mini-ticket-header,
-.mini-ticket-route,
-.mini-ticket-message {
-  position: relative;
-
-  z-index: 1;
-}
-
-.mini-ticket-header {
-  display: flex;
-
-  align-items: flex-start;
-  justify-content: space-between;
-
-  margin-bottom: 18px;
-}
-
-.mini-ticket-jr {
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 25px;
-  font-weight: 700;
-
-  line-height: 1;
-
-  color: #fff;
-}
-
-.mini-ticket-title {
-  text-align: right;
-}
-
-.mini-ticket-title-main {
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  line-height: 1;
-
-  letter-spacing: 0.06em;
-
-  color: #fff;
-}
-
-.mini-ticket-title-sub {
-  margin-top: 3px;
-
-  font-size: 5px;
-
-  letter-spacing: 0.04em;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.72
-    );
-}
-
-
-/* HAKATA / HUIS TEN BOSCH 정렬 */
-
-.mini-ticket-route {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    26px
-    minmax(0, 1fr);
-
-  align-items: start;
-
-  gap: 7px;
-
-  margin-bottom: 14px;
-}
-
-.mini-ticket-station {
-  min-width: 0;
-}
-
-.mini-ticket-station:first-child {
-  text-align: left;
-}
-
-.mini-ticket-station:last-child {
-  text-align: right;
-}
-
-.mini-ticket-label {
-  height: 10px;
-
-  margin-bottom: 2px;
-
-  font-size: 5px;
-
-  line-height: 10px;
-
-  font-weight: 500;
-
-  letter-spacing: 0.04em;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.68
-    );
-}
-
-.mini-ticket-station-name {
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  line-height: 1.1;
-
-  white-space: nowrap;
-
-  color: #fff;
-}
-
-.mini-ticket-arrow {
-  position: relative;
-
-  height: 1px;
-
-  margin-top: 17px;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.9
-    );
-}
-
-.mini-ticket-arrow::after {
-  content: '';
-
-  position: absolute;
-
-  right: 0;
-  top: -2px;
-
-  border-left:
-    4px solid #fff;
-
-  border-top:
-    2px solid transparent;
-
-  border-bottom:
-    2px solid transparent;
-}
-
-.mini-ticket-divider {
-  position: relative;
-
-  z-index: 1;
-
-  margin:
-    0 -15px 10px;
-
-  border: none;
-
-  border-top:
-    1px dashed
-    rgba(
-      255,
-      255,
-      255,
-      0.38
-    );
-}
-
-.mini-ticket-message {
-  padding: 8px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.10
-    );
-
-  border-radius: 4px;
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.13
-    );
-}
-
-.mini-ticket-message-label {
-  margin-bottom: 3px;
-
-  font-size: 5px;
-
-  font-weight: 700;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.68
-    );
-}
-
-.mini-ticket-message-text {
-  font-size: 6px;
-
-  line-height: 1.4;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.94
-    );
-}
-
-
-/* 봉투 앞 */
-
-.envelope-front {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 112px;
-
-  z-index: 5;
-
-  overflow: hidden;
-
-  border-radius:
-    0 0 10px 10px;
-
-  background:
-    transparent;
-}
-
-.envelope-front::before {
-  content: '';
-
-  position: absolute;
-
-  left: 0;
-  bottom: 0;
-
-  width: 58%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--envelope-light),
-      var(--envelope-main)
-    );
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 60%,
-      0 100%
-    );
-}
-
-.envelope-front::after {
-  content: '';
-
-  position: absolute;
-
-  right: 0;
-  bottom: 0;
-
-  width: 58%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      225deg,
-      var(--envelope-light),
-      var(--envelope-main)
-    );
-
-  clip-path:
-    polygon(
-      100% 0,
-      0 60%,
-      100% 100%
-    );
-}
-
-.envelope-bottom-flap {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 100%;
-
-  z-index: 2;
-
-  background:
-    linear-gradient(
-      180deg,
-      var(--envelope-light),
-      var(--envelope-main) 72%,
-      var(--envelope-dark)
-    );
-
-  clip-path:
-    polygon(
-      0 100%,
-      50% 39%,
-      100% 100%
-    );
-}
-
-.envelope-front-label {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 17px;
-
-  z-index: 3;
-
-  text-align: center;
-
-  font-family:
-    'Cormorant Garamond',
-    serif;
-
-  font-size: 8px;
-
-  letter-spacing: 0.34em;
-
-  color:
-    rgba(
-      92,
-      79,
-      62,
-      0.48
-    );
-}
-
-.envelope-scene.open
-.boarding-card {
-  transform:
-    translateX(-50%)
-    translateY(-66px);
-}
-
-.step1-title {
-  margin-bottom: 1rem;
-
-  font-size:
-    clamp(
-      18px,
-      4vw,
-      24px
-    );
-
-  font-weight: 700;
-
-  line-height: 1.5;
-
-  text-align: center;
-
-  color:
-    var(--text-cream);
-}
-
-.step1-sub {
-  margin-top: 0.8rem;
-  margin-bottom: 2.5rem;
-
-  font-size: 13px;
-
-  text-align: center;
-
-  color:
-    var(--text-muted);
-}
-
-
-/* ========================================
-   STEP 2 — 초대장 작성
-======================================== */
-
-.letter-card {
-  width: 100%;
-
-  max-width: 480px;
-
-  padding:
-    36px 30px;
-
-  color: #222;
-
-  background:
-    #faf8f5;
-
-  border-radius: 8px;
-
-  box-shadow:
-    0 24px 50px
-    rgba(
-      0,
-      0,
-      0,
-      0.5
-    );
-}
-
-.letter-header {
-  margin-bottom: 24px;
-
-  text-align: center;
-}
-
-.letter-eyebrow {
-  font-family:
-    'Cormorant Garamond',
-    serif;
-
-  font-size: 12px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.2em;
-
-  color:
-    var(--orange);
-}
-
-.letter-title {
-  margin-top: 6px;
-
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  display: block;
-
-  margin-bottom: 8px;
-
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 14px;
-
-  font-weight: 700;
-
-  color: #333;
-}
-
-
-/* 연인 / 친구 / 가족 / 나 자신 */
-
-.target-grid {
-  width: 100%;
-
-  display: flex;
-
-  gap: 8px;
-}
-
-.target-btn {
-  flex: 1;
-
-  padding:
-    11px 8px;
-
-  border:
-    1px solid
-    #e0d4ca;
-
-  border-radius: 8px;
-
-  cursor: pointer;
-
-  white-space: nowrap;
-
-  font-size: 13px;
-
-  font-weight: 500;
-
-  color:
-    #6f6258;
-
-  background:
-    #efe7df;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.target-btn:hover {
-  background:
-    #e7dbd1;
-
-  transform:
-    translateY(-1px);
-}
-
-.target-btn.selected {
-  background:
-    var(--orange);
-
-  color: #fff;
-
-  border-color:
-    var(--orange);
-
-  box-shadow:
-    0 4px 12px
-    rgba(
-      212,
-      95,
-      30,
-      0.22
-    );
-}
-
-.form-input {
-  width: 100%;
-
-  padding:
-    8px 0;
-
-  border: none;
-
-  border-bottom:
-    1px solid
-    #d1c2b8;
-
-  outline: none;
-
-  font-size: 14px;
-
-  color: #111;
-
-  background:
-    transparent;
-}
-
-.form-input:focus {
-  border-bottom-color:
-    var(--orange);
-}
-
-.form-textarea {
-  width: 100%;
-
-  min-height: 300px;
-
-  padding: 14px;
-
-  border: none;
-
-  border-radius: 4px;
-
-  outline: none;
-
-  resize: none;
-
-  overflow-y: auto;
-
-  font-size: 14px;
-
-  line-height: 1.8;
-
-  color: #222;
-
-  background:
-    #f3ede8;
-}
-
-.char-count {
-  margin-top: 4px;
-
-  text-align: right;
-
-  font-size: 11px;
-
-  color: #777;
-}
-
-
-/* ========================================
-   STEP 3 — 완성 탑승권
-======================================== */
-
-.step3-label {
-  margin-bottom: 2rem;
-
-  font-size: 13px;
-
-  line-height: 1.8;
-
-  text-align: center;
-
-  color:
-    var(--text-muted);
-}
-
-#ticketEl {
-  position: relative;
-
-  width: 100%;
-
-  max-width: 520px;
-
-  overflow: hidden;
-
-  border-radius: 10px;
-
-  background:
-    var(--orange);
-
-  box-shadow:
-    0 25px 55px
-    rgba(
-      0,
-      0,
-      0,
-      0.6
-    );
-}
-
-.ticket-texture {
-  position: absolute;
-
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 4px,
-      rgba(0, 0, 0, 0.02) 4px,
-      rgba(0, 0, 0, 0.02) 5px
-    );
-}
-
-.ticket-content {
-  position: relative;
-
-  z-index: 1;
-
-  padding:
-    28px 32px;
-}
-
-.ticket-header-row {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 22px;
-}
-
-.jr-logo-area {
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 32px;
-
-  font-weight: 700;
-
-  line-height: 1;
-
-  color: #fff;
-}
-
-.htb-express-title {
-  text-align: right;
-}
-
-.htb-express-title
-.main-txt {
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 16px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-
-  color: #fff;
-}
-
-.htb-express-title
-.sub-txt {
-  margin-top: 1px;
-
-  font-size: 9px;
-
-  letter-spacing: 0.05em;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.7
-    );
-}
-
-
-/* 마지막 탑승권 정렬 */
-
-.ticket-route {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    50px
-    minmax(0, 1fr);
-
-  align-items: start;
-
-  gap: 15px;
-
-  margin-bottom: 22px;
-}
-
-.ticket-station {
-  min-width: 0;
-}
-
-.ticket-station:first-child {
-  text-align: left;
-}
-
-.ticket-station:last-child {
-  text-align: right;
-}
-
-.ticket-station-label {
-  height: 16px;
-
-  margin-bottom: 3px;
-
-  font-size: 8px;
-
-  line-height: 16px;
-
-  letter-spacing: 0.1em;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.6
-    );
-}
-
-.ticket-station-name {
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 22px;
-
-  font-weight: 700;
-
-  line-height: 1;
-
-  white-space: nowrap;
-
-  color: #fff;
-}
-
-.ticket-arrow {
-  align-self: start;
-
-  margin-top: 26px;
-}
-
-.ticket-arrow-line {
-  position: relative;
-
-  width: 50px;
-
-  height: 1px;
-
-  background: #fff;
-}
-
-.ticket-arrow-line::after {
-  content: '';
-
-  position: absolute;
-
-  right: 0;
-  top: -3px;
-
-  border-left:
-    5px solid #fff;
-
-  border-top:
-    3px solid transparent;
-
-  border-bottom:
-    3px solid transparent;
-}
-
-.ticket-divider {
-  position: relative;
-
-  margin:
-    0 -32px 20px;
-
-  border: none;
-
-  border-top:
-    1px dashed
-    rgba(
-      255,
-      255,
-      255,
-      0.3
-    );
-}
-
-.ticket-divider::before,
-.ticket-divider::after {
-  content: '';
-
-  position: absolute;
-
-  top: -9px;
-
-  width: 18px;
-
-  height: 18px;
-
-  border-radius: 50%;
-
-  background:
-    var(--navy-deep);
-}
-
-.ticket-divider::before {
-  left: -9px;
-}
-
-.ticket-divider::after {
-  right: -9px;
-}
-
-.ticket-info-grid {
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 14px;
-
-  margin-bottom: 20px;
-}
-
-.ticket-field:last-child {
-  text-align: right;
-}
-
-.ticket-field-label {
-  margin-bottom: 2px;
-
-  font-size: 9px;
-
-  font-weight: 500;
-
-  text-transform: uppercase;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.6
-    );
-}
-
-.ticket-field-value {
-  font-size: 14px;
-
-  font-weight: 700;
-
-  color: #fff;
-
-  word-break: break-word;
-}
-
-.ticket-target {
-  margin-bottom: 20px;
-}
-
-.ticket-target-value {
-  font-size: 14px;
-
-  font-weight: 700;
-
-  color: #fff;
-}
-
-.ticket-message-block {
-  width: 100%;
-
-  margin-bottom: 20px;
-
-  padding:
-    14px 16px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-
-  border-radius: 6px;
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.15
-    );
-}
-
-.ticket-message-label {
-  margin-bottom: 6px;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.7
-    );
-}
-
-.ticket-message-text {
-  display: block;
-
-  width: 100%;
-
-  white-space: pre-wrap;
-
-  overflow-wrap: break-word;
-
-  font-size: 13px;
-
-  line-height: 1.7;
-
-  color: #fff;
-}
-
-.ticket-bottom-row {
-  display: flex;
-
-  justify-content: flex-end;
-
-  padding-top: 14px;
-
-  border-top:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.15
-    );
-}
-
-.ticket-train-plate {
-  font-size: 10px;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.5
-    );
-}
-
-
-/* ========================================
-   BUTTON
-======================================== */
-
-.btn-issue,
-.btn-save {
-  width: 100%;
-
-  padding:
-    15px 36px;
-
-  border: none;
-
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  font-size: 14px;
-
-  font-weight: 700;
-
-  color: #fff;
-
-  background:
-    var(--orange);
-
-  box-shadow:
-    0 4px 15px
-    rgba(
-      212,
-      95,
-      30,
-      0.30
-    );
-}
-
-.btn-issue:hover {
-  background:
-    var(--orange-deep);
-}
-
-.btn-save {
-  background:
-    linear-gradient(
-      135deg,
-      #a82828,
-      #8b2020
-    );
-
-  box-shadow:
-    0 4px 15px
-    rgba(
-      139,
-      32,
-      32,
-      0.4
-    );
-}
-
-.btn-save:disabled {
-  cursor: default;
-
-  opacity: 0.65;
-}
-
-.btn-restart {
-  width: 100%;
-
-  padding:
-    12px 24px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.2
-    );
-
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  font-size: 12px;
-
-  text-align: center;
-
-  color:
-    var(--text-muted);
-
-  background:
-    transparent;
-}
-
-.step3-actions {
-  width: 100%;
-
-  max-width: 520px;
-
-  margin-top: 2.5rem;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 16px;
-}
-
-
-/* ========================================
-   LOADING
-======================================== */
-
-.loading-overlay {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 100;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  background:
-    var(--navy-deep);
-
-  transition:
-    opacity
-    0.2s ease;
-}
-
-.loading-overlay.active {
-  opacity: 1;
-
-  pointer-events: all;
-}
-
-.loading-spinner {
-  width: 28px;
-
-  height: 28px;
-
-  border:
-    2px solid
-    rgba(
-      212,
-      95,
-      30,
-      0.2
-    );
-
-  border-top-color:
-    var(--orange);
-
-  border-radius: 50%;
-
-  animation:
-    spin
-    0.8s
-    linear
-    infinite;
-}
-
-@keyframes spin {
-  to {
-    transform:
-      rotate(360deg);
-  }
-}
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 600px) {
-
-  .letter-card {
-    padding:
-      30px 22px;
+  button,
+  input,
+  textarea {
+    font: inherit;
   }
 
-  .target-grid {
-    flex-wrap: wrap;
+  button {
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .target-btn {
-    flex:
-      1 1
-      calc(50% - 8px);
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+
+    z-index: 0;
+    pointer-events: none;
+
+    background-color: var(--navy-deep);
+
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(15, 20, 32, 0.30) 0%,
+        rgba(15, 20, 32, 0.50) 50%,
+        rgba(15, 20, 32, 0.85) 100%
+      ),
+      url('./zzzzz.jpg');
+
+    background-size: 100% auto;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+
+    min-height: 100vh;
+    padding: 2rem 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orange-line {
+    width: 50px;
+    height: 1px;
+
+    margin: 1.2rem auto;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        var(--orange),
+        transparent
+      );
+  }
+
+  /* ========================================
+     STEP 1 — 봉투
+  ======================================== */
+
+  .step1-eyebrow {
+    margin-bottom: 2rem;
+
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+
+    color: var(--white);
+  }
+
+  @keyframes bounceIn {
+    0% {
+      transform: translateY(20px) scale(0.96);
+      opacity: 0;
+    }
+
+    70% {
+      transform: translateY(-3px) scale(1.01);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes softFloat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-7px);
+    }
   }
 
   .envelope-scene {
-    width:
-      min(82vw, 280px);
+    width: min(78vw, 310px);
+    height: 275px;
 
-    height: 250px;
+    margin: 0 auto 1.9rem;
+
+    position: relative;
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+
+    animation:
+      bounceIn
+      0.75s
+      cubic-bezier(0.175, 0.885, 0.32, 1.12)
+      both,
+
+      softFloat
+      3.2s
+      ease-in-out
+      0.9s
+      infinite;
+
+    filter:
+      drop-shadow(
+        0 22px 34px
+        rgba(0, 0, 0, 0.36)
+      );
+  }
+
+  .envelope-scene.open {
+    animation-play-state: paused;
   }
 
   .envelope-wrap {
-    width: 258px;
+    position: absolute;
 
-    height: 178px;
+    left: 50%;
+    bottom: 14px;
 
-    bottom: 12px;
+    width: 285px;
+    height: 195px;
+
+    transform: translateX(-50%);
   }
 
   .envelope-back {
-    height: 204px;
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 225px;
+
+    z-index: 1;
+
+    background:
+      linear-gradient(
+        180deg,
+        var(--envelope-main) 0%,
+        var(--envelope-main) 42%,
+        var(--envelope-dark) 100%
+      );
+
+    clip-path:
+      polygon(
+        0 100%,
+        0 44%,
+        50% 0,
+        100% 44%,
+        100% 100%
+      );
+
+    border-radius: 0 0 10px 10px;
+
+    box-shadow:
+      inset
+      0 -14px 24px
+      rgba(92, 79, 62, 0.10);
   }
 
+  .envelope-flap {
+    display: none;
+  }
+
+  /* 봉투 안 미니 탑승권 */
+
   .boarding-card {
-    width: 222px;
+    position: absolute;
 
-    min-height: 152px;
+    left: 50%;
+    bottom: 34px;
 
-    bottom: 31px;
+    width: 246px;
+    min-height: 168px;
 
-    padding: 13px;
+    z-index: 4;
+
+    padding: 15px;
+
+    transform: translateX(-50%);
+
+    color: #fff;
+
+    background:
+      linear-gradient(
+        145deg,
+        #e56b20 0%,
+        var(--orange) 58%,
+        #bf4d16 100%
+      );
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.22);
+
+    border-radius: 7px;
+
+    box-shadow:
+      0 12px 24px
+      rgba(0, 0, 0, 0.22),
+      inset 0 1px 0
+      rgba(255, 255, 255, 0.14);
+
+    overflow: hidden;
+
+    transition:
+      transform
+      0.72s
+      cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .boarding-card::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 4px,
+        rgba(0, 0, 0, 0.025) 4px,
+        rgba(0, 0, 0, 0.025) 5px
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08),
+        transparent 38%
+      );
+  }
+
+  .mini-ticket-header,
+  .mini-ticket-route,
+  .mini-ticket-message {
+    position: relative;
+    z-index: 1;
+  }
+
+  .mini-ticket-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
   }
 
   .mini-ticket-jr {
-    font-size: 22px;
+    font-family: 'Playfair Display', serif;
+
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: #fff;
+  }
+
+  .mini-ticket-title {
+    text-align: right;
   }
 
   .mini-ticket-title-main {
-    font-size: 10px;
+    font-family: 'Playfair Display', serif;
+
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+
+    letter-spacing: 0.06em;
+
+    color: #fff;
+  }
+
+  .mini-ticket-title-sub {
+    margin-top: 3px;
+
+    font-size: 5px;
+    letter-spacing: 0.04em;
+
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /*
+    HAKATA / HUIS TEN BOSCH
+    좌우 같은 너비로 정렬
+  */
+
+  .mini-ticket-route {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      26px
+      minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+  }
+
+  .mini-ticket-station {
+    min-width: 0;
+  }
+
+  .mini-ticket-station:first-child {
+    text-align: left;
+  }
+
+  .mini-ticket-station:last-child {
+    text-align: right;
+  }
+
+  .mini-ticket-label {
+    height: 10px;
+
+    margin-bottom: 2px;
+
+    font-size: 5px;
+    line-height: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.04em;
+
+    color: rgba(255, 255, 255, 0.68);
   }
 
   .mini-ticket-station-name {
-    font-size: 9px;
+    font-family: 'Playfair Display', serif;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+
+    color: #fff;
   }
+
+  .mini-ticket-arrow {
+    position: relative;
+
+    height: 1px;
+
+    margin-top: 17px;
+
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .mini-ticket-arrow::after {
+    content: '';
+
+    position: absolute;
+
+    right: 0;
+    top: -2px;
+
+    border-left: 4px solid #fff;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+  }
+
+  .mini-ticket-divider {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 -15px 10px;
+
+    border: none;
+
+    border-top:
+      1px dashed
+      rgba(255, 255, 255, 0.38);
+  }
+
+  /*
+    첫 화면 PASSENGER / FOR 삭제.
+    MESSAGE만 유지.
+  */
+
+  .mini-ticket-message {
+    padding: 8px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.10);
+
+    border-radius: 4px;
+
+    background:
+      rgba(0, 0, 0, 0.13);
+  }
+
+  .mini-ticket-message-label {
+    margin-bottom: 3px;
+
+    font-size: 5px;
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .mini-ticket-message-text {
+    font-size: 6px;
+
+    line-height: 1.4;
+
+    color: rgba(255, 255, 255, 0.94);
+  }
+
+  /* 봉투 앞 */
 
   .envelope-front {
-    height: 101px;
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 112px;
+
+    z-index: 5;
+
+    overflow: hidden;
+
+    border-radius:
+      0 0 10px 10px;
+
+    background: transparent;
   }
 
-  .envelope-scene.open
-  .boarding-card {
+  .envelope-front::before {
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 58%;
+    height: 100%;
+
+    background:
+      linear-gradient(
+        135deg,
+        var(--envelope-light),
+        var(--envelope-main)
+      );
+
+    clip-path:
+      polygon(
+        0 0,
+        100% 60%,
+        0 100%
+      );
+  }
+
+  .envelope-front::after {
+    content: '';
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 58%;
+    height: 100%;
+
+    background:
+      linear-gradient(
+        225deg,
+        var(--envelope-light),
+        var(--envelope-main)
+      );
+
+    clip-path:
+      polygon(
+        100% 0,
+        0 60%,
+        100% 100%
+      );
+  }
+
+  .envelope-bottom-flap {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100%;
+
+    z-index: 2;
+
+    background:
+      linear-gradient(
+        180deg,
+        var(--envelope-light),
+        var(--envelope-main) 72%,
+        var(--envelope-dark)
+      );
+
+    clip-path:
+      polygon(
+        0 100%,
+        50% 39%,
+        100% 100%
+      );
+  }
+
+  .envelope-front-label {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 17px;
+
+    z-index: 3;
+
+    text-align: center;
+
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: 8px;
+
+    letter-spacing: 0.34em;
+
+    color: rgba(92, 79, 62, 0.48);
+  }
+
+  .envelope-scene.open .boarding-card {
     transform:
       translateX(-50%)
-      translateY(-56px);
+      translateY(-66px);
   }
 
-  .ticket-content {
-    padding:
-      18px 16px;
+  .step1-title {
+    margin-bottom: 1rem;
+
+    font-size: clamp(18px, 4vw, 24px);
+
+    font-weight: 700;
+    line-height: 1.5;
+
+    text-align: center;
+
+    color: var(--text-cream);
   }
 
-  .ticket-route {
-    grid-template-columns:
-      minmax(0, 1fr)
-      34px
-      minmax(0, 1fr);
+  .step1-sub {
+    margin-top: 0.8rem;
+    margin-bottom: 2.5rem;
 
-    gap: 8px;
+    font-size: 13px;
+
+    text-align: center;
+
+    color: var(--text-muted);
   }
 
-  .ticket-arrow-line {
-    width: 34px;
+
+  /* ========================================
+     STEP 2 — 관계 선택
+  ======================================== */
+
+  .step2-question {
+    margin-bottom: 2.5rem;
+
+    font-size: clamp(18px, 3.5vw, 22px);
+
+    font-weight: 700;
+    line-height: 1.5;
+
+    text-align: center;
+
+    color: var(--text-cream);
   }
 
-  .ticket-station-name {
-    font-size: 16px;
+  .target-grid {
+    width: 100%;
+
+    max-width: 480px;
+
+    display: flex;
+
+    flex-wrap: nowrap;
+
+    justify-content: center;
+
+    gap: 10px;
   }
 
-  .ticket-divider {
-    margin:
-      0 -16px 16px;
+  .target-btn {
+    flex: 1;
+
+    padding: 14px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #fff;
+
+    background: var(--orange);
+
+    box-shadow:
+      0 4px 15px
+      rgba(212, 95, 30, 0.24);
+
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
   }
 
-  .ticket-message-text {
+  .target-btn:hover {
+    background: var(--orange-deep);
+
+    transform: translateY(-2px);
+  }
+
+
+  /* ========================================
+     STEP 3 — 초대장 작성
+  ======================================== */
+
+  .letter-card {
+    width: 100%;
+
+    max-width: 480px;
+
+    padding: 36px 30px;
+
+    color: #222;
+
+    background: #faf8f5;
+
+    border-radius: 8px;
+
+    box-shadow:
+      0 24px 50px
+      rgba(0, 0, 0, 0.5);
+  }
+
+  .letter-header {
+    margin-bottom: 24px;
+
+    text-align: center;
+  }
+
+  .letter-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+
     font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+
+    color: var(--orange);
+  }
+
+  .letter-title {
+    margin-top: 6px;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #333;
+  }
+
+  .form-input {
+    width: 100%;
+
+    padding: 8px 0;
+
+    border: none;
+
+    border-bottom:
+      1px solid #d1c2b8;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #111;
+
+    background: transparent;
+  }
+
+  .form-input:focus {
+    border-bottom-color: var(--orange);
+  }
+
+  .form-textarea {
+    width: 100%;
+
+    min-height: 300px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 4px;
+
+    outline: none;
+
+    resize: none;
+    overflow-y: auto;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    color: #222;
+
+    background: #f3ede8;
+  }
+
+  .char-count {
+    margin-top: 4px;
+
+    text-align: right;
+
+    font-size: 11px;
+
+    color: #777;
+  }
+
+
+  /* ========================================
+     STEP 4 — 완성된 초대장
+  ======================================== */
+
+  .step4-label {
+    margin-bottom: 2rem;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    color: var(--text-muted);
   }
 
   #ticketEl {
-    max-width: 100%;
-  }
-}
+    position: relative;
 
-@media (
-  prefers-reduced-motion:
-  reduce
-) {
+    width: 100%;
 
-  .envelope-scene {
-    animation: none;
+    max-width: 520px;
+
+    height: auto;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: var(--orange);
+
+    box-shadow:
+      0 25px 55px
+      rgba(0, 0, 0, 0.6);
   }
 
-  .boarding-card {
-    transition-duration:
-      0.01ms;
+  .ticket-texture {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    border-radius: 10px;
+
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(0, 0, 0, 0.02) 4px,
+        rgba(0, 0, 0, 0.02) 5px
+      );
   }
-}
+
+  .ticket-content {
+    position: relative;
+
+    z-index: 1;
+
+    padding: 28px 32px;
+  }
+
+  .ticket-header-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+  }
+
+  .jr-logo-area {
+    font-family: 'Playfair Display', serif;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    color: #fff;
+  }
+
+  .htb-express-title {
+    text-align: right;
+  }
+
+  .htb-express-title .main-txt {
+    font-family: 'Playfair Display', serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+
+    color: #fff;
+  }
+
+  .htb-express-title .sub-txt {
+    margin-top: 1px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.05em;
+
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /*
+    마지막 탑승권도
+    HAKATA / HUIS TEN BOSCH
+    좌우 같은 너비로 정렬
+  */
+
+  .ticket-route {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      50px
+      minmax(0, 1fr);
+
+    align-items: start;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+  }
+
+  .ticket-station {
+    min-width: 0;
+  }
+
+  .ticket-station:first-child {
+    text-align: left;
+  }
+
+  .ticket-station:last-child {
+    text-align: right;
+  }
+
+  .ticket-station-label {
+    height: 16px;
+
+    margin-bottom: 3px;
+
+    font-size: 8px;
+
+    line-height: 16px;
+
+    letter-spacing: 0.1em;
+
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ticket-station-name {
+    font-family: 'Playfair Display', serif;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    color: #fff;
+  }
+
+  .ticket-arrow {
+    align-self: start;
+
+    margin-top: 26px;
+  }
+
+  .ticket-arrow-line {
+    position: relative;
+
+    width: 50px;
+
+    height: 1px;
+
+    background: #fff;
+  }
+
+  .ticket-arrow-line::after {
+    content: '';
+
+    position: absolute;
+
+    right: 0;
+    top: -3px;
+
+    border-left:
+      5px solid #fff;
+
+    border-top:
+      3px solid transparent;
+
+    border-bottom:
+      3px solid transparent;
+  }
+
+  .ticket-divider {
+    position: relative;
+
+    margin: 0 -32px 20px;
+
+    border: none;
+
+    border-top:
+      1px dashed
+      rgba(255, 255, 255, 0.3);
+  }
+
+  .ticket-divider::before,
+  .ticket-divider::after {
+    content: '';
+
+    position: absolute;
+
+    top: -9px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: var(--navy-deep);
+  }
+
+  .ticket-divider::before {
+    left: -9px;
+  }
+
+  .ticket-divider::after {
+    right: -9px;
+  }
+
+  .ticket-info-grid {
+    display: grid;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+  }
+
+  .ticket-field:last-child {
+    text-align: right;
+  }
+
+  .ticket-field-label {
+    margin-bottom: 2px;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ticket-field-value {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .ticket-target {
+    margin-bottom: 20px;
+  }
+
+  .ticket-target-value {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #fff;
+  }
+
+  .ticket-message-block {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    padding:
+      14px 16px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.1);
+
+    border-radius: 6px;
+
+    background:
+      rgba(0, 0, 0, 0.15);
+  }
+
+  .ticket-message-label {
+    margin-bottom: 6px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .ticket-message-text {
+    display: block;
+
+    width: 100%;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: break-word;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #fff;
+  }
+
+  .ticket-bottom-row {
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding-top: 14px;
+
+    border-top:
+      1px solid
+      rgba(255, 255, 255, 0.15);
+  }
+
+  .ticket-train-plate {
+    font-size: 10px;
+
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+
+  /* ========================================
+     BUTTONS
+  ======================================== */
+
+  .btn-issue {
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    background: var(--orange);
+  }
+
+  .btn-issue:hover {
+    background: var(--orange-deep);
+  }
+
+  .btn-download {
+    width: 100%;
+
+    padding: 15px 36px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    background:
+      linear-gradient(
+        135deg,
+        #a82828,
+        #8b2020
+      );
+
+    box-shadow:
+      0 4px 15px
+      rgba(139, 32, 32, 0.4);
+  }
+
+  .btn-download:disabled {
+    opacity: 0.65;
+
+    cursor: default;
+  }
+
+  .btn-restart {
+    width: 100%;
+
+    padding: 12px 24px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.2);
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: var(--text-muted);
+
+    background: transparent;
+  }
+
+  .step4-actions {
+    width: 100%;
+
+    max-width: 520px;
+
+    margin-top: 2.5rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+  }
+
+
+  /* ========================================
+     LOADING
+  ======================================== */
+
+  .loading-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    background: var(--navy-deep);
+
+    transition:
+      opacity 0.2s ease;
+  }
+
+  .loading-overlay.active {
+    opacity: 1;
+
+    pointer-events: all;
+  }
+
+  .loading-spinner {
+    width: 28px;
+
+    height: 28px;
+
+    border:
+      2px solid
+      rgba(212, 95, 30, 0.2);
+
+    border-top-color:
+      var(--orange);
+
+    border-radius: 50%;
+
+    animation:
+      spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  /* ========================================
+     MOBILE
+  ======================================== */
+
+  @media (max-width: 600px) {
+
+    .target-grid {
+      gap: 8px;
+
+      flex-wrap: wrap;
+    }
+
+    .target-btn {
+      flex:
+        1 1
+        calc(50% - 8px);
+
+      padding:
+        13px 8px;
+    }
+
+    .letter-card {
+      padding:
+        30px 22px;
+    }
+
+    .envelope-scene {
+      width: min(82vw, 280px);
+
+      height: 250px;
+    }
+
+    .envelope-wrap {
+      width: 258px;
+
+      height: 178px;
+
+      bottom: 12px;
+    }
+
+    .envelope-back {
+      height: 204px;
+    }
+
+    .boarding-card {
+      width: 222px;
+
+      min-height: 152px;
+
+      bottom: 31px;
+
+      padding:
+        13px;
+    }
+
+    .mini-ticket-jr {
+      font-size: 22px;
+    }
+
+    .mini-ticket-title-main {
+      font-size: 10px;
+    }
+
+    .mini-ticket-station-name {
+      font-size: 9px;
+    }
+
+    .envelope-front {
+      height: 101px;
+    }
+
+    .envelope-scene.open
+    .boarding-card {
+      transform:
+        translateX(-50%)
+        translateY(-56px);
+    }
+
+    .ticket-content {
+      padding:
+        18px 16px;
+    }
+
+    .ticket-route {
+      grid-template-columns:
+        minmax(0, 1fr)
+        34px
+        minmax(0, 1fr);
+
+      gap: 8px;
+    }
+
+    .ticket-arrow-line {
+      width: 34px;
+    }
+
+    .ticket-station-name {
+      font-size: 16px;
+    }
+
+    .ticket-divider {
+      margin:
+        0 -16px 16px;
+    }
+
+    .ticket-divider::before {
+      left: -8px;
+    }
+
+    .ticket-divider::after {
+      right: -8px;
+    }
+
+    .ticket-message-text {
+      font-size: 12px;
+    }
+
+    #ticketEl {
+      max-width: 100%;
+    }
+
+    .step4-actions {
+      padding: 0 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .envelope-scene {
+      animation: none;
+    }
+
+    .boarding-card {
+      transition-duration: 0.01ms;
+    }
+  }
 </style>
 </head>
 
 
 <body>
 
-<div class="bg-layer"></div>
+  <div class="bg-layer"></div>
 
-
-<div
-  class="loading-overlay"
-  id="loadingOverlay"
->
 
   <div
-    class="loading-spinner"
-  ></div>
-
-  <div
-    style="
-      font-size:13px;
-      color:var(--text-muted);
-    "
+    class="loading-overlay"
+    id="loadingOverlay"
   >
-    초대장 이미지 생성 중...
-  </div>
+    <div class="loading-spinner"></div>
 
-</div>
-
-
-<!-- ========================================
-     STEP 1
-======================================== -->
-
-<div
-  class="step"
-  id="step1"
->
-
-  <div class="step1-eyebrow">
-    JR KYUSHU OFFICIAL EVENT
+    <div
+      style="
+        font-size:13px;
+        color:var(--text-muted);
+      "
+    >
+      초대장 이미지 생성 중...
+    </div>
   </div>
 
 
+  <!-- ========================================
+       STEP 1 — 봉투
+  ======================================== -->
+
   <div
-    class="envelope-scene"
-    id="envelopeScene"
-    role="button"
-    tabindex="0"
-    aria-label="하우스텐보스 초대장 열기"
-    onclick="openEnvelope()"
-    onkeydown="handleEnvelopeKey(event)"
+    class="step"
+    id="step1"
   >
 
-    <div class="envelope-wrap">
-
-      <div
-        class="envelope-back"
-      ></div>
-
-      <div
-        class="envelope-flap"
-      ></div>
+    <div class="step1-eyebrow">
+      JR KYUSHU OFFICIAL EVENT
+    </div>
 
 
-      <div class="boarding-card">
+    <div
+      class="envelope-scene"
+      id="envelopeScene"
+      role="button"
+      tabindex="0"
+      aria-label="하우스텐보스 초대장 열기"
+      onclick="openEnvelope()"
+      onkeydown="handleEnvelopeKey(event)"
+    >
+
+      <div class="envelope-wrap">
+
+        <div class="envelope-back"></div>
+
+        <div class="envelope-flap"></div>
+
+
+        <div class="boarding-card">
+
+
+          <div class="mini-ticket-header">
+
+            <div class="mini-ticket-jr">
+              JR
+            </div>
+
+
+            <div class="mini-ticket-title">
+
+              <div class="mini-ticket-title-main">
+                BOARDING PASS
+              </div>
+
+              <div class="mini-ticket-title-sub">
+                KYUSHU RAILWAY COMPANY
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="mini-ticket-route">
+
+            <div class="mini-ticket-station">
+
+              <div class="mini-ticket-label">
+                출발 · FROM
+              </div>
+
+              <div class="mini-ticket-station-name">
+                HAKATA
+              </div>
+
+            </div>
+
+
+            <div class="mini-ticket-arrow"></div>
+
+
+            <div class="mini-ticket-station">
+
+              <div class="mini-ticket-label">
+                도착 · TO
+              </div>
+
+              <div class="mini-ticket-station-name">
+                HUIS TEN BOSCH
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <hr class="mini-ticket-divider">
+
+
+          <div class="mini-ticket-message">
+
+            <div class="mini-ticket-message-label">
+              MESSAGE
+            </div>
+
+            <div class="mini-ticket-message-text">
+              JR큐슈 열차를 타고 함께 떠나요.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="envelope-front">
+
+          <div class="envelope-bottom-flap"></div>
+
+          <div class="envelope-front-label">
+            HUIS TEN BOSCH
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="orange-line"></div>
+
+
+    <h1 class="step1-title">
+      JR열차를 타고 떠나는<br>
+      하우스텐보스 초대장 선물하기
+    </h1>
+
+
+    <p class="step1-sub">
+      봉투를 클릭해 나만의 초대장을 만들어 보세요
+    </p>
+
+  </div>
+
+
+  <!-- ========================================
+       STEP 2 — 연인 / 친구 / 가족 / 나 자신
+  ======================================== -->
+
+  <div
+    class="step"
+    id="step2"
+  >
+
+    <h2 class="step2-question">
+      기차 여행을<br>
+      함께하고 싶은 소중한 사람은?
+    </h2>
+
+
+    <div class="target-grid">
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('연인')"
+      >
+        연인
+      </button>
+
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('친구')"
+      >
+        친구
+      </button>
+
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('가족')"
+      >
+        가족
+      </button>
+
+
+      <button
+        class="target-btn"
+        type="button"
+        onclick="selectTarget('나 자신')"
+      >
+        나 자신
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       STEP 3 — 초대장 작성
+  ======================================== -->
+
+  <div
+    class="step"
+    id="step3"
+  >
+
+    <div class="letter-card">
+
+
+      <div class="letter-header">
 
         <div
-          class="mini-ticket-header"
+          class="letter-eyebrow"
+          id="stepLabel"
+        >
+          초대장 작성
+        </div>
+
+
+        <div class="letter-title">
+          함께 떠나고 싶은 이유를 알려주세요
+        </div>
+
+
+        <div
+          class="orange-line"
+          style="margin:10px auto;"
+        ></div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label
+          class="form-label"
+          for="senderNameInput"
+        >
+          From. 보내는 사람 이름
+        </label>
+
+
+        <input
+          class="form-input"
+          id="senderNameInput"
+          type="text"
+          placeholder="보내는 사람 이름을 입력해 주세요"
+          maxlength="30"
         >
 
-          <div
-            class="mini-ticket-jr"
-          >
+      </div>
+
+
+      <div class="form-group">
+
+        <label
+          class="form-label"
+          for="passengerNameInput"
+        >
+          To. 함께 탑승할 승객 이름
+        </label>
+
+
+        <input
+          class="form-input"
+          id="passengerNameInput"
+          type="text"
+          placeholder="함께 떠나고 싶은 사람의 이름을 입력해 주세요"
+          maxlength="30"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label
+          class="form-label"
+          for="messageInput"
+        >
+          같이 떠나고 싶은 이유
+        </label>
+
+
+        <textarea
+          class="form-textarea"
+          id="messageInput"
+          placeholder="하우스텐보스로 함께 떠나고 싶은 이유를 자유롭게 적어주세요."
+          maxlength="500"
+        ></textarea>
+
+
+        <div class="char-count">
+          <span id="charCount">0</span>
+          / 500
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn-issue"
+        type="button"
+        onclick="issueTicket()"
+      >
+        탑승권 발권하기
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       STEP 4 — 완성
+  ======================================== -->
+
+  <div
+    class="step"
+    id="step4"
+  >
+
+    <p class="step4-label">
+      초대장이 완성되었습니다.<br>
+      이미지를 저장해 블로그 댓글에 응모해 주세요.
+    </p>
+
+
+    <div id="ticketEl">
+
+      <div class="ticket-texture"></div>
+
+
+      <div class="ticket-content">
+
+
+        <div class="ticket-header-row">
+
+          <div class="jr-logo-area">
             JR
           </div>
 
 
-          <div
-            class="mini-ticket-title"
-          >
+          <div class="htb-express-title">
 
-            <div
-              class="mini-ticket-title-main"
-            >
+            <div class="main-txt">
               BOARDING PASS
             </div>
 
-            <div
-              class="mini-ticket-title-sub"
-            >
+            <div class="sub-txt">
               KYUSHU RAILWAY COMPANY
             </div>
 
@@ -1786,47 +1879,35 @@ button {
         </div>
 
 
-        <div
-          class="mini-ticket-route"
-        >
+        <div class="ticket-route">
 
-          <div
-            class="mini-ticket-station"
-          >
+          <div class="ticket-station">
 
-            <div
-              class="mini-ticket-label"
-            >
+            <div class="ticket-station-label">
               출발 · FROM
             </div>
 
-            <div
-              class="mini-ticket-station-name"
-            >
+            <div class="ticket-station-name">
               HAKATA
             </div>
 
           </div>
 
 
-          <div
-            class="mini-ticket-arrow"
-          ></div>
+          <div class="ticket-arrow">
+
+            <div class="ticket-arrow-line"></div>
+
+          </div>
 
 
-          <div
-            class="mini-ticket-station"
-          >
+          <div class="ticket-station">
 
-            <div
-              class="mini-ticket-label"
-            >
+            <div class="ticket-station-label">
               도착 · TO
             </div>
 
-            <div
-              class="mini-ticket-station-name"
-            >
+            <div class="ticket-station-name">
               HUIS TEN BOSCH
             </div>
 
@@ -1835,406 +1916,70 @@ button {
         </div>
 
 
-        <hr
-          class="mini-ticket-divider"
-        >
+        <hr class="ticket-divider">
 
 
-        <div
-          class="mini-ticket-message"
-        >
+        <div class="ticket-info-grid">
+
+          <div class="ticket-field">
+
+            <div class="ticket-field-label">
+              FROM
+            </div>
+
+            <div
+              class="ticket-field-value"
+              id="t-sender"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="ticket-field">
+
+            <div class="ticket-field-label">
+              PASSENGER
+            </div>
+
+            <div
+              class="ticket-field-value"
+              id="t-name"
+            >
+              —
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="ticket-target">
+
+          <div class="ticket-field-label">
+            FOR
+          </div>
 
           <div
-            class="mini-ticket-message-label"
+            class="ticket-target-value"
+            id="t-target"
           >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="ticket-message-block">
+
+          <div class="ticket-message-label">
             MESSAGE
           </div>
 
           <div
-            class="mini-ticket-message-text"
-          >
-            JR큐슈 열차를 타고 함께 떠나요.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="envelope-front"
-      >
-
-        <div
-          class="envelope-bottom-flap"
-        ></div>
-
-        <div
-          class="envelope-front-label"
-        >
-          HUIS TEN BOSCH
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="orange-line"
-  ></div>
-
-
-  <h1 class="step1-title">
-    JR열차를 타고 떠나는<br>
-    하우스텐보스 초대장 선물하기
-  </h1>
-
-
-  <p class="step1-sub">
-    봉투를 클릭해 나만의 초대장을 만들어 보세요
-  </p>
-
-</div>
-
-
-<!-- ========================================
-     STEP 2 — 초대장 작성
-======================================== -->
-
-<div
-  class="step"
-  id="step2"
->
-
-  <div class="letter-card">
-
-
-    <div class="letter-header">
-
-      <div
-        class="letter-eyebrow"
-        id="stepLabel"
-      >
-        초대장 작성
-      </div>
-
-
-      <div class="letter-title">
-        함께 떠나고 싶은 사람에게 초대장을 보내보세요
-      </div>
-
-
-      <div
-        class="orange-line"
-        style="
-          margin:10px auto;
-        "
-      ></div>
-
-    </div>
-
-
-    <!-- 관계 선택 -->
-
-    <div class="form-group">
-
-      <span class="form-label">
-        함께 떠나고 싶은 사람은?
-      </span>
-
-
-      <div class="target-grid">
-
-        <button
-          class="target-btn"
-          type="button"
-          onclick="
-            selectTarget(
-              '연인',
-              this
-            )
-          "
-        >
-          연인
-        </button>
-
-
-        <button
-          class="target-btn"
-          type="button"
-          onclick="
-            selectTarget(
-              '친구',
-              this
-            )
-          "
-        >
-          친구
-        </button>
-
-
-        <button
-          class="target-btn"
-          type="button"
-          onclick="
-            selectTarget(
-              '가족',
-              this
-            )
-          "
-        >
-          가족
-        </button>
-
-
-        <button
-          class="target-btn"
-          type="button"
-          onclick="
-            selectTarget(
-              '나 자신',
-              this
-            )
-          "
-        >
-          나 자신
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- FROM -->
-
-    <div class="form-group">
-
-      <label
-        class="form-label"
-        for="senderNameInput"
-      >
-        From. 보내는 사람 이름
-      </label>
-
-
-      <input
-        class="form-input"
-        id="senderNameInput"
-        type="text"
-        placeholder="보내는 사람 이름을 입력해 주세요"
-        maxlength="30"
-      >
-
-    </div>
-
-
-    <!-- TO -->
-
-    <div class="form-group">
-
-      <label
-        class="form-label"
-        for="passengerNameInput"
-      >
-        To. 함께 탑승할 승객 이름
-      </label>
-
-
-      <input
-        class="form-input"
-        id="passengerNameInput"
-        type="text"
-        placeholder="함께 떠나고 싶은 사람의 이름을 입력해 주세요"
-        maxlength="30"
-      >
-
-    </div>
-
-
-    <!-- MESSAGE -->
-
-    <div class="form-group">
-
-      <label
-        class="form-label"
-        for="messageInput"
-      >
-        같이 떠나고 싶은 이유
-      </label>
-
-
-      <textarea
-        class="form-textarea"
-        id="messageInput"
-        placeholder="하우스텐보스로 함께 떠나고 싶은 이유를 자유롭게 적어주세요."
-        maxlength="500"
-      ></textarea>
-
-
-      <div class="char-count">
-        <span id="charCount">
-          0
-        </span>
-        / 500
-      </div>
-
-    </div>
-
-
-    <button
-      class="btn-issue"
-      type="button"
-      onclick="
-        issueTicket()
-      "
-    >
-      탑승권 발권하기
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- ========================================
-     STEP 3 — 완성
-======================================== -->
-
-<div
-  class="step"
-  id="step3"
->
-
-  <p class="step3-label">
-    초대장이 완성되었습니다.<br>
-    이미지를 저장한 뒤 이벤트 게시글 댓글에 첨부해 주세요.
-  </p>
-
-
-  <div id="ticketEl">
-
-    <div
-      class="ticket-texture"
-    ></div>
-
-
-    <div
-      class="ticket-content"
-    >
-
-
-      <div
-        class="ticket-header-row"
-      >
-
-        <div
-          class="jr-logo-area"
-        >
-          JR
-        </div>
-
-
-        <div
-          class="htb-express-title"
-        >
-
-          <div
-            class="main-txt"
-          >
-            BOARDING PASS
-          </div>
-
-          <div
-            class="sub-txt"
-          >
-            KYUSHU RAILWAY COMPANY
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="ticket-route"
-      >
-
-        <div
-          class="ticket-station"
-        >
-
-          <div
-            class="ticket-station-label"
-          >
-            출발 · FROM
-          </div>
-
-          <div
-            class="ticket-station-name"
-          >
-            HAKATA
-          </div>
-
-        </div>
-
-
-        <div
-          class="ticket-arrow"
-        >
-
-          <div
-            class="ticket-arrow-line"
-          ></div>
-
-        </div>
-
-
-        <div
-          class="ticket-station"
-        >
-
-          <div
-            class="ticket-station-label"
-          >
-            도착 · TO
-          </div>
-
-          <div
-            class="ticket-station-name"
-          >
-            HUIS TEN BOSCH
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <hr
-        class="ticket-divider"
-      >
-
-
-      <div
-        class="ticket-info-grid"
-      >
-
-        <div
-          class="ticket-field"
-        >
-
-          <div
-            class="ticket-field-label"
-          >
-            FROM
-          </div>
-
-          <div
-            class="ticket-field-value"
-            id="t-sender"
+            class="ticket-message-text"
+            id="t-message"
           >
             —
           </div>
@@ -2242,225 +1987,962 @@ button {
         </div>
 
 
-        <div
-          class="ticket-field"
-        >
+        <div class="ticket-bottom-row">
 
-          <div
-            class="ticket-field-label"
-          >
-            PASSENGER
+          <div class="ticket-train-plate">
+            JR큐슈 블로그 이벤트
           </div>
 
-          <div
-            class="ticket-field-value"
-            id="t-name"
-          >
-            —
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="ticket-target"
-      >
-
-        <div
-          class="ticket-field-label"
-        >
-          WITH
-        </div>
-
-        <div
-          class="ticket-target-value"
-          id="t-target"
-        >
-          —
-        </div>
-
-      </div>
-
-
-      <div
-        class="ticket-message-block"
-      >
-
-        <div
-          class="ticket-message-label"
-        >
-          MESSAGE
-        </div>
-
-        <div
-          class="ticket-message-text"
-          id="t-message"
-        >
-          —
-        </div>
-
-      </div>
-
-
-      <div
-        class="ticket-bottom-row"
-      >
-
-        <div
-          class="ticket-train-plate"
-        >
-          JR큐슈 블로그 이벤트
         </div>
 
       </div>
 
     </div>
 
-  </div>
+
+    <div class="step4-actions">
+
+      <button
+        class="btn-download"
+        type="button"
+        id="downloadButton"
+        onclick="downloadTicket()"
+      >
+        초대장 이미지 저장하고 블로그에 응모하기
+      </button>
 
 
-  <div
-    class="step3-actions"
-  >
+      <button
+        class="btn-restart"
+        type="button"
+        onclick="restart()"
+      >
+        처음으로 돌아가기
+      </button>
 
-    <button
-      class="btn-save"
-      type="button"
-      id="saveButton"
-      onclick="
-        saveTicket()
-      "
-    >
-      초대장 이미지 저장하기
-    </button>
-
-
-    <button
-      class="btn-restart"
-      type="button"
-      onclick="
-        restart()
-      "
-    >
-      처음으로 돌아가기
-    </button>
+    </div>
 
   </div>
-
-</div>
 
 
 <script>
 
-/* ========================================
-   STATE
-======================================== */
+  /* ========================================
+     STATE
+  ======================================== */
 
-const state = {
-  target: '',
-  senderName: '',
-  passengerName: '',
-  message: ''
-};
-
-let envelopeOpening = false;
-
-let isSaving = false;
-
-let sheetSubmitted = false;
+  const state = {
+    target: '',
+    senderName: '',
+    passengerName: '',
+    message: ''
+  };
 
 
-/* ========================================
-   STEP 이동
-======================================== */
+  let envelopeOpening = false;
 
-function goTo(n) {
+  let isDownloading = false;
 
-  document
-    .querySelectorAll(
-      '.step'
-    )
-    .forEach(
-      function(step) {
+  let sheetSubmitted = false;
+
+
+  /* ========================================
+     화면 이동
+  ======================================== */
+
+  function goTo(n) {
+
+    document
+      .querySelectorAll('.step')
+      .forEach(function(step) {
 
         step.style.display =
           'none';
 
-      }
-    );
+      });
 
 
-  const targetStep =
-    document.getElementById(
-      'step' + n
-    );
+    const targetStep =
+      document.getElementById(
+        'step' + n
+      );
 
 
-  if (!targetStep) {
-    return;
+    if (!targetStep) {
+      return;
+    }
+
+
+    targetStep.style.display =
+      'flex';
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
   }
 
 
-  targetStep.style.display =
-    'flex';
+  /* ========================================
+     봉투 열기
+  ======================================== */
+
+  function openEnvelope() {
+
+    if (envelopeOpening) {
+      return;
+    }
 
 
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-
-}
+    const envelope =
+      document.getElementById(
+        'envelopeScene'
+      );
 
 
-/* ========================================
-   봉투 열기
-======================================== */
-
-function openEnvelope() {
-
-  if (
-    envelopeOpening
-  ) {
-    return;
-  }
-
-
-  const envelope =
-    document.getElementById(
-      'envelopeScene'
-    );
-
-
-  if (!envelope) {
-
-    goTo(2);
-
-    return;
-  }
-
-
-  envelopeOpening =
-    true;
-
-
-  envelope.classList.add(
-    'open'
-  );
-
-
-  window.setTimeout(
-    function() {
-
-      /*
-        네이버 닉네임 화면 없음.
-        바로 초대장 작성 화면.
-      */
+    if (!envelope) {
 
       goTo(2);
 
+      return;
+    }
+
+
+    envelopeOpening =
+      true;
+
+
+    envelope.classList.add(
+      'open'
+    );
+
+
+    window.setTimeout(
+      function() {
+
+        /*
+          닉네임 화면 없음.
+          바로 관계 선택 STEP 2.
+        */
+
+        goTo(2);
+
+
+        envelope
+          .classList
+          .remove(
+            'open'
+          );
+
+
+        envelopeOpening =
+          false;
+
+      },
+      820
+    );
+
+  }
+
+
+  function handleEnvelopeKey(event) {
+
+    if (
+      event.key === 'Enter' ||
+      event.key === ' '
+    ) {
+
+      event.preventDefault();
+
+      openEnvelope();
+
+    }
+
+  }
+
+
+  /* ========================================
+     관계 선택
+  ======================================== */
+
+  function selectTarget(target) {
+
+    state.target =
+      target;
+
+
+    const passengerInput =
+      document.getElementById(
+        'passengerNameInput'
+      );
+
+
+    if (
+      target ===
+      '나 자신'
+    ) {
+
+      passengerInput.value =
+        '나 자신';
+
+    } else {
+
+      if (
+        passengerInput.value ===
+        '나 자신'
+      ) {
+
+        passengerInput.value =
+          '';
+
+      }
+
+    }
+
+
+    document
+      .getElementById(
+        'stepLabel'
+      )
+      .textContent =
+        target +
+        '에게 보내는 초대장';
+
+
+    goTo(3);
+
+  }
+
+
+  /* ========================================
+     메시지 글자 수
+  ======================================== */
+
+  const textarea =
+    document.getElementById(
+      'messageInput'
+    );
+
+
+  textarea.addEventListener(
+    'input',
+    function() {
+
+      document
+        .getElementById(
+          'charCount'
+        )
+        .textContent =
+          this.value.length;
+
+
+      this.style.height =
+        'auto';
+
+
+      this.style.height =
+        this.scrollHeight +
+        'px';
+
+    }
+  );
+
+
+  /* ========================================
+     탑승권 발권
+  ======================================== */
+
+  function issueTicket() {
+
+    const senderName =
+      document
+        .getElementById(
+          'senderNameInput'
+        )
+        .value
+        .trim();
+
+
+    const passengerName =
+      document
+        .getElementById(
+          'passengerNameInput'
+        )
+        .value
+        .trim();
+
+
+    const message =
+      document
+        .getElementById(
+          'messageInput'
+        )
+        .value
+        .trim();
+
+
+    if (!state.target) {
+
+      alert(
+        '함께 떠나고 싶은 사람을 선택해 주세요.'
+      );
+
+      goTo(2);
+
+      return;
+    }
+
+
+    if (!senderName) {
+
+      alert(
+        '보내는 사람 이름을 입력해 주세요.'
+      );
+
+      return;
+    }
+
+
+    if (!passengerName) {
+
+      alert(
+        '함께 탑승할 승객 이름을 입력해 주세요.'
+      );
+
+      return;
+    }
+
+
+    if (!message) {
+
+      alert(
+        '같이 떠나고 싶은 이유를 입력해 주세요.'
+      );
+
+      return;
+    }
+
+
+    state.senderName =
+      senderName;
+
+
+    state.passengerName =
+      passengerName;
+
+
+    state.message =
+      message;
+
+
+    document
+      .getElementById(
+        't-sender'
+      )
+      .textContent =
+        senderName;
+
+
+    document
+      .getElementById(
+        't-name'
+      )
+      .textContent =
+        passengerName;
+
+
+    document
+      .getElementById(
+        't-target'
+      )
+      .textContent =
+        state.target;
+
+
+    document
+      .getElementById(
+        't-message'
+      )
+      .textContent =
+        message;
+
+
+    goTo(4);
+
+  }
+
+
+  /* ========================================
+     Google Sheet 1회 저장
+  ======================================== */
+
+  function sendToSheetOnce() {
+
+    if (sheetSubmitted) {
+      return;
+    }
+
+
+    sheetSubmitted =
+      true;
+
+
+    const APPS_SCRIPT_URL =
+      'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
+
+
+    fetch(
+      APPS_SCRIPT_URL,
+      {
+
+        method:
+          'POST',
+
+        mode:
+          'no-cors',
+
+        headers: {
+          'Content-Type':
+            'application/json'
+        },
+
+        body:
+          JSON.stringify({
+
+            /*
+              이름 =
+              From. 보내는 사람 이름
+            */
+
+            name:
+              state.senderName,
+
+
+            /*
+              대상 =
+              연인 / 친구 / 가족 / 나 자신
+            */
+
+            target:
+              state.target,
+
+
+            message:
+              state.message
+
+          })
+
+      }
+    )
+    .catch(
+      function(error) {
+
+        console.log(
+          '시트 저장 오류:',
+          error
+        );
+
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     이미지 저장
+  ======================================== */
+
+  function downloadTicket() {
+
+    if (isDownloading) {
+      return;
+    }
+
+
+    if (
+      !state.target ||
+      !state.senderName ||
+      !state.passengerName ||
+      !state.message
+    ) {
+
+      alert(
+        '초대장 정보를 다시 확인해 주세요.'
+      );
+
+      return;
+    }
+
+
+    if (
+      typeof html2canvas ===
+      'undefined'
+    ) {
+
+      alert(
+        '이미지 저장 기능을 불러오지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.'
+      );
+
+      return;
+    }
+
+
+    const loadingOverlay =
+      document.getElementById(
+        'loadingOverlay'
+      );
+
+
+    const ticket =
+      document.getElementById(
+        'ticketEl'
+      );
+
+
+    const downloadButton =
+      document.getElementById(
+        'downloadButton'
+      );
+
+
+    isDownloading =
+      true;
+
+
+    if (downloadButton) {
+
+      downloadButton.disabled =
+        true;
+
+
+      downloadButton.textContent =
+        '초대장 이미지 생성 중...';
+
+    }
+
+
+    loadingOverlay
+      .classList
+      .add(
+        'active'
+      );
+
+
+    /*
+      이미지 저장 버튼을 누른 시점에
+      Sheet에도 한 번 기록.
+    */
+
+    sendToSheetOnce();
+
+
+    html2canvas(
+      ticket,
+      {
+
+        scale: 3,
+
+        useCORS: true,
+
+        backgroundColor:
+          '#d45f1e',
+
+        logging:
+          false
+
+      }
+    )
+
+    .then(
+      function(canvas) {
+
+        loadingOverlay
+          .classList
+          .remove(
+            'active'
+          );
+
+
+        const isMobile =
+          /Android|iPhone|iPad|iPod/i
+            .test(
+              navigator.userAgent
+            );
+
+
+        /*
+          모바일:
+          브라우저 다운로드 대신
+          이미지 띄우고 길게 눌러 저장.
+        */
+
+        if (isMobile) {
+
+          showImageOverlay(
+            canvas.toDataURL(
+              'image/png',
+              1.0
+            )
+          );
+
+
+          resetDownloadButton();
+
+          return;
+
+        }
+
+
+        /*
+          PC:
+          JPG 파일 자동 다운로드.
+        */
+
+        canvas.toBlob(
+          function(blob) {
+
+            if (!blob) {
+
+              resetDownloadButton();
+
+
+              alert(
+                '이미지를 생성하지 못했습니다. 다시 시도해 주세요.'
+              );
+
+              return;
+
+            }
+
+
+            const url =
+              URL.createObjectURL(
+                blob
+              );
+
+
+            const link =
+              document.createElement(
+                'a'
+              );
+
+
+            link.download =
+              '하우스텐보스_초대장.jpg';
+
+
+            link.href =
+              url;
+
+
+            document.body
+              .appendChild(
+                link
+              );
+
+
+            link.click();
+
+
+            document.body
+              .removeChild(
+                link
+              );
+
+
+            window.setTimeout(
+              function() {
+
+                URL.revokeObjectURL(
+                  url
+                );
+
+              },
+              1000
+            );
+
+
+            resetDownloadButton();
+
+          },
+          'image/jpeg',
+          0.95
+        );
+
+      }
+    )
+
+    .catch(
+      function(error) {
+
+        console.log(
+          '이미지 저장 오류:',
+          error
+        );
+
+
+        loadingOverlay
+          .classList
+          .remove(
+            'active'
+          );
+
+
+        resetDownloadButton();
+
+
+        alert(
+          '이미지 저장에 실패했습니다. 다시 시도해 주세요.'
+        );
+
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     저장 버튼 복구
+  ======================================== */
+
+  function resetDownloadButton() {
+
+    const downloadButton =
+      document.getElementById(
+        'downloadButton'
+      );
+
+
+    isDownloading =
+      false;
+
+
+    if (downloadButton) {
+
+      downloadButton.disabled =
+        false;
+
+
+      downloadButton.textContent =
+        '초대장 이미지 저장하고 블로그에 응모하기';
+
+    }
+
+  }
+
+
+  /* ========================================
+     모바일 저장 안내
+  ======================================== */
+
+  function showImageOverlay(dataUrl) {
+
+    const overlay =
+      document.createElement(
+        'div'
+      );
+
+
+    overlay.style.cssText =
+      'position:fixed;' +
+      'inset:0;' +
+      'z-index:200;' +
+      'padding:24px;' +
+      'display:flex;' +
+      'flex-direction:column;' +
+      'align-items:center;' +
+      'justify-content:center;' +
+      'gap:20px;' +
+      'overflow:auto;' +
+      'background:rgba(15,20,32,0.98);';
+
+
+    const guide =
+      document.createElement(
+        'p'
+      );
+
+
+    guide.style.cssText =
+      'font-size:14px;' +
+      'font-weight:700;' +
+      'line-height:1.8;' +
+      'text-align:center;' +
+      'color:#d45f1e;';
+
+
+    guide.innerHTML =
+      '📱 이미지를 <strong>꾹 눌러서</strong> 저장해 주세요!<br>' +
+      '<span style="' +
+        'font-size:12px;' +
+        'color:#8a9ab5;' +
+        'font-weight:400;' +
+      '">' +
+        '저장 후 블로그 댓글에 첨부해 주세요.' +
+      '</span>';
+
+
+    const image =
+      document.createElement(
+        'img'
+      );
+
+
+    image.src =
+      dataUrl;
+
+
+    image.alt =
+      '완성된 하우스텐보스 초대장';
+
+
+    image.style.cssText =
+      'max-width:100%;' +
+      'max-height:65vh;' +
+      'border-radius:10px;' +
+      'box-shadow:0 12px 40px rgba(0,0,0,0.5);';
+
+
+    const closeButton =
+      document.createElement(
+        'button'
+      );
+
+
+    closeButton.type =
+      'button';
+
+
+    closeButton.textContent =
+      '창 닫기';
+
+
+    closeButton.style.cssText =
+      'padding:12px 40px;' +
+      'border:1px solid #d45f1e;' +
+      'border-radius:4px;' +
+      'cursor:pointer;' +
+      'font-size:13px;' +
+      'color:#fff;' +
+      'background:transparent;';
+
+
+    closeButton
+      .addEventListener(
+        'click',
+        function() {
+
+          overlay.remove();
+
+        }
+      );
+
+
+    overlay
+      .appendChild(
+        guide
+      );
+
+
+    overlay
+      .appendChild(
+        image
+      );
+
+
+    overlay
+      .appendChild(
+        closeButton
+      );
+
+
+    document.body
+      .appendChild(
+        overlay
+      );
+
+  }
+
+
+  /* ========================================
+     처음으로 돌아가기
+  ======================================== */
+
+  function restart() {
+
+    state.target =
+      '';
+
+
+    state.senderName =
+      '';
+
+
+    state.passengerName =
+      '';
+
+
+    state.message =
+      '';
+
+
+    document
+      .getElementById(
+        'senderNameInput'
+      )
+      .value =
+        '';
+
+
+    document
+      .getElementById(
+        'passengerNameInput'
+      )
+      .value =
+        '';
+
+
+    document
+      .getElementById(
+        'messageInput'
+      )
+      .value =
+        '';
+
+
+    document
+      .getElementById(
+        'charCount'
+      )
+      .textContent =
+        '0';
+
+
+    document
+      .getElementById(
+        'messageInput'
+      )
+      .style.height =
+        'auto';
+
+
+    document
+      .getElementById(
+        'stepLabel'
+      )
+      .textContent =
+        '초대장 작성';
+
+
+    const envelope =
+      document.getElementById(
+        'envelopeScene'
+      );
+
+
+    if (envelope) {
 
       envelope
         .classList
@@ -2468,888 +2950,41 @@ function openEnvelope() {
           'open'
         );
 
-
-      envelopeOpening =
-        false;
-
-    },
-    820
-  );
-
-}
-
-
-function handleEnvelopeKey(
-  event
-) {
-
-  if (
-    event.key === 'Enter' ||
-    event.key === ' '
-  ) {
-
-    event.preventDefault();
-
-    openEnvelope();
-
-  }
-
-}
-
-
-/* ========================================
-   연인 / 친구 / 가족 / 나 자신
-======================================== */
-
-function selectTarget(
-  target,
-  button
-) {
-
-  state.target =
-    target;
-
-
-  document
-    .querySelectorAll(
-      '.target-btn'
-    )
-    .forEach(
-      function(btn) {
-
-        btn
-          .classList
-          .remove(
-            'selected'
-          );
-
-      }
-    );
-
-
-  if (button) {
-
-    button
-      .classList
-      .add(
-        'selected'
-      );
-
-  }
-
-
-  const passengerInput =
-    document.getElementById(
-      'passengerNameInput'
-    );
-
-
-  if (
-    target ===
-    '나 자신'
-  ) {
-
-    passengerInput.value =
-      '나 자신';
-
-  } else if (
-    passengerInput.value ===
-    '나 자신'
-  ) {
-
-    passengerInput.value =
-      '';
-
-  }
-
-
-  document
-    .getElementById(
-      'stepLabel'
-    )
-    .textContent =
-      target +
-      '에게 보내는 초대장';
-
-}
-
-
-/* ========================================
-   메시지 글자수
-======================================== */
-
-const textarea =
-  document.getElementById(
-    'messageInput'
-  );
-
-
-textarea.addEventListener(
-  'input',
-  function() {
-
-    document
-      .getElementById(
-        'charCount'
-      )
-      .textContent =
-        this.value.length;
-
-
-    this.style.height =
-      'auto';
-
-
-    this.style.height =
-      this.scrollHeight +
-      'px';
-
-  }
-);
-
-
-/* ========================================
-   탑승권 발권
-======================================== */
-
-function issueTicket() {
-
-  const senderName =
-    document
-      .getElementById(
-        'senderNameInput'
-      )
-      .value
-      .trim();
-
-
-  const passengerName =
-    document
-      .getElementById(
-        'passengerNameInput'
-      )
-      .value
-      .trim();
-
-
-  const message =
-    document
-      .getElementById(
-        'messageInput'
-      )
-      .value
-      .trim();
-
-
-  if (!state.target) {
-
-    alert(
-      '함께 떠나고 싶은 사람을 선택해 주세요.'
-    );
-
-    return;
-  }
-
-
-  if (!senderName) {
-
-    alert(
-      '보내는 사람 이름을 입력해 주세요.'
-    );
-
-    return;
-  }
-
-
-  if (!passengerName) {
-
-    alert(
-      '함께 탑승할 승객 이름을 입력해 주세요.'
-    );
-
-    return;
-  }
-
-
-  if (!message) {
-
-    alert(
-      '같이 떠나고 싶은 이유를 입력해 주세요.'
-    );
-
-    return;
-  }
-
-
-  state.senderName =
-    senderName;
-
-
-  state.passengerName =
-    passengerName;
-
-
-  state.message =
-    message;
-
-
-  document
-    .getElementById(
-      't-sender'
-    )
-    .textContent =
-      senderName;
-
-
-  document
-    .getElementById(
-      't-name'
-    )
-    .textContent =
-      passengerName;
-
-
-  document
-    .getElementById(
-      't-target'
-    )
-    .textContent =
-      state.target;
-
-
-  document
-    .getElementById(
-      't-message'
-    )
-    .textContent =
-      message;
-
-
-  goTo(3);
-
-}
-
-
-/* ========================================
-   구글 SHEET
-======================================== */
-
-function sendToSheetOnce() {
-
-  if (
-    sheetSubmitted
-  ) {
-    return;
-  }
-
-
-  sheetSubmitted =
-    true;
-
-
-  const APPS_SCRIPT_URL =
-    'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
-
-
-  fetch(
-    APPS_SCRIPT_URL,
-    {
-
-      method:
-        'POST',
-
-      mode:
-        'no-cors',
-
-      headers: {
-        'Content-Type':
-          'application/json'
-      },
-
-      body:
-        JSON.stringify({
-
-          name:
-            state.senderName,
-
-          target:
-            state.target,
-
-          message:
-            state.message
-
-        })
-
     }
-  )
-  .catch(
-    function(error) {
 
-      console.log(
-        '시트 저장 오류:',
-        error
-      );
 
-    }
-  );
-
-}
-
-
-/* ========================================
-   이미지 저장
-======================================== */
-
-function saveTicket() {
-
-  if (
-    isSaving
-  ) {
-    return;
-  }
-
-
-  if (
-    !state.target ||
-    !state.senderName ||
-    !state.passengerName ||
-    !state.message
-  ) {
-
-    alert(
-      '초대장 정보를 다시 확인해 주세요.'
-    );
-
-    return;
-  }
-
-
-  if (
-    typeof html2canvas ===
-    'undefined'
-  ) {
-
-    alert(
-      '이미지 저장 기능을 불러오지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.'
-    );
-
-    return;
-  }
-
-
-  const overlay =
-    document.getElementById(
-      'loadingOverlay'
-    );
-
-
-  const ticket =
-    document.getElementById(
-      'ticketEl'
-    );
-
-
-  const saveButton =
-    document.getElementById(
-      'saveButton'
-    );
-
-
-  isSaving =
-    true;
-
-
-  if (saveButton) {
-
-    saveButton.disabled =
-      true;
-
-
-    saveButton.textContent =
-      '이미지 생성 중...';
-
-  }
-
-
-  overlay
-    .classList
-    .add(
-      'active'
-    );
-
-
-  /*
-    초대장 이미지를 저장할 때
-    Sheet에도 1회 저장.
-  */
-
-  sendToSheetOnce();
-
-
-  html2canvas(
-    ticket,
-    {
-
-      scale: 3,
-
-      useCORS: true,
-
-      backgroundColor:
-        '#d45f1e',
-
-      logging:
-        false
-
-    }
-  )
-
-  .then(
-    function(canvas) {
-
-      overlay
-        .classList
-        .remove(
-          'active'
-        );
-
-
-      const isMobile =
-        /Android|iPhone|iPad|iPod/i
-        .test(
-          navigator.userAgent
-        );
-
-
-      if (isMobile) {
-
-        showImageOverlay(
-          canvas.toDataURL(
-            'image/png',
-            1.0
-          )
-        );
-
-
-        resetSaveButton();
-
-        return;
-
-      }
-
-
-      canvas.toBlob(
-        function(blob) {
-
-          if (!blob) {
-
-            resetSaveButton();
-
-
-            alert(
-              '이미지를 생성하지 못했습니다. 다시 시도해 주세요.'
-            );
-
-            return;
-
-          }
-
-
-          const url =
-            URL.createObjectURL(
-              blob
-            );
-
-
-          const link =
-            document
-              .createElement(
-                'a'
-              );
-
-
-          link.download =
-            '하우스텐보스_초대장.jpg';
-
-
-          link.href =
-            url;
-
-
-          document.body
-            .appendChild(
-              link
-            );
-
-
-          link.click();
-
-
-          document.body
-            .removeChild(
-              link
-            );
-
-
-          window.setTimeout(
-            function() {
-
-              URL
-                .revokeObjectURL(
-                  url
-                );
-
-            },
-            1000
-          );
-
-
-          resetSaveButton();
-
-
-          window.setTimeout(
-            function() {
-
-              alert(
-                '초대장 이미지가 저장되었습니다.\n이벤트 게시글 댓글에 이미지를 첨부해 주세요.'
-              );
-
-            },
-            150
-          );
-
-        },
-
-        'image/jpeg',
-
-        0.95
-
-      );
-
-    }
-  )
-
-  .catch(
-    function(error) {
-
-      console.log(
-        '이미지 저장 오류:',
-        error
-      );
-
-
-      overlay
-        .classList
-        .remove(
-          'active'
-        );
-
-
-      resetSaveButton();
-
-
-      alert(
-        '이미지 저장에 실패했습니다. 다시 시도해 주세요.'
-      );
-
-    }
-  );
-
-}
-
-
-/* ========================================
-   저장 버튼 초기화
-======================================== */
-
-function resetSaveButton() {
-
-  const saveButton =
-    document.getElementById(
-      'saveButton'
-    );
-
-
-  isSaving =
-    false;
-
-
-  if (
-    saveButton
-  ) {
-
-    saveButton.disabled =
+    envelopeOpening =
       false;
 
 
-    saveButton.textContent =
-      '초대장 이미지 저장하기';
+    isDownloading =
+      false;
 
-  }
 
-}
+    sheetSubmitted =
+      false;
 
 
-/* ========================================
-   모바일 이미지 저장
-======================================== */
+    resetDownloadButton();
 
-function showImageOverlay(
-  dataUrl
-) {
-
-  const overlay =
-    document.createElement(
-      'div'
-    );
-
-
-  overlay.style.cssText =
-    'position:fixed;' +
-    'inset:0;' +
-    'z-index:200;' +
-    'padding:24px;' +
-    'display:flex;' +
-    'flex-direction:column;' +
-    'align-items:center;' +
-    'justify-content:center;' +
-    'gap:20px;' +
-    'overflow:auto;' +
-    'background:rgba(15,20,32,0.98);';
-
-
-  const guide =
-    document.createElement(
-      'p'
-    );
-
-
-  guide.style.cssText =
-    'font-size:14px;' +
-    'font-weight:700;' +
-    'line-height:1.8;' +
-    'text-align:center;' +
-    'color:#d45f1e;';
-
-
-  guide.innerHTML =
-    '📱 이미지를 <strong>꾹 눌러서</strong> 저장해 주세요!<br>' +
-    '<span style="' +
-      'font-size:12px;' +
-      'color:#8a9ab5;' +
-      'font-weight:400;' +
-    '">' +
-      '저장 후 블로그 이벤트 게시글 댓글에 첨부해 주세요.' +
-    '</span>';
-
-
-  const image =
-    document.createElement(
-      'img'
-    );
-
-
-  image.src =
-    dataUrl;
-
-
-  image.alt =
-    '완성된 하우스텐보스 초대장';
-
-
-  image.style.cssText =
-    'max-width:100%;' +
-    'max-height:65vh;' +
-    'border-radius:10px;' +
-    'box-shadow:0 12px 40px rgba(0,0,0,0.5);';
-
-
-  const closeButton =
-    document.createElement(
-      'button'
-    );
-
-
-  closeButton.type =
-    'button';
-
-
-  closeButton.textContent =
-    '창 닫기';
-
-
-  closeButton.style.cssText =
-    'padding:12px 40px;' +
-    'border:1px solid #d45f1e;' +
-    'border-radius:4px;' +
-    'cursor:pointer;' +
-    'font-size:13px;' +
-    'color:#fff;' +
-    'background:transparent;';
-
-
-  closeButton
-    .addEventListener(
-      'click',
-      function() {
-
-        overlay.remove();
-
-      }
-    );
-
-
-  overlay
-    .appendChild(
-      guide
-    );
-
-
-  overlay
-    .appendChild(
-      image
-    );
-
-
-  overlay
-    .appendChild(
-      closeButton
-    );
-
-
-  document.body
-    .appendChild(
-      overlay
-    );
-
-}
-
-
-/* ========================================
-   처음으로
-======================================== */
-
-function restart() {
-
-  state.target = '';
-
-  state.senderName = '';
-
-  state.passengerName = '';
-
-  state.message = '';
-
-
-  document
-    .getElementById(
-      'senderNameInput'
-    )
-    .value = '';
-
-
-  document
-    .getElementById(
-      'passengerNameInput'
-    )
-    .value = '';
-
-
-  document
-    .getElementById(
-      'messageInput'
-    )
-    .value = '';
-
-
-  document
-    .getElementById(
-      'charCount'
-    )
-    .textContent =
-      '0';
-
-
-  document
-    .getElementById(
-      'messageInput'
-    )
-    .style.height =
-      'auto';
-
-
-  document
-    .getElementById(
-      'stepLabel'
-    )
-    .textContent =
-      '초대장 작성';
-
-
-  document
-    .querySelectorAll(
-      '.target-btn'
-    )
-    .forEach(
-      function(btn) {
-
-        btn
-          .classList
-          .remove(
-            'selected'
-          );
-
-      }
-    );
-
-
-  const envelope =
-    document.getElementById(
-      'envelopeScene'
-    );
-
-
-  if (envelope) {
-
-    envelope
-      .classList
-      .remove(
-        'open'
-      );
-
-  }
-
-
-  envelopeOpening =
-    false;
-
-
-  isSaving =
-    false;
-
-
-  sheetSubmitted =
-    false;
-
-
-  resetSaveButton();
-
-
-  goTo(1);
-
-}
-
-
-/* ========================================
-   시작
-======================================== */
-
-document.addEventListener(
-  'DOMContentLoaded',
-  function() {
 
     goTo(1);
 
   }
-);
+
+
+  /* ========================================
+     시작
+  ======================================== */
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    function() {
+
+      goTo(1);
+
+    }
+  );
 
 </script>
 
