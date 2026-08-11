@@ -6,8 +6,6 @@
 <title>하우스텐보스행 초대장</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <style>
   :root {
     --navy: #1a1f2e;
@@ -1014,6 +1012,11 @@
     box-shadow: 0 4px 15px rgba(139, 32, 32, 0.4);
   }
 
+  .btn-download:disabled {
+    cursor: default;
+    opacity: 0.65;
+  }
+
   .btn-restart {
     width: 100%;
     padding: 12px 24px;
@@ -1037,6 +1040,72 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+  }
+
+
+  /* ═══════════════════════════════
+     STEP 5 — COMPLETE
+  ═══════════════════════════════ */
+
+  .complete-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 42px 30px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+
+    background: rgba(15, 20, 32, 0.78);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(8px);
+  }
+
+  .complete-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(212, 95, 30, 0.45);
+    border-radius: 50%;
+
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--orange);
+  }
+
+  .complete-eyebrow {
+    margin-bottom: 10px;
+
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--orange);
+  }
+
+  .complete-title {
+    margin-bottom: 14px;
+
+    font-size: clamp(20px, 4vw, 26px);
+    line-height: 1.5;
+    color: var(--text-cream);
+  }
+
+  .complete-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .complete-restart {
+    margin-top: 28px;
   }
 
   /* ═══════════════════════════════
@@ -1204,7 +1273,7 @@
   <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-spinner"></div>
     <div style="font-size: 13px; color: var(--text-muted);">
-      탑승권 발행 중...
+      응모 처리 중...
     </div>
   </div>
 
@@ -1385,16 +1454,50 @@
       <div class="form-group">
         <label
           class="form-label"
-          for="nameInput"
+          for="nicknameInput"
+        >
+          네이버 닉네임
+        </label>
+
+        <input
+          class="form-input"
+          id="nicknameInput"
+          type="text"
+          placeholder="이벤트 참여에 사용할 네이버 닉네임을 입력해 주세요"
+          maxlength="30"
+        >
+      </div>
+
+      <div class="form-group">
+        <label
+          class="form-label"
+          for="senderNameInput"
+        >
+          From. 보내는 사람 이름
+        </label>
+
+        <input
+          class="form-input"
+          id="senderNameInput"
+          type="text"
+          placeholder="보내는 사람 이름을 입력해 주세요"
+          maxlength="30"
+        >
+      </div>
+
+      <div class="form-group">
+        <label
+          class="form-label"
+          for="passengerNameInput"
         >
           To. 함께 탑승할 승객 이름
         </label>
 
         <input
           class="form-input"
-          id="nameInput"
+          id="passengerNameInput"
           type="text"
-          placeholder="이름을 입력해 주세요"
+          placeholder="함께 떠나고 싶은 사람의 이름을 입력해 주세요"
           maxlength="30"
         >
       </div>
@@ -1404,7 +1507,7 @@
           class="form-label"
           for="messageInput"
         >
-          같이 떠나고 싶은 이유를 적어주세요
+          같이 떠나고 싶은 이유
         </label>
 
         <textarea
@@ -1432,8 +1535,8 @@
   <!-- ═══════════ STEP 4 ═══════════ -->
   <div class="step" id="step4">
     <p class="step4-label">
-      탑승권이 발행되었습니다.<br>
-      이미지를 저장해 블로그 댓글에 응모해 주세요.
+      초대장이 완성되었습니다.<br>
+      내용을 확인한 뒤 아래 버튼을 눌러 이벤트에 응모해 주세요.
     </p>
 
     <div id="ticketEl">
@@ -1494,6 +1597,19 @@
         <div class="ticket-info-grid">
           <div class="ticket-field">
             <div class="ticket-field-label">
+              FROM
+            </div>
+
+            <div
+              class="ticket-field-value"
+              id="t-sender"
+            >
+              —
+            </div>
+          </div>
+
+          <div class="ticket-field">
+            <div class="ticket-field-label">
               PASSENGER
             </div>
 
@@ -1544,9 +1660,10 @@
       <button
         class="btn-download"
         type="button"
-        onclick="downloadTicket()"
+        id="submitEntryButton"
+        onclick="submitEntry()"
       >
-        초대장 이미지 저장하고 블로그에 응모하기
+        이벤트 응모 완료하기
       </button>
 
       <button
@@ -1559,10 +1676,40 @@
     </div>
   </div>
 
+  <!-- ═══════════ STEP 5 — 응모 완료 ═══════════ -->
+  <div class="step" id="step5">
+    <div class="complete-card">
+      <div class="complete-icon">✓</div>
+
+      <p class="complete-eyebrow">
+        JR KYUSHU OFFICIAL EVENT
+      </p>
+
+      <h2 class="complete-title">
+        이벤트 응모가 완료되었습니다!
+      </h2>
+
+      <p class="complete-text">
+        참여해 주셔서 감사합니다.<br>
+        당첨자 발표는 JR큐슈 공식 블로그에서 확인해 주세요.
+      </p>
+
+      <button
+        class="btn-restart complete-restart"
+        type="button"
+        onclick="restart()"
+      >
+        처음으로 돌아가기
+      </button>
+    </div>
+  </div>
+
 <script>
   const state = {
     target: '',
-    name: '',
+    nickname: '',
+    senderName: '',
+    passengerName: '',
     message: ''
   };
 
@@ -1623,7 +1770,10 @@
   function selectTarget(target) {
     state.target = target;
 
-    document.getElementById('nameInput').value =
+    const passengerInput =
+      document.getElementById('passengerNameInput');
+
+    passengerInput.value =
       target === '나 자신' ? '나 자신' : '';
 
     document.getElementById('stepLabel').textContent =
@@ -1643,27 +1793,48 @@
   });
 
   function issueTicket() {
-    const name =
-      document.getElementById('nameInput').value.trim();
+    const nickname =
+      document.getElementById('nicknameInput').value.trim();
+
+    const senderName =
+      document.getElementById('senderNameInput').value.trim();
+
+    const passengerName =
+      document.getElementById('passengerNameInput').value.trim();
 
     const message =
       document.getElementById('messageInput').value.trim();
 
-    if (!name) {
-      alert('승객 이름을 입력해 주세요.');
+    if (!nickname) {
+      alert('네이버 닉네임을 입력해 주세요.');
+      return;
+    }
+
+    if (!senderName) {
+      alert('보내는 사람 이름을 입력해 주세요.');
+      return;
+    }
+
+    if (!passengerName) {
+      alert('함께 탑승할 승객 이름을 입력해 주세요.');
       return;
     }
 
     if (!message) {
-      alert('내용을 입력해 주세요.');
+      alert('같이 떠나고 싶은 이유를 입력해 주세요.');
       return;
     }
 
-    state.name = name;
+    state.nickname = nickname;
+    state.senderName = senderName;
+    state.passengerName = passengerName;
     state.message = message;
 
+    document.getElementById('t-sender').textContent =
+      senderName;
+
     document.getElementById('t-name').textContent =
-      name;
+      passengerName;
 
     document.getElementById('t-target').textContent =
       state.target;
@@ -1674,13 +1845,41 @@
     goTo(4);
   }
 
-  function downloadTicket() {
-    /*
-      구글 시트 저장 주소.
-      기존에 사용하던 Apps Script URL을 그대로 유지했다.
-    */
+  let isSubmitting = false;
+
+  function submitEntry() {
+    if (isSubmitting) {
+      return;
+    }
+
+    if (
+      !state.nickname ||
+      !state.senderName ||
+      !state.passengerName ||
+      !state.target ||
+      !state.message
+    ) {
+      alert('응모 정보를 다시 확인해 주세요.');
+      return;
+    }
+
     const APPS_SCRIPT_URL =
       'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
+
+    const overlay =
+      document.getElementById('loadingOverlay');
+
+    const submitButton =
+      document.getElementById('submitEntryButton');
+
+    isSubmitting = true;
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = '응모 처리 중...';
+    }
+
+    overlay.classList.add('active');
 
     fetch(APPS_SCRIPT_URL, {
       method: 'POST',
@@ -1689,166 +1888,53 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: state.name,
+        nickname: state.nickname,
+        name: state.senderName,
         target: state.target,
         message: state.message
       })
-    }).catch(function (error) {
-      console.log('시트 저장 오류:', error);
-    });
-
-    const overlay =
-      document.getElementById('loadingOverlay');
-
-    const ticket =
-      document.getElementById('ticketEl');
-
-    overlay.classList.add('active');
-
-    html2canvas(ticket, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: '#d45f1e',
-      logging: false
     })
-      .then(function (canvas) {
+      .then(function () {
         overlay.classList.remove('active');
+        goTo(5);
+      })
+      .catch(function (error) {
+        console.log('시트 저장 오류:', error);
 
-        const isMobile =
-          /Android|iPhone|iPad|iPod/i.test(
-            navigator.userAgent
-          );
+        overlay.classList.remove('active');
+        isSubmitting = false;
 
-        if (isMobile) {
-          showImageOverlay(
-            canvas.toDataURL('image/png', 1.0)
-          );
-
-          return;
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = '이벤트 응모 완료하기';
         }
 
-        canvas.toBlob(
-          function (blob) {
-            if (!blob) {
-              alert('이미지를 생성하지 못했습니다. 다시 시도해 주세요.');
-              return;
-            }
-
-            const url =
-              URL.createObjectURL(blob);
-
-            const link =
-              document.createElement('a');
-
-            link.download =
-              '하우스텐보스_초대장.jpg';
-
-            link.href = url;
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            window.setTimeout(function () {
-              URL.revokeObjectURL(url);
-            }, 1000);
-          },
-          'image/jpeg',
-          0.95
-        );
-      })
-      .catch(function () {
-        overlay.classList.remove('active');
-
-        alert(
-          '이미지 저장에 실패했습니다. 다시 시도해 주세요.'
-        );
+        alert('응모 처리 중 오류가 발생했습니다. 다시 시도해 주세요.');
       });
-  }
-
-  function showImageOverlay(dataUrl) {
-    const overlay =
-      document.createElement('div');
-
-    overlay.style.cssText =
-      'position:fixed;' +
-      'inset:0;' +
-      'z-index:200;' +
-      'padding:24px;' +
-      'display:flex;' +
-      'flex-direction:column;' +
-      'align-items:center;' +
-      'justify-content:center;' +
-      'gap:20px;' +
-      'background:rgba(15,20,32,0.98);';
-
-    const guide =
-      document.createElement('p');
-
-    guide.style.cssText =
-      'font-size:14px;' +
-      'font-weight:700;' +
-      'line-height:1.8;' +
-      'text-align:center;' +
-      'color:#d45f1e;';
-
-    guide.innerHTML =
-      '📱 이미지를 <strong>꾹 눌러서</strong> 저장해 주세요!<br>' +
-      '<span style="font-size:12px;color:#8a9ab5;font-weight:400;">' +
-      '저장 후 블로그 댓글에 첨부해 주세요.' +
-      '</span>';
-
-    const image =
-      document.createElement('img');
-
-    image.src = dataUrl;
-    image.alt = '완성된 하우스텐보스 초대장';
-
-    image.style.cssText =
-      'max-width:100%;' +
-      'max-height:65vh;' +
-      'border-radius:10px;' +
-      'box-shadow:0 12px 40px rgba(0,0,0,0.5);';
-
-    const closeButton =
-      document.createElement('button');
-
-    closeButton.type = 'button';
-    closeButton.textContent = '창 닫기';
-
-    closeButton.style.cssText =
-      'padding:12px 40px;' +
-      'border:1px solid #d45f1e;' +
-      'border-radius:4px;' +
-      'cursor:pointer;' +
-      'font-size:13px;' +
-      'color:#fff;' +
-      'background:transparent;';
-
-    closeButton.addEventListener(
-      'click',
-      function () {
-        overlay.remove();
-      }
-    );
-
-    overlay.appendChild(guide);
-    overlay.appendChild(image);
-    overlay.appendChild(closeButton);
-
-    document.body.appendChild(overlay);
   }
 
   function restart() {
     state.target = '';
-    state.name = '';
+    state.nickname = '';
+    state.senderName = '';
+    state.passengerName = '';
     state.message = '';
 
-    document.getElementById('nameInput').value = '';
+    document.getElementById('nicknameInput').value = '';
+    document.getElementById('senderNameInput').value = '';
+    document.getElementById('passengerNameInput').value = '';
     document.getElementById('messageInput').value = '';
     document.getElementById('charCount').textContent = '0';
     document.getElementById('messageInput').style.height = 'auto';
     document.getElementById('stepLabel').textContent = '초대장 작성';
+
+    const submitButton =
+      document.getElementById('submitEntryButton');
+
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = '이벤트 응모 완료하기';
+    }
 
     const envelope =
       document.getElementById('envelopeScene');
@@ -1858,6 +1944,7 @@
     }
 
     envelopeOpening = false;
+    isSubmitting = false;
 
     goTo(1);
   }
