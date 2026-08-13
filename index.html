@@ -2385,40 +2385,73 @@
     }
 
 
-    sheetSubmitted =
-      true;
-
-
     const APPS_SCRIPT_URL =
       'https://script.google.com/macros/s/AKfycbwN8v4D7E79jEjwFbLmwALMh61R-2Esf1b0H4j86dzpen8g2xOFt-cSNN8jel-_wOrH/exec';
 
 
-    fetch(
-      APPS_SCRIPT_URL,
-      {
-        method: 'POST',
-        mode: 'no-cors',
-        keepalive: true,
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify({
-          senderName: state.senderName,
-          passengerName: state.passengerName,
-          target: state.target,
-          message: state.message
-        })
-      }
-    )
-    .catch(
-      function(error) {
-        sheetSubmitted = false;
+    /*
+      fetch + no-cors 대신 숨겨진 form POST 사용.
+      브라우저 CORS 정책과 관계없이 Apps Script 웹 앱으로
+      일반 폼 전송을 보내는 방식이라 정적 HTML에서도 안정적이다.
+    */
 
-        console.log(
-          '시트 저장 오류:',
-          error
-        );
+    let iframe =
+      document.getElementById('sheetSubmitFrame');
+
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = 'sheetSubmitFrame';
+      iframe.name = 'sheetSubmitFrame';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+
+
+    const form = document.createElement('form');
+
+    form.method = 'POST';
+    form.action = APPS_SCRIPT_URL;
+    form.target = 'sheetSubmitFrame';
+    form.style.display = 'none';
+
+
+    const payload = {
+      senderName: state.senderName,
+      passengerName: state.passengerName,
+      target: state.target,
+      message: state.message
+    };
+
+
+    Object.keys(payload).forEach(
+      function(key) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = payload[key] || '';
+        form.appendChild(input);
       }
+    );
+
+
+    document.body.appendChild(form);
+
+    try {
+      form.submit();
+      sheetSubmitted = true;
+    } catch (error) {
+      sheetSubmitted = false;
+      console.log('시트 저장 오류:', error);
+    }
+
+
+    window.setTimeout(
+      function() {
+        if (form.parentNode) {
+          form.parentNode.removeChild(form);
+        }
+      },
+      1500
     );
 
   }
