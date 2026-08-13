@@ -2396,31 +2396,24 @@
     fetch(
       APPS_SCRIPT_URL,
       {
-
-        method:
-          'POST',
-
-        mode:
-          'no-cors',
-
+        method: 'POST',
+        mode: 'no-cors',
         headers: {
-          'Content-Type':
-            'application/json'
+          'Content-Type': 'application/json'
         },
-
-       body: JSON.stringify({
-  senderName: state.senderName,
-  passengerName: state.passengerName,
-  message: state.message
-})
+        body: JSON.stringify({
+          senderName: state.senderName,
+          passengerName: state.passengerName,
+          message: state.message
+        })
+      }
+    )
     .catch(
       function(error) {
-
         console.log(
           '시트 저장 오류:',
           error
         );
-
       }
     );
 
